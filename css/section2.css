@@ -1,0 +1,31 @@
+#s01-gate02 {
+    left: 3600px;
+    top: 85px;
+}
+
+.stone {
+    width: 150px;
+    height: 150px;
+    background-color: darkgray;
+    border-radius: 40px 40px 0 0;
+}
+
+.stone-cloud {
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    background-color: lightgray;
+    border-radius: 10px;
+    bottom: 200px;
+    left: 100px;
+}
+
+#stone-speys {
+    left: 4100px;
+    top: 450px;
+}
+
+#stone-triven {
+    left: 4700px;
+    top: 450px;
+}

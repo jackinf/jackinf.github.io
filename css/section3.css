@@ -1,0 +1,35 @@
+#s01-gate03 {
+    left: 5400px;
+    top: 85px;
+}
+
+#s03-skills-board {
+    left: 6000px;
+    width: 500px;
+    height: 300px;
+    top: 100px;
+    background-color: sandybrown;
+}
+
+#s03-school {
+    left: 6800px;
+    width: 500px;
+    height: 300px;
+    top: 300px;
+    background-color: indianred;
+}
+
+#s03-school-degrees {
+    left: 7400px;
+    width: 500px;
+    height: 300px;
+    top: 100px;
+}
+
+.school-degree {
+    background-color: yellowgreen;
+    width: 400px;
+    height: 150px;
+    border-radius: 40px;
+    margin: 30px
+}

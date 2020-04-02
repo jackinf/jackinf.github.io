@@ -1,0 +1,148 @@
+@font-face {
+    font-family: '04b03';
+    src:url('../font/04b03.ttf.woff') format('woff'),
+    url('../font/04b03.ttf.svg#04b03') format('svg'),
+    url('../font/04b03.ttf.eot'),
+    url('../font/04b03.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: '01-Digit';
+    src:url('../font/01-Digit.ttf.woff') format('woff'),
+    url('../font/01-Digit.ttf.svg#01-Digit') format('svg'),
+    url('../font/01-Digit.ttf.eot'),
+    url('../font/01-Digit.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: '04b03';
+}
+
+.content-noscroll {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#page {
+    height: 18000px; /* set total height according to sum of all layers*/
+}
+
+#container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#player {
+    position: absolute;
+    background-image: url("../image/Player.png");
+    width: 100px;
+    height: 100px;
+    top: 500px;
+    left: 200px;
+    z-index: 100;
+}
+
+.layer-horizontal {
+    position: absolute;
+    height: 100%;
+}
+
+.layer-vertical {
+    position: absolute;
+}
+
+#layer-horizontal-1 {
+    width: 5000px;
+}
+
+#layer-horizontal-2 {
+    width: 1650px;
+}
+
+#layer-vertical-1 {
+    width: 1000px;
+    height: 3000px;
+    left: 1000px;
+}
+
+.it {
+    position: absolute;
+}
+
+#ground {
+    width: 10000px;
+    height: 600px;
+    background-image: url("../image/GroundFromWeb2.png");
+    background-size: 200px;
+    /*background-color: saddlebrown;*/
+    left: 0;
+    top: 600px;
+}
+
+#grass {
+    width: 10000px;
+    height: 300px;
+    background-image: url("../image/GroundFromWeb.png");
+    background-repeat: repeat-x;
+    background-size: 200px;
+    /*background-color: forestgreen;*/
+    left: 0;
+    top: 524px;
+}
+
+.board-plank {
+    width: 100%;
+    background-image: url('../image/Boardsign.png');
+    background-size: 309px;
+    background-color: rosybrown;
+    padding: 10px;
+    margin: 10px;
+    height: 97px;
+    color: whitesmoke;
+    font-size: 1.1em;
+}
+
+.board-plank-inner {
+    background-color: saddlebrown;
+    opacity: 0.5;
+    padding: 10px;
+    position: absolute;
+    width: 580px;
+    height: 77px;
+}
+
+.board-plank-text {
+    position: absolute;
+    margin: 5px;
+}
+
+.gate-far {
+    position: absolute;
+    width: 400px;
+    height: 600px;
+    background-image: url("../image/GateFar.png");
+    background-repeat: no-repeat;
+    background-size: 400px;
+}
+
+.gate-close {
+    position: absolute;
+    width: 200px;
+    height: 600px;
+    background-image: url("../image/GateClose.png");
+    background-repeat: no-repeat;
+    background-size: 132px;
+    left: 268px;
+    top: 137px;
+    z-index: 120;
+}
