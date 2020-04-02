@@ -44,8 +44,8 @@ body {
 
 #player {
     position: absolute;
-    background-image: url("../image/Player.png");
-    width: 100px;
+    background-image: url("../image/PlayerB.png");
+    width: 60px;
     height: 100px;
     top: 500px;
     left: 200px;
@@ -84,9 +84,9 @@ body {
     height: 600px;
     background-image: url("../image/GroundFromWeb2.png");
     background-size: 200px;
-    /*background-color: saddlebrown;*/
     left: 0;
     top: 600px;
+    z-index: 100;
 }
 
 #grass {
@@ -95,35 +95,9 @@ body {
     background-image: url("../image/GroundFromWeb.png");
     background-repeat: repeat-x;
     background-size: 200px;
-    /*background-color: forestgreen;*/
     left: 0;
     top: 524px;
-}
-
-.board-plank {
-    width: 100%;
-    background-image: url('../image/Boardsign.png');
-    background-size: 309px;
-    background-color: rosybrown;
-    padding: 10px;
-    margin: 10px;
-    height: 97px;
-    color: whitesmoke;
-    font-size: 1.1em;
-}
-
-.board-plank-inner {
-    background-color: saddlebrown;
-    opacity: 0.5;
-    padding: 10px;
-    position: absolute;
-    width: 580px;
-    height: 77px;
-}
-
-.board-plank-text {
-    position: absolute;
-    margin: 5px;
+    z-index: 110;
 }
 
 .gate-far {

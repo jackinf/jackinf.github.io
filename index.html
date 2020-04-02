@@ -10,6 +10,7 @@
     <script src=script/jquery-3.3.1.min.js></script>
     <script src=script/jquery-ui.min.js></script>
     <script src=script/detect-browser-device.js></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.4/rxjs.umd.min.js" integrity="sha256-3JbAc2wecCc4ABnmHEKJ3rsAIFsFKS2xw7Y740PmCzY=" crossorigin="anonymous"></script>
     <title>Zeka's resume</title>
 </head>
 <body>
@@ -35,7 +36,7 @@
     <div id="container">
         <div id="player"></div>
         <div class="layer-horizontal" id="layer-horizontal-2" data-layer-speed="0.125">
-        <div class="layer-horizontal" id="layer-horizontal-1" data-layer-speed="1">
+        <div class="layer-horizontal" id="layer-horizontal-1" data-layer-speed="0.5">
             <div class="it" id="ground"></div>
             <div class="it" id="grass"></div>
 
@@ -50,19 +51,20 @@
 
             <div class="it project-board" id="project-board-travix">
                 <h2 class="project-board-title">Travix</h2>
-                <div class="board-plank">
+                <div class="board-plank-standing"></div>
+                <div class="board-plank board-plan-1">
+                    <div class="board-plank-inner"></div>
+                    <div class="board-plank-text">
+                        PLANK - LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT.
+                    </div>
+                </div>
+                <div class="board-plank board-plan-2">
                     <div class="board-plank-inner"></div>
                     <div class="board-plank-text">
                         plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </div>
                 </div>
-                <div class="board-plank">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </div>
-                </div>
-                <div class="board-plank">
+                <div class="board-plank board-plan-3">
                     <div class="board-plank-inner"></div>
                     <div class="board-plank-text">
                         plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -72,19 +74,20 @@
 
             <div class="it project-board" id="project-board-genius">
                 <h2 class="project-board-title">Genius Sports</h2>
-                <div class="board-plank">
+                <div class="board-plank-standing"></div>
+                <div class="board-plank board-plan-1">
                     <div class="board-plank-inner"></div>
                     <div class="board-plank-text">
                         plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </div>
                 </div>
-                <div class="board-plank">
+                <div class="board-plank board-plan-2">
                     <div class="board-plank-inner"></div>
                     <div class="board-plank-text">
                         plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </div>
                 </div>
-                <div class="board-plank">
+                <div class="board-plank board-plan-3">
                     <div class="board-plank-inner"></div>
                     <div class="board-plank-text">
                         plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -94,19 +97,20 @@
 
             <div class="it project-board" id="project-board-finest">
                 <h2 class="project-board-title">Finestmedia</h2>
-                <div class="board-plank">
+                <div class="board-plank-standing"></div>
+                <div class="board-plank board-plan-1">
                     <div class="board-plank-inner"></div>
                     <div class="board-plank-text">
                         plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </div>
                 </div>
-                <div class="board-plank">
+                <div class="board-plank board-plan-2">
                     <div class="board-plank-inner"></div>
                     <div class="board-plank-text">
                         plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </div>
                 </div>
-                <div class="board-plank">
+                <div class="board-plank board-plan-3">
                     <div class="board-plank-inner"></div>
                     <div class="board-plank-text">
                         plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -116,19 +120,20 @@
 
             <div class="it project-board" id="project-board-abb">
                 <h2 class="project-board-title">ABB</h2>
-                <div class="board-plank">
+                <div class="board-plank-standing"></div>
+                <div class="board-plank board-plan-1">
                     <div class="board-plank-inner"></div>
                     <div class="board-plank-text">
                         plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </div>
                 </div>
-                <div class="board-plank">
+                <div class="board-plank board-plan-2">
                     <div class="board-plank-inner"></div>
                     <div class="board-plank-text">
                         plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </div>
                 </div>
-                <div class="board-plank">
+                <div class="board-plank board-plan-3">
                     <div class="board-plank-inner"></div>
                     <div class="board-plank-text">
                         plank - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -183,6 +188,6 @@
     </div>
 </div>
 
-<script src="script/zeka-main.js"></script>
+<script src="script/main.js"></script>
 </body>
 </html>

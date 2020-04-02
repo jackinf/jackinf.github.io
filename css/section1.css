@@ -24,8 +24,58 @@
     height: 600px;
 }
 
+.board-plank {
+    position: absolute;
+    width: 100%;
+    background-image: url('../image/Boardsign.png');
+    background-size: 309px;
+    background-color: rosybrown;
+    padding: 10px;
+    margin: 10px;
+    height: 97px;
+    color: whitesmoke;
+    font-size: 1.1em;
+    z-index: 90;
+}
+
+.board-plan-1 {
+    top: 0;
+}
+
+.board-plan-2 {
+    top: 140px;
+}
+
+.board-plan-3 {
+    top: 280px;
+}
+
+.board-plank-standing {
+    position: absolute;
+    background-image: url('../image/WoodenPoll.jpg');
+    width: 58px;
+    left: 300px;
+    top: 80px;
+    height: 500px;
+    z-index: 80;
+}
+
+.board-plank-inner {
+    background-color: saddlebrown;
+    opacity: 0.5;
+    padding: 10px;
+    position: absolute;
+    width: 580px;
+    height: 77px;
+}
+
+.board-plank-text {
+    position: absolute;
+    margin: 5px;
+}
+
 .project-board-title {
-    font-family: '01-Digit';
+    font-family: '01-Digit', "Courier New", monospace;
     font-size: 3em;
     position: absolute;
     top: -80px;

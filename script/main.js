@@ -5,6 +5,7 @@ let canScrollOrSwipe = false;
 let previousPageVerticalPosition = 0;
 let pageVerticalPosition = 0;
 let currentPhase = "horizontal";
+let deltaPageVerticalPosition = 0;
 const constants = { PHASE_1: "phase1" };
 
 /*
@@ -36,10 +37,21 @@ function makePageScrollable() {
   enableScrollOrSwipe();
 }
 
+function setStandingOrWalkingAnimation(delta) {
+  // if (delta > 0) {
+  //   isWalking = true;
+  //   console.log('walking');
+  // } else if (delta === 0) {
+  //   isWalking = false;
+  //   console.log('standing');
+  // }
+}
+
 function detectPageVerticalPosition() {
   previousPageVerticalPosition = pageVerticalPosition;
   pageVerticalPosition = pageYOffset;
   deltaPageVerticalPosition = pageVerticalPosition - previousPageVerticalPosition;
+  return deltaPageVerticalPosition;
 }
 
 function moveLayers() {
@@ -59,9 +71,33 @@ window.onload = function (e) {
   makePageScrollable();
 };
 
+let moveInterval = null, moveIntervalStopTimeout = null, movePositions = [60, 114], moveIndex = 0;
+let playMoveAnimationStep = () => {
+  moveIndex += 1;
+  player.style["background-position"] = `${movePositions[moveIndex % movePositions.length]}px`;
+};
+let createMoveAnimation = () => setInterval(playMoveAnimationStep, 300);
+
 window.onscroll = function (e) {
   if (canScrollOrSwipe) {
-    detectPageVerticalPosition();
+    const delta = detectPageVerticalPosition();
+    setStandingOrWalkingAnimation(Math.abs(delta));
     runTheseFunctionsAfterScrollOrSwipe();
+
+    if (!moveInterval) {
+      playMoveAnimationStep();
+      moveInterval = createMoveAnimation();
+    }
+
+    if (moveIntervalStopTimeout) {
+      clearTimeout(moveIntervalStopTimeout);
+      moveIntervalStopTimeout = null;
+    }
+
+    moveIntervalStopTimeout = setTimeout(() => {
+      clearInterval(moveInterval);
+      moveInterval = null;
+      player.style["background-position"] = 0;
+    }, 200);
   }
 };
