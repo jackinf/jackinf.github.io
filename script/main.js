@@ -76,28 +76,33 @@ let playMoveAnimationStep = () => {
   moveIndex += 1;
   player.style["background-position"] = `${movePositions[moveIndex % movePositions.length]}px`;
 };
-let createMoveAnimation = () => setInterval(playMoveAnimationStep, 300);
+let createMoveAnimation = () => setInterval(playMoveAnimationStep, 30);
+
+function playerMovement() {
+  if (!moveInterval) {
+    document.getElementById("wtf").style.opacity = 1;
+    playMoveAnimationStep();
+    moveInterval = createMoveAnimation();
+  }
+
+  if (moveIntervalStopTimeout) {
+    clearTimeout(moveIntervalStopTimeout);
+    moveIntervalStopTimeout = null;
+  }
+
+  moveIntervalStopTimeout = setTimeout(() => {
+    clearInterval(moveInterval);
+    moveInterval = null;
+    player.style["background-position"] = 0;
+    document.getElementById("wtf").style.opacity = 0;
+  }, 200);
+}
 
 window.onscroll = function (e) {
   if (canScrollOrSwipe) {
     const delta = detectPageVerticalPosition();
     setStandingOrWalkingAnimation(Math.abs(delta));
     runTheseFunctionsAfterScrollOrSwipe();
-
-    if (!moveInterval) {
-      playMoveAnimationStep();
-      moveInterval = createMoveAnimation();
-    }
-
-    if (moveIntervalStopTimeout) {
-      clearTimeout(moveIntervalStopTimeout);
-      moveIntervalStopTimeout = null;
-    }
-
-    moveIntervalStopTimeout = setTimeout(() => {
-      clearInterval(moveInterval);
-      moveInterval = null;
-      player.style["background-position"] = 0;
-    }, 200);
+    playerMovement();
   }
 };
