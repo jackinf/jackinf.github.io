@@ -7,11 +7,21 @@
 }
 
 #s01-description {
-    width: 300px;
-    height: 300px;
-    background-color: aqua;
+    width: 450px;
+    height: 392px;
+    background-image: url(../image/Monitor.png);
     left: 800px;
-    top: 100px;
+    top: 208px;
+    background-size: 450px;
+}
+
+#s01-monitor-text {
+    position: absolute;
+    color: white;
+    left: 40px;
+    top: 40px;
+    font-size: 1.5em;
+    width: 350px;
 }
 
 #s01-gate01 {

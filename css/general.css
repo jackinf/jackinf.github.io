@@ -52,6 +52,13 @@ body {
     z-index: 100;
 }
 
+#player-hint {
+    position: absolute;
+    top: -40px;
+    width: 200px;
+    left: -10px;
+}
+
 .layer-horizontal {
     position: absolute;
     height: 100%;

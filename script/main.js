@@ -80,7 +80,7 @@ let createMoveAnimation = () => setInterval(playMoveAnimationStep, 30);
 
 function playerMovement() {
   if (!moveInterval) {
-    document.getElementById("wtf").style.opacity = 1;
+    document.getElementById("player-hint").style.opacity = 1;
     playMoveAnimationStep();
     moveInterval = createMoveAnimation();
   }
@@ -94,7 +94,7 @@ function playerMovement() {
     clearInterval(moveInterval);
     moveInterval = null;
     player.style["background-position"] = 0;
-    document.getElementById("wtf").style.opacity = 0;
+    document.getElementById("player-hint").style.opacity = 0;
   }, 200);
 }
 
