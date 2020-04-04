@@ -77,7 +77,6 @@ body {
 #layer-horizontal-2 {
     width: 2000px;
     background-image: url("../image/experiment/sky-lo-res2.jpg");
-    /*background-image: url("../image/experiment/sky1.jpg");*/
     background-size: 1750px;
     background-repeat: no-repeat;
 }

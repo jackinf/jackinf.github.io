@@ -101,18 +101,16 @@
 }
 
 #project-board-genius {
-    left: 2400px;
-    top: 100px;
-    display: none; /* TODO: remove */
-}
-
-#project-board-finest {
     left: 2800px;
     top: 100px;
 }
 
-#project-board-abb {
-    left: 3200px;
+#project-board-finest {
+    left: 3600px;
     top: 100px;
-    display: none; /* TODO: remove */
+}
+
+#project-board-abb {
+    left: 4400px;
+    top: 100px;
 }
