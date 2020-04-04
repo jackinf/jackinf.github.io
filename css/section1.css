@@ -84,6 +84,7 @@
 .board-plank-text {
     position: absolute;
     margin: 5px;
+    font-size: 1.3em;
 }
 
 .project-board-title {

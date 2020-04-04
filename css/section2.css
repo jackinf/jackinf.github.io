@@ -6,7 +6,8 @@
 .stone {
     width: 150px;
     height: 150px;
-    background-color: darkgray;
+    background-image: url("../image/Rock.png");
+    /*background-color: darkgray;*/
     border-radius: 40px 40px 0 0;
 }
 

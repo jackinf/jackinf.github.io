@@ -105,7 +105,7 @@ function startLoaderAnimations() {
 function startDescriptionAnimation() {
   if (Typed) {
     new Typed('#s01-monitor-text', {
-      strings: ['WELCOME TO MY WEBPAGE!', 'CONTINUE SCROLLING TO DISCOVER MY EXPERIENCE! 😁'],
+      strings: ['WELCOME TO MY WEBPAGE!', 'CONTINUE SCROLLING TO DISCOVER MY EXPERIENCE!'],
       typeSpeed: 40
     });
   }
