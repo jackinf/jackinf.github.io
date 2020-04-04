@@ -1,6 +1,6 @@
 #s01-gate02 {
     left: 5200px;
-    top: 85px;
+    top: var(--s04-gate-top);
 }
 
 .stone {
@@ -22,10 +22,10 @@
 
 #stone-speys {
     left: 5700px;
-    top: 450px;
+    top: var(--stone-speys-top);
 }
 
 #stone-triven {
     left: 6300px;
-    top: 450px;
+    top: var(--stone-triven-top);
 }

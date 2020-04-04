@@ -13,7 +13,7 @@
     height: 392px;
     background-image: url(../image/Monitor.png);
     left: 800px;
-    top: 208px;
+    top: var(--s01-description-top);
     background-size: 450px;
 }
 
@@ -28,7 +28,7 @@
 
 #s01-gate01 {
     left: 1400px;
-    top: 85px;
+    top: var(--s01-gate-top);
 }
 
 .project-board {
@@ -97,20 +97,20 @@
 
 #project-board-travix {
     left: 2000px;
-    top: 100px;
+    top: var(--project-board-travix-top);
 }
 
 #project-board-genius {
     left: 2800px;
-    top: 100px;
+    top: var(--project-board-genius-top);
 }
 
 #project-board-finest {
     left: 3600px;
-    top: 100px;
+    top: var(--project-board-finest-top);
 }
 
 #project-board-abb {
     left: 4400px;
-    top: 100px;
+    top: var(--project-board-abb-top);
 }

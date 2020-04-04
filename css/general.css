@@ -1,3 +1,37 @@
+* {
+    --top: 150px;
+
+    /* general */
+    --player-top: calc(500px + var(--top));
+    --ground-top: calc(600px + var(--top));
+    --grass-top: calc(524px + var(--top));
+    --gate-close-top: calc(137px);
+
+    /* section 1*/
+    --s01-gate-top: calc(85px + var(--top));
+    --s01-welcome-top: calc(180px);
+    --s01-description-top: calc(208px + var(--top));
+    --project-board-travix-top: calc(100px + var(--top));
+    --project-board-genius-top: calc(100px + var(--top));
+    --project-board-finest-top: calc(100px + var(--top));
+    --project-board-abb-top: calc(100px + var(--top));
+
+    /* section 2*/
+    --s02-gate-top: calc(85px + var(--top));
+    --stone-speys-top: calc(450px + var(--top));
+    --stone-triven-top: calc(450px + var(--top));
+
+    /* section 3*/
+    --s03-gate-top: calc(85px + var(--top));
+    --s03-skills-board-top: calc(100px + var(--top));
+    --s03-school-top: calc(300px + var(--top));
+    --s03-school-degrees-top: calc(100px + var(--top));
+
+
+    /* section 4*/
+    --s04-gate-top: calc(85px + var(--top));
+}
+
 @font-face {
     font-family: '04b03';
     src:url('../font/04b03.ttf.woff') format('woff'),
@@ -48,7 +82,7 @@ body {
     background-image: url("../image/PlayerB.png");
     width: 60px;
     height: 100px;
-    top: 500px;
+    top: var(--player-top);
     left: 200px;
     z-index: 100;
 }
@@ -104,7 +138,7 @@ body {
     background-image: url("../image/GroundFromWeb2.png");
     background-size: 200px;
     left: 0;
-    top: 600px;
+    top: var(--ground-top);
     z-index: 100;
 }
 
@@ -115,7 +149,7 @@ body {
     background-repeat: repeat-x;
     background-size: 200px;
     left: 0;
-    top: 524px;
+    top: var(--grass-top);
     z-index: 110;
 }
 
@@ -136,7 +170,7 @@ body {
     background-repeat: no-repeat;
     background-size: 132px;
     left: 268px;
-    top: 137px;
+    top: var(--gate-close-top);
     z-index: 120;
 }
 
