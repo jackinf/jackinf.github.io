@@ -35,15 +35,18 @@
     <!-- Entire container will stay in place during the scrolling. We will animate everything via JavaScript -->
     <div id="container">
         <div id="player">
-            <h4 id="player-hint">WOWOWO!</h4>
+            <h4 id="player-hint">Scroll to move</h4>
         </div>
-        <div class="layer-horizontal" id="layer-horizontal-2" data-layer-speed="0.125">
+        <div class="layer-horizontal" id="layer-horizontal-2" data-layer-speed="0.01"></div>
+        <div class="layer-horizontal" id="layer-horizontal-3" data-layer-speed="0.01" data-left-offset="1750"></div>
         <div class="layer-horizontal" id="layer-horizontal-1" data-layer-speed="0.5">
             <div class="it" id="ground"></div>
             <div class="it" id="grass"></div>
 
             <!-- Section 1-->
-            <div class="it" id="s01-welcome">Welcome to Jevgeni's page</div>
+            <div class="it" id="s01-welcome">
+                <div class="label-wrapper"></div>
+            </div>
             <div class="it" id="s01-description">
                 <div id="s01-monitor-text">
                     WELCOME TO MY WEBPAGE! CONTINUE SCROLLING TO DISCOVER MY EXPERIENCE 🤣
@@ -56,7 +59,9 @@
             </div>
 
             <div class="it project-board" id="project-board-travix">
-                <h2 class="project-board-title">Travix</h2>
+                <h2 class="project-board-title">
+                    <div class="label-wrapper"></div>Travix
+                </h2>
                 <div class="board-plank-standing"></div>
                 <div class="board-plank board-plan-1">
                     <div class="board-plank-inner"></div>
@@ -79,7 +84,9 @@
             </div>
 
             <div class="it project-board" id="project-board-genius">
-                <h2 class="project-board-title">Genius Sports</h2>
+                <h2 class="project-board-title">
+                    <div class="label-wrapper"></div>Genius Sports
+                </h2>
                 <div class="board-plank-standing"></div>
                 <div class="board-plank board-plan-1">
                     <div class="board-plank-inner"></div>
@@ -102,7 +109,9 @@
             </div>
 
             <div class="it project-board" id="project-board-finest">
-                <h2 class="project-board-title">Finestmedia</h2>
+                <h2 class="project-board-title">
+                    <div class="label-wrapper"></div>Finestmedia
+                </h2>
                 <div class="board-plank-standing"></div>
                 <div class="board-plank board-plan-1">
                     <div class="board-plank-inner"></div>
@@ -125,7 +134,8 @@
             </div>
 
             <div class="it project-board" id="project-board-abb">
-                <h2 class="project-board-title">ABB</h2>
+                <h2 class="project-board-title">
+                    <div class="label-wrapper"></div>ABB</h2>
                 <div class="board-plank-standing"></div>
                 <div class="board-plank board-plan-1">
                     <div class="board-plank-inner"></div>

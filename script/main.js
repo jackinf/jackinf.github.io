@@ -16,6 +16,7 @@ const contentDiv = document.getElementById("content");
 const layers = {
   LAYER_1: mapLayer("layer-horizontal-1"),
   LAYER_2: mapLayer("layer-horizontal-2"),
+  LAYER_3: mapLayer("layer-horizontal-3"),
 };
 const player = document.getElementById("player");
 const layerKeys = Object.keys(layers);
@@ -25,7 +26,9 @@ const enableScrollOrSwipe = () => canScrollOrSwipe = true;
 function mapLayer(layerId) {
   const elem = document.getElementById(layerId);
   const speed = parseFloat(elem.getAttribute('data-layer-speed'));
-  return { elem, speed };
+  let offset = elem.getAttribute('data-left-offset');
+  offset = offset ? parseFloat(offset) : 0;
+  return { elem, speed, offset };
 }
 
 function setPhase() {
@@ -35,16 +38,6 @@ function setPhase() {
 function makePageScrollable() {
   contentDiv.removeAttribute("class");
   enableScrollOrSwipe();
-}
-
-function setStandingOrWalkingAnimation(delta) {
-  // if (delta > 0) {
-  //   isWalking = true;
-  //   console.log('walking');
-  // } else if (delta === 0) {
-  //   isWalking = false;
-  //   console.log('standing');
-  // }
 }
 
 function detectPageVerticalPosition() {
@@ -57,7 +50,7 @@ function detectPageVerticalPosition() {
 function moveLayers() {
   for (let layerKey of layerKeys) {
     const layerElem = layers[layerKey];
-    const newLeftPosition = -1 * layerElem.speed * pageVerticalPosition;
+    const newLeftPosition = layerElem.offset + (-1 * layerElem.speed * pageVerticalPosition);
     layerElem.elem.style.left = `${newLeftPosition}px`;
   }
 }
@@ -76,11 +69,11 @@ let playMoveAnimationStep = () => {
   moveIndex += 1;
   player.style["background-position"] = `${movePositions[moveIndex % movePositions.length]}px`;
 };
-let createMoveAnimation = () => setInterval(playMoveAnimationStep, 30);
+let createMoveAnimation = () => setInterval(playMoveAnimationStep, 100);
 
 function playerMovement() {
   if (!moveInterval) {
-    document.getElementById("player-hint").style.opacity = 1;
+    document.getElementById("player-hint").style.opacity = 0;
     playMoveAnimationStep();
     moveInterval = createMoveAnimation();
   }
@@ -94,15 +87,16 @@ function playerMovement() {
     clearInterval(moveInterval);
     moveInterval = null;
     player.style["background-position"] = 0;
-    document.getElementById("player-hint").style.opacity = 0;
+    document.getElementById("player-hint").style.opacity = 1;
   }, 200);
 }
 
 window.onscroll = function (e) {
   if (canScrollOrSwipe) {
     const delta = detectPageVerticalPosition();
-    setStandingOrWalkingAnimation(Math.abs(delta));
     runTheseFunctionsAfterScrollOrSwipe();
     playerMovement();
   }
 };
+
+moveLayers();
