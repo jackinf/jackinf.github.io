@@ -1,5 +1,5 @@
 /*
-  Variables
+  Variables & HTMLl element references
  */
 let canScrollOrSwipe = false;
 let previousPageVerticalPosition = 0;
@@ -8,10 +8,6 @@ let currentPhase = "horizontal";
 let deltaPageVerticalPosition = 0;
 const constants = { PHASE_1: "phase1" };
 
-/*
-  HTMLl element references
- */
-const containerDiv = document.getElementById("container");
 const contentDiv = document.getElementById("content");
 const layers = {
   LAYER_1: mapLayer("layer-horizontal-1"),
@@ -21,7 +17,9 @@ const layers = {
 const player = document.getElementById("player");
 const layerKeys = Object.keys(layers);
 
-const enableScrollOrSwipe = () => canScrollOrSwipe = true;
+/*
+  Layer logic
+ */
 
 function mapLayer(layerId) {
   const elem = document.getElementById(layerId);
@@ -29,22 +27,6 @@ function mapLayer(layerId) {
   let offset = elem.getAttribute('data-left-offset');
   offset = offset ? parseFloat(offset) : 0;
   return { elem, speed, offset };
-}
-
-function setPhase() {
-  currentPhase = constants.PHASE_1;
-}
-
-function makePageScrollable() {
-  contentDiv.removeAttribute("class");
-  enableScrollOrSwipe();
-}
-
-function detectPageVerticalPosition() {
-  previousPageVerticalPosition = pageVerticalPosition;
-  pageVerticalPosition = pageYOffset;
-  deltaPageVerticalPosition = pageVerticalPosition - previousPageVerticalPosition;
-  return deltaPageVerticalPosition;
 }
 
 function moveLayers() {
@@ -55,14 +37,28 @@ function moveLayers() {
   }
 }
 
-function runTheseFunctionsAfterScrollOrSwipe() {
-  setPhase();
-  moveLayers();
+/*
+  Scrolling logic
+ */
+
+function setPhase() {
+  currentPhase = constants.PHASE_1;
 }
 
-window.onload = function (e) {
-  makePageScrollable();
-};
+function makePageScrollable() {
+  contentDiv.removeAttribute("class");
+  canScrollOrSwipe = true;
+}
+
+function detectPageVerticalPosition() {
+  previousPageVerticalPosition = pageVerticalPosition;
+  pageVerticalPosition = pageYOffset;
+  deltaPageVerticalPosition = pageVerticalPosition - previousPageVerticalPosition;
+}
+
+/*
+  PLAYER'S SECTION
+ */
 
 let moveInterval = null, moveIntervalStopTimeout = null, movePositions = [60, 114], moveIndex = 0;
 let playMoveAnimationStep = () => {
@@ -91,12 +87,52 @@ function playerMovement() {
   }, 200);
 }
 
+/*
+  LOADER ANIMATIONS
+ */
+
+function startLoaderAnimations() {
+  const csharpBar = document.getElementById("progress-bar-charp");
+  const jsBar = document.getElementById("progress-bar-js");
+  const pythonBar = document.getElementById("progress-bar-python");
+
+  const loadingPixelWidth = 15;
+  const steps = {csharp: 0, js: 0, python: 0};
+  const maxSteps = {csharp: 20, js: 18, python: 14};
+
+  const csharpInterval = setInterval(() => increasePercent("csharp", csharpBar, () => csharpInterval), 50);
+  const jsInterval = setInterval(() => increasePercent("js", jsBar, () => jsInterval), 50);
+  const pythonInterval = setInterval(() => increasePercent("python", pythonBar, () => pythonInterval), 50);
+
+  function increasePercent(key, bar, getInterval) {
+    steps[key] += 1;
+    bar.style.width = `${steps[key] * loadingPixelWidth}px`;
+    if (steps[key] >= maxSteps[key]) {
+      clearInterval(getInterval());
+    }
+  }
+}
+
+/*
+  START OF THE PROGRAM
+ */
+
+function runTheseFunctionsAfterScrollOrSwipe() {
+  setPhase();
+  moveLayers();
+}
+
+window.onload = function (e) {
+  makePageScrollable();
+};
+
 window.onscroll = function (e) {
   if (canScrollOrSwipe) {
-    const delta = detectPageVerticalPosition();
+    detectPageVerticalPosition();
     runTheseFunctionsAfterScrollOrSwipe();
     playerMovement();
   }
 };
 
 moveLayers();
+startLoaderAnimations();
