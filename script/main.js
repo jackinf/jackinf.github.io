@@ -39,25 +39,6 @@ function moveLayers() {
 }
 
 /*
-  Scrolling logic
- */
-
-function setPhase() {
-  currentPhase = constants.PHASE_1;
-}
-
-function makePageScrollable() {
-  contentDiv.removeAttribute("class");
-  canScrollOrSwipe = true;
-}
-
-function detectPageVerticalPosition() {
-  previousPageVerticalPosition = pageVerticalPosition;
-  pageVerticalPosition = pageYOffset;
-  deltaPageVerticalPosition = pageVerticalPosition - previousPageVerticalPosition;
-}
-
-/*
   PLAYER'S SECTION
  */
 
@@ -92,10 +73,17 @@ function playerMovement() {
   LOADER ANIMATIONS
  */
 
+const csharpBar = document.getElementById("progress-bar-charp");
+const jsBar = document.getElementById("progress-bar-js");
+const pythonBar = document.getElementById("progress-bar-python");
+
+function resetLoaderAnimations() {
+  animationsPlayed.loaders = false;
+  [csharpBar, jsBar, pythonBar].forEach(bar => bar.style.width = "0px");
+}
+
 function startLoaderAnimations() {
-  const csharpBar = document.getElementById("progress-bar-charp");
-  const jsBar = document.getElementById("progress-bar-js");
-  const pythonBar = document.getElementById("progress-bar-python");
+  animationsPlayed.loaders = true;
 
   const loadingPixelWidth = 15;
   const steps = {csharp: 0, js: 0, python: 0};
@@ -118,19 +106,38 @@ function startLoaderAnimations() {
   START OF THE PROGRAM
  */
 
+function setPhase() {
+  currentPhase = constants.PHASE_1;
+}
+
+function reset() {
+  resetLoaderAnimations();
+}
+
+function makePageScrollable() {
+  contentDiv.removeAttribute("class");
+  canScrollOrSwipe = true;
+}
+
+function detectPageVerticalPosition() {
+  previousPageVerticalPosition = pageVerticalPosition;
+  pageVerticalPosition = pageYOffset;
+  deltaPageVerticalPosition = pageVerticalPosition - previousPageVerticalPosition;
+}
+
 function runTheseFunctionsAfterScrollOrSwipe() {
   setPhase();
   moveLayers();
-  if (pageYOffset > 14000 && !animationsPlayed.loaders) {
-    animationsPlayed.loaders = true;
+  if (pageYOffset > 13500 && !animationsPlayed.loaders) {
     startLoaderAnimations();
   }
-  if (pageYOffset < 4500) {
-    animationsPlayed.loaders = false;
+  if (pageYOffset < 4500 && animationsPlayed.loaders) {
+    resetLoaderAnimations();
   }
 }
 
 window.onload = function (e) {
+  reset();
   makePageScrollable();
 };
 
@@ -143,4 +150,3 @@ window.onscroll = function (e) {
 };
 
 moveLayers();
-startLoaderAnimations();
