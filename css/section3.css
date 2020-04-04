@@ -33,3 +33,39 @@
     border-radius: 40px;
     margin: 30px
 }
+
+#s03-skills-board-csharp {
+    position: absolute;
+    top: 10px;
+}
+
+.loading-bar-progress {
+    position: absolute;
+    background-image: url("../image/loading-10percent.png");
+    height: 30px;
+    background-size: 30px;
+    top: 10px;
+    left: 40px;
+}
+
+#s03-skills-board-csharp > .loading-bar-progress {
+    width: 285px;
+}
+
+#s03-skills-board-js {
+    position: absolute;
+    top: 110px;
+}
+
+#s03-skills-board-js > .loading-bar-progress {
+    width: 240px;
+}
+
+#s03-skills-board-python {
+    position: absolute;
+    top: 210px;
+}
+
+#s03-skills-board-python > .loading-bar-progress {
+    width: 180px;
+}
