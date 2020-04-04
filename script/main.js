@@ -6,6 +6,7 @@ let previousPageVerticalPosition = 0;
 let pageVerticalPosition = 0;
 let currentPhase = "horizontal";
 let deltaPageVerticalPosition = 0;
+const animationsPlayed = { loaders: false };
 const constants = { PHASE_1: "phase1" };
 
 const contentDiv = document.getElementById("content");
@@ -120,6 +121,13 @@ function startLoaderAnimations() {
 function runTheseFunctionsAfterScrollOrSwipe() {
   setPhase();
   moveLayers();
+  if (pageYOffset > 14000 && !animationsPlayed.loaders) {
+    animationsPlayed.loaders = true;
+    startLoaderAnimations();
+  }
+  if (pageYOffset < 4500) {
+    animationsPlayed.loaders = false;
+  }
 }
 
 window.onload = function (e) {
