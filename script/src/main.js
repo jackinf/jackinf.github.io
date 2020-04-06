@@ -72,20 +72,15 @@ function playerMovement() {
   BOARDS ANIMATIONS
  */
 
-const boardTravix = document.getElementById("project-board-travix");
-const boardGenius = document.getElementById("project-board-genius");
-const boardFinest = document.getElementById("project-board-finest");
-const boardAbb = document.getElementById("project-board-abb");
 const boardAnimationsPlayed = {
   travix: true,
   genius: true,
   finest: true,
   abb: true
-}
+};
 
 function resetBoardsAnimations() {
   for (let key of Object.keys(boardAnimationsPlayed)) {
-    console.log(key);
     if (boardAnimationsPlayed[key]) {
       boardAnimationsPlayed[key] = false;
       $(`#project-board-${key}`).css({top: '+=600px'});
@@ -101,10 +96,71 @@ function startBoardsAnimations(key) {
 }
 
 /*
+  STONES ANIMATIONS
+ */
+
+const stoneAnimationsPlayed = {
+  speys: true,
+  triven: true
+};
+
+const dialogText = {
+  speys: "PURPOSE OF THE SYSTEM IS TO ALLOW USERS TO TRACK PACKAGES, MAINTAIN INFORMATION ABOUT PACKAGES IN USER-FRIENDLY SINGLE-PAGE-APPLICATION. INFOSTRUCTURE COMPOSED OF MICROSERVICES. IT GAVE THE POSSIBILITY TO PRACTICE MICROSERVICE ARCHITECTURE (.NET) AS WELL AS REACT. SERVICES WERE HOSTED IN AZURE.",
+  triven: "TRIVEN WAS THE STARTUP, WHICH AIMED TO MAKE BUYING AND SELLING VEHICLES EASIER. WITH A TEAM OF SEVEN PEOPLE, WE BUILT A PLATFORM IN JAVA SPRING BOOT AND REACT."
+};
+
+let hackSkipTyped = false;
+function resetStonesAnimations() {
+  for (let key of Object.keys(stoneAnimationsPlayed)) {
+    if (stoneAnimationsPlayed[key]) {
+      stoneAnimationsPlayed[key] = false;
+      $(`#stone-${key}`).css({top: '+=600px'});
+      $(`#dialog-${key}`).css({
+        width: "200px",
+        height: "100px",
+        bottom: "0",
+        left: "0",
+        opacity: "0"
+      });
+
+      document.getElementById(`dialog-${key}`).innerHTML = "";
+
+      // hack: if we scrolled too quickly, don't retype the text for the stone
+      if (!hackSkipTyped) {
+        setTimeout(() => {
+          if (document.getElementById(`dialog-${key}`).innerHTML !== "") {
+            hackSkipTyped = true;
+          }
+        });
+      }
+    }
+  }
+}
+
+function startStonesAnimation(key) {
+  if (!stoneAnimationsPlayed[key]) {
+    stoneAnimationsPlayed[key] = true;
+    $(`#stone-${key}`).animate({ top: "-=600px" }, 500, function () {
+      $(`#dialog-${key}`).animate({
+        width: "400px",
+        height: "200px",
+        opacity: "1",
+        left: "100px",
+        bottom: "200px",
+      }, 500, function () {
+        if (!hackSkipTyped) {
+          new Typed(`#dialog-${key}`, { strings: [dialogText[key]], typeSpeed: 5 });
+        }
+      })
+    });
+  }
+}
+
+/*
   LOADER ANIMATIONS
  */
 
-const animationsPlayed = { loaders: false };
+const animationsPlayed = { loaders: true };
 const csharpBar = document.getElementById("progress-bar-charp");
 const jsBar = document.getElementById("progress-bar-js");
 const pythonBar = document.getElementById("progress-bar-python");
@@ -158,8 +214,10 @@ function setPhase() {
 }
 
 function reset() {
+  moveLayers();
   resetLoaderAnimations();
   resetBoardsAnimations();
+  resetStonesAnimations();
 }
 
 function makePageScrollable() {
@@ -183,6 +241,9 @@ function runTheseFunctionsAfterScrollOrSwipe() {
   pageYOffset > 5600 && startBoardsAnimations("finest");
   pageYOffset > 7300 && startBoardsAnimations("abb");
 
+  pageYOffset > 9300 && startStonesAnimation("speys");
+  pageYOffset > 10300 && startStonesAnimation("triven");
+
   pageYOffset < 1500 && reset();
 }
 
@@ -199,5 +260,3 @@ window.onscroll = function (e) {
     playerMovement();
   }
 };
-
-moveLayers();
