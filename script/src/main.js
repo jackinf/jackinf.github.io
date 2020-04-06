@@ -6,7 +6,6 @@ let previousPageVerticalPosition = 0;
 let pageVerticalPosition = 0;
 let currentPhase = "horizontal";
 let deltaPageVerticalPosition = 0;
-const animationsPlayed = { loaders: false };
 const constants = { PHASE_1: "phase1" };
 
 const contentDiv = document.getElementById("content");
@@ -70,19 +69,58 @@ function playerMovement() {
 }
 
 /*
+  BOARDS ANIMATIONS
+ */
+
+const boardTravix = document.getElementById("project-board-travix");
+const boardGenius = document.getElementById("project-board-genius");
+const boardFinest = document.getElementById("project-board-finest");
+const boardAbb = document.getElementById("project-board-abb");
+const boardAnimationsPlayed = {
+  travix: true,
+  genius: true,
+  finest: true,
+  abb: true
+}
+
+function resetBoardsAnimations() {
+  for (let key of Object.keys(boardAnimationsPlayed)) {
+    console.log(key);
+    if (boardAnimationsPlayed[key]) {
+      boardAnimationsPlayed[key] = false;
+      $(`#project-board-${key}`).css({top: '+=600px'});
+    }
+  }
+}
+
+function startBoardsAnimations(key) {
+  if (!boardAnimationsPlayed[key]) {
+    boardAnimationsPlayed[key] = true;
+    $(`#project-board-${key}`).animate({ top: "-=600px" }, 500);
+  }
+}
+
+/*
   LOADER ANIMATIONS
  */
 
+const animationsPlayed = { loaders: false };
 const csharpBar = document.getElementById("progress-bar-charp");
 const jsBar = document.getElementById("progress-bar-js");
 const pythonBar = document.getElementById("progress-bar-python");
 
 function resetLoaderAnimations() {
+  if (!animationsPlayed.loaders) {
+    return;
+  }
   animationsPlayed.loaders = false;
   [csharpBar, jsBar, pythonBar].forEach(bar => bar.style.width = "0px");
 }
 
 function startLoaderAnimations() {
+  if (animationsPlayed.loaders) {
+    return;
+  }
   animationsPlayed.loaders = true;
 
   const loadingPixelWidth = 15;
@@ -120,8 +158,8 @@ function setPhase() {
 }
 
 function reset() {
-  startDescriptionAnimation();
   resetLoaderAnimations();
+  resetBoardsAnimations();
 }
 
 function makePageScrollable() {
@@ -138,16 +176,19 @@ function detectPageVerticalPosition() {
 function runTheseFunctionsAfterScrollOrSwipe() {
   setPhase();
   moveLayers();
-  if (pageYOffset > 13500 && !animationsPlayed.loaders) {
-    startLoaderAnimations();
-  }
-  if (pageYOffset < 4500 && animationsPlayed.loaders) {
-    resetLoaderAnimations();
-  }
+
+  pageYOffset > 13500 && startLoaderAnimations();
+  pageYOffset > 2700 && startBoardsAnimations("travix");
+  pageYOffset > 3800 && startBoardsAnimations("genius");
+  pageYOffset > 5600 && startBoardsAnimations("finest");
+  pageYOffset > 7300 && startBoardsAnimations("abb");
+
+  pageYOffset < 1500 && reset();
 }
 
 window.onload = function (e) {
   reset();
+  startDescriptionAnimation();
   makePageScrollable();
 };
 
