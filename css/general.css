@@ -191,3 +191,33 @@ body {
     left: 40px;
     top: 40px;
 }
+
+#gate-label-experience {
+    position: absolute;
+    background-image: url("../image/LabelExp.png");
+    width: 400px;
+    height: 150px;
+    top: -60px;
+    left: 24px;
+    background-repeat: no-repeat;
+}
+
+#gate-label-projects {
+    position: absolute;
+    background-image: url("../image/LabelSideProjects.png");
+    width: 400px;
+    height: 150px;
+    top: -60px;
+    left: 24px;
+    background-repeat: no-repeat;
+}
+
+#gate-label-knowledge {
+    position: absolute;
+    background-image: url("../image/LabelKnowledge.png");
+    width: 400px;
+    height: 150px;
+    top: -60px;
+    left: 24px;
+    background-repeat: no-repeat;
+}

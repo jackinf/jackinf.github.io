@@ -99,6 +99,20 @@
     top: 200px;
 }
 
+.degree-title {
+    font-family: '01-Digit', "Courier New", monospace;
+    position: absolute;
+    top: 20px;
+}
+
+#s03-degree-title-bachelor {
+    left: 60px;
+}
+
+#s03-degree-title-master {
+    left: 70px;
+}
+
 #s03-tree-trunk {
     position: absolute;
     background-image: url("../image/TreeTrunk.png");

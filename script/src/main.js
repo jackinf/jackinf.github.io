@@ -206,6 +206,41 @@ function startDescriptionAnimation() {
 }
 
 /*
+  TREE ANIMATIONS
+ */
+
+const treeAnimationsPlayed = {master: true, bachelor: true};
+const bachelorTreeDiv = document.getElementById("s03-tree-bachelor");
+const masterTreeDiv = document.getElementById("s03-tree-master");
+
+function resetTreeAnimations() {
+  if (treeAnimationsPlayed.bachelor) {
+    treeAnimationsPlayed.bachelor = false;
+    bachelorTreeDiv.style.opacity = 0;
+    bachelorTreeDiv.style.top = "175px";
+  }
+
+  if (treeAnimationsPlayed.master) {
+    treeAnimationsPlayed.master = false;
+    masterTreeDiv.style.opacity = 0;
+    masterTreeDiv.style.top = "45px";
+  }
+}
+
+function startTreeAnimations() {
+  if (!treeAnimationsPlayed.bachelor) {
+    treeAnimationsPlayed.bachelor = true;
+    $(bachelorTreeDiv).animate({opacity: "1", top: "+=25px"}, 500);
+  }
+  if (!treeAnimationsPlayed.master) {
+    treeAnimationsPlayed.master = true;
+    setTimeout(() => {
+      $(masterTreeDiv).animate({opacity: "1", top: "+=25px"}, 500)
+    }, 500);
+  }
+}
+
+/*
   START OF THE PROGRAM
  */
 
@@ -218,6 +253,7 @@ function reset() {
   resetLoaderAnimations();
   resetBoardsAnimations();
   resetStonesAnimations();
+  resetTreeAnimations();
 }
 
 function makePageScrollable() {
@@ -243,6 +279,8 @@ function runTheseFunctionsAfterScrollOrSwipe() {
 
   pageYOffset > 9300 && startStonesAnimation("speys");
   pageYOffset > 10300 && startStonesAnimation("triven");
+
+  pageYOffset > 16100 && startTreeAnimations();
 
   pageYOffset < 1500 && reset();
 }
