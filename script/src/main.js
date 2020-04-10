@@ -83,7 +83,7 @@ function resetBoardsAnimations() {
   for (let key of Object.keys(boardAnimationsPlayed)) {
     if (boardAnimationsPlayed[key]) {
       boardAnimationsPlayed[key] = false;
-      $(`#project-board-${key}`).css({top: '+=600px'});
+      $(`#project-board-${key}`).animate({top: '+=600px'}, 500);
     }
   }
 }
@@ -109,7 +109,7 @@ const dialogText = {
   triven: "TRIVEN WAS THE STARTUP, WHICH AIMED TO MAKE BUYING AND SELLING VEHICLES EASIER. WITH A TEAM OF SEVEN PEOPLE, WE BUILT A PLATFORM IN JAVA SPRING BOOT AND REACT."
 };
 
-let hackSkipTyped = false;
+const skipStoneDialog = {speys: false, triven: false};
 function resetStonesAnimations() {
   for (let key of Object.keys(stoneAnimationsPlayed)) {
     if (stoneAnimationsPlayed[key]) {
@@ -122,17 +122,6 @@ function resetStonesAnimations() {
         left: "0",
         opacity: "0"
       });
-
-      document.getElementById(`dialog-${key}`).innerHTML = "";
-
-      // hack: if we scrolled too quickly, don't retype the text for the stone
-      if (!hackSkipTyped) {
-        setTimeout(() => {
-          if (document.getElementById(`dialog-${key}`).innerHTML !== "") {
-            hackSkipTyped = true;
-          }
-        });
-      }
     }
   }
 }
@@ -148,7 +137,8 @@ function startStonesAnimation(key) {
         left: "100px",
         bottom: "200px",
       }, 500, function () {
-        if (!hackSkipTyped) {
+        if (!skipStoneDialog[key]) {
+          skipStoneDialog[key] = true;
           new Typed(`#dialog-${key}`, { strings: [dialogText[key]], typeSpeed: 5 });
         }
       })
@@ -241,6 +231,38 @@ function startTreeAnimations() {
 }
 
 /*
+  GATE LABELS ANIMATION
+ */
+
+const gateLabelsDivs = {
+  exp: document.getElementById("gate-label-experience"),
+  projects: document.getElementById("gate-label-projects"),
+  knowledge: document.getElementById("gate-label-knowledge")
+};
+const gateLabelsAnimationsPlayed = {exp: true, projects: true, knowledge: true};
+
+function resetGateLabelsAnimations() {
+  // for (let gateLabel of gateLabelsDivs) {
+  //   gateLabel.style.top = "40px";
+  // }
+  Object.keys(gateLabelsAnimationsPlayed).forEach(resetGateLabelAnimation);
+}
+
+function resetGateLabelAnimation(key) {
+  if (gateLabelsAnimationsPlayed[key]) {
+    gateLabelsAnimationsPlayed[key] = false;
+    $(gateLabelsDivs[key]).animate({top: "+=100px"}, 500);
+  }
+}
+
+function startLabelAnimation(key) {
+  if (!gateLabelsAnimationsPlayed[key]) {
+    gateLabelsAnimationsPlayed[key] = true;
+    $(gateLabelsDivs[key]).animate({top: "-=100px"}, 500);
+  }
+}
+
+/*
   START OF THE PROGRAM
  */
 
@@ -250,6 +272,7 @@ function setPhase() {
 
 function reset() {
   moveLayers();
+  resetGateLabelsAnimations();
   resetLoaderAnimations();
   resetBoardsAnimations();
   resetStonesAnimations();
@@ -270,6 +293,15 @@ function detectPageVerticalPosition() {
 function runTheseFunctionsAfterScrollOrSwipe() {
   setPhase();
   moveLayers();
+
+  // Gate labels
+  pageYOffset < 1500 && resetGateLabelAnimation("exp");
+  pageYOffset < 9100 && resetGateLabelAnimation("projects");
+  pageYOffset < 12800 && resetGateLabelAnimation("knowledge");
+
+  pageYOffset > 1700 && startLabelAnimation("exp");
+  pageYOffset > 9300 && startLabelAnimation("projects");
+  pageYOffset > 13000 && startLabelAnimation("knowledge");
 
   pageYOffset > 13500 && startLoaderAnimations();
   pageYOffset > 2700 && startBoardsAnimations("travix");
