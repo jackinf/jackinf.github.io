@@ -108,17 +108,30 @@ body {
 }
 
 #layer-horizontal-2 {
-    width: 2000px;
-    background-image: url("../image/experiment/sky-lo-res2.jpg");
-    background-size: 2000px;
-    background-repeat: no-repeat;
+    width: 20000px;
+    background-image: url("../image/Background/zSky.png");
+    background-size: 350px;
 }
 
 #layer-horizontal-3 {
-    width: 2000px;
-    background-image: url("../image/experiment/sky-lo-res1.jpg");
-    background-size: 2000px;
-    background-repeat: no-repeat;
+    width: 20000px;
+    background-image: url("../image/Background/zMountains1.png");
+    background-repeat: repeat-x;
+    top: 60px;
+}
+
+#layer-horizontal-4 {
+    width: 15000px;
+    background-image: url("../image/Background/zMountains2.png");
+    background-repeat: repeat-x;
+    top: 60px;
+}
+
+#layer-horizontal-5 {
+    width: 10000px;
+    background-image: url("../image/Background/zMountains3.png");
+    background-repeat: repeat-x;
+    top: 60px;
 }
 
 .it {
@@ -220,4 +233,17 @@ body {
     top: -60px;
     left: 24px;
     background-repeat: no-repeat;
+}
+
+.background-tree {
+    position: absolute;
+    top: 370px;
+    width: 150px;
+}
+
+#sky-stars {
+    background-image: url("../image/Background/zStars.png");
+    width: 2500px;
+    height: 600px;
+    opacity: 0.5;
 }
