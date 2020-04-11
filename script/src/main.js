@@ -6,8 +6,11 @@ let previousPageVerticalPosition = 0;
 let pageVerticalPosition = 0;
 let currentPhase = "horizontal";
 let deltaPageVerticalPosition = 0;
+let touchStartX = 0, touchCurrentX = 0, touchEndX = 0, pageVerticalPositionOnTouch = 0;
 const constants = { PHASE_1: "phase1" };
 
+const pageDiv = document.getElementById("page");
+const containerDiv = document.getElementById("container");
 const contentDiv = document.getElementById("content");
 const layers = {
   LAYER_1: mapLayer("layer-horizontal-1"),
@@ -244,9 +247,6 @@ const gateLabelsDivs = {
 const gateLabelsAnimationsPlayed = {exp: true, projects: true, knowledge: true};
 
 function resetGateLabelsAnimations() {
-  // for (let gateLabel of gateLabelsDivs) {
-  //   gateLabel.style.top = "40px";
-  // }
   Object.keys(gateLabelsAnimationsPlayed).forEach(resetGateLabelAnimation);
 }
 
@@ -262,6 +262,34 @@ function startLabelAnimation(key) {
     gateLabelsAnimationsPlayed[key] = true;
     $(gateLabelsDivs[key]).animate({top: "-=100px"}, 500);
   }
+}
+
+/*
+  TOUCH CONTROLS
+ */
+
+function initTouchEvents() {
+  document.addEventListener("touchstart", handleStart);
+  document.addEventListener("touchmove", handleMove);
+  document.addEventListener("touchend", handleEnd);
+}
+
+function handleStart(e) {
+  touchStartX = e.targetTouches[0].pageX;
+  pageVerticalPositionOnTouch = pageVerticalPosition;
+}
+
+function handleMove(e) {
+  touchCurrentX = e.targetTouches[0].pageX;
+  if (canScrollOrSwipe) {
+    detectPageVerticalPosition();
+    runTheseFunctionsAfterScrollOrSwipe();
+    playerMovement();
+  }
+}
+
+function handleEnd(e) {
+  touchEndX = e.changedTouches[0].pageX;
 }
 
 /*
@@ -288,8 +316,17 @@ function makePageScrollable() {
 
 function detectPageVerticalPosition() {
   previousPageVerticalPosition = pageVerticalPosition;
-  pageVerticalPosition = pageYOffset;
-  deltaPageVerticalPosition = pageVerticalPosition - previousPageVerticalPosition;
+
+  if ("computer" === deviceName) {
+    pageVerticalPosition = pageYOffset;
+    deltaPageVerticalPosition = pageVerticalPosition - previousPageVerticalPosition;
+  } else {
+    pageVerticalPosition = Math.max(pageVerticalPositionOnTouch + (touchStartX - touchCurrentX), 0);
+    if (pageVerticalPosition > pageDiv.offsetHeight - containerDiv.offsetHeight) {
+      pageVerticalPosition = pageDiv.offsetHeight - containerDiv.offsetHeight;
+    }
+    deltaPageVerticalPosition = pageVerticalPosition - previousPageVerticalPosition;
+  }
 }
 
 function runTheseFunctionsAfterScrollOrSwipe() {
@@ -297,29 +334,32 @@ function runTheseFunctionsAfterScrollOrSwipe() {
   moveLayers();
 
   // Gate labels
-  pageYOffset < 1500 && resetGateLabelAnimation("exp");
-  pageYOffset < 9100 && resetGateLabelAnimation("projects");
-  pageYOffset < 12800 && resetGateLabelAnimation("knowledge");
+  pageVerticalPosition < 1500 && resetGateLabelAnimation("exp");
+  pageVerticalPosition < 9100 && resetGateLabelAnimation("projects");
+  pageVerticalPosition < 12800 && resetGateLabelAnimation("knowledge");
 
-  pageYOffset > 1700 && startLabelAnimation("exp");
-  pageYOffset > 9300 && startLabelAnimation("projects");
-  pageYOffset > 13000 && startLabelAnimation("knowledge");
+  pageVerticalPosition > 1700 && startLabelAnimation("exp");
+  pageVerticalPosition > 9300 && startLabelAnimation("projects");
+  pageVerticalPosition > 13000 && startLabelAnimation("knowledge");
 
-  pageYOffset > 13500 && startLoaderAnimations();
-  pageYOffset > 2700 && startBoardsAnimations("travix");
-  pageYOffset > 3800 && startBoardsAnimations("genius");
-  pageYOffset > 5600 && startBoardsAnimations("finest");
-  pageYOffset > 7300 && startBoardsAnimations("abb");
+  pageVerticalPosition > 13500 && startLoaderAnimations();
+  pageVerticalPosition > 2700 && startBoardsAnimations("travix");
+  pageVerticalPosition > 3800 && startBoardsAnimations("genius");
+  pageVerticalPosition > 5600 && startBoardsAnimations("finest");
+  pageVerticalPosition > 7300 && startBoardsAnimations("abb");
 
-  pageYOffset > 9300 && startStonesAnimation("speys");
-  pageYOffset > 10300 && startStonesAnimation("triven");
+  pageVerticalPosition > 9300 && startStonesAnimation("speys");
+  pageVerticalPosition > 10300 && startStonesAnimation("triven");
 
-  pageYOffset > 16100 && startTreeAnimations();
+  pageVerticalPosition > 16100 && startTreeAnimations();
 
-  pageYOffset < 1500 && reset();
+  pageVerticalPosition < 1500 && reset();
 }
 
 window.onload = function (e) {
+  if ("computer" !== deviceName) {
+    initTouchEvents();
+  }
   reset();
   startDescriptionAnimation();
   makePageScrollable();
