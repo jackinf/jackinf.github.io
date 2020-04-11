@@ -79,9 +79,10 @@ body {
 #player {
     position: absolute;
     background-image: url("../image/PlayerB.png");
+    background-repeat: repeat-x;
     width: 60px;
     height: 100px;
-    top: var(--player-top);
+    bottom: 20%;
     left: 200px;
     z-index: 100;
 }
@@ -105,6 +106,7 @@ body {
 
 #layer-horizontal-1 {
     width: 5000px;
+    bottom: 0;
 }
 
 #layer-horizontal-2 {
@@ -140,8 +142,8 @@ body {
 
 #grass-and-ground-container {
     width: 10000px;
-    height: 600px;
-    top: var(--ground-top);
+    top: 80%;
+    height: 90%;
 }
 
 #ground {
