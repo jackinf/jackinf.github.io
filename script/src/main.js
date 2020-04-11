@@ -2,12 +2,8 @@
   Variables & HTMLl element references
  */
 let canScrollOrSwipe = false;
-let previousPageVerticalPosition = 0;
-let pageVerticalPosition = 0;
-let currentPhase = "horizontal";
-let deltaPageVerticalPosition = 0;
-let touchStartX = 0, touchCurrentX = 0, touchEndX = 0, pageVerticalPositionOnTouch = 0;
-const constants = { PHASE_1: "phase1" };
+let previousPageVerticalPosition = 0, pageVerticalPosition = 0, deltaPageVerticalPosition = 0;
+let touchStartX = 0, touchCurrentX = 0, touchEndX = 0, pageVerticalPositionOnTouch = 0, touchSpeed = 2;
 
 const pageDiv = document.getElementById("page");
 const containerDiv = document.getElementById("container");
@@ -296,10 +292,6 @@ function handleEnd(e) {
   START OF THE PROGRAM
  */
 
-function setPhase() {
-  currentPhase = constants.PHASE_1;
-}
-
 function reset() {
   moveLayers();
   resetGateLabelsAnimations();
@@ -321,7 +313,7 @@ function detectPageVerticalPosition() {
     pageVerticalPosition = pageYOffset;
     deltaPageVerticalPosition = pageVerticalPosition - previousPageVerticalPosition;
   } else {
-    pageVerticalPosition = Math.max(pageVerticalPositionOnTouch + (touchStartX - touchCurrentX), 0);
+    pageVerticalPosition = Math.max(pageVerticalPositionOnTouch + (touchStartX - touchCurrentX) * touchSpeed, 0);
     if (pageVerticalPosition > pageDiv.offsetHeight - containerDiv.offsetHeight) {
       pageVerticalPosition = pageDiv.offsetHeight - containerDiv.offsetHeight;
     }
@@ -330,7 +322,6 @@ function detectPageVerticalPosition() {
 }
 
 function runTheseFunctionsAfterScrollOrSwipe() {
-  setPhase();
   moveLayers();
 
   // Gate labels
