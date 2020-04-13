@@ -40,7 +40,8 @@
 }
 
 #s01-project-boards {
-    bottom: -200px;
+    bottom: 580px;
+    position: absolute;
 }
 
 .project-board {
@@ -110,20 +111,20 @@
 
 #project-board-travix {
     left: 2000px;
-    top: var(--project-board-travix-top);
+    /*top: var(--project-board-travix-top);*/
 }
 
 #project-board-genius {
     left: 2800px;
-    top: var(--project-board-genius-top);
+    /*top: var(--project-board-genius-top);*/
 }
 
 #project-board-finest {
     left: 3600px;
-    top: var(--project-board-finest-top);
+    /*top: var(--project-board-finest-top);*/
 }
 
 #project-board-abb {
     left: 4400px;
-    top: var(--project-board-abb-top);
+    /*top: var(--project-board-abb-top);*/
 }

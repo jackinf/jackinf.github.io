@@ -17,6 +17,7 @@ const layers = {
 };
 const player = document.getElementById("player");
 const layerKeys = Object.keys(layers);
+const animationsEnabled = true;
 
 /*
   Layer logic
@@ -84,7 +85,7 @@ function resetBoardsAnimations() {
   for (let key of Object.keys(boardAnimationsPlayed)) {
     if (boardAnimationsPlayed[key]) {
       boardAnimationsPlayed[key] = false;
-      $(`#project-board-${key}`).animate({top: '+=600px'}, 500);
+      $(`#project-board-${key}`).animate({bottom: '-=600px'}, 500);
     }
   }
 }
@@ -92,7 +93,7 @@ function resetBoardsAnimations() {
 function startBoardsAnimations(key) {
   if (!boardAnimationsPlayed[key]) {
     boardAnimationsPlayed[key] = true;
-    $(`#project-board-${key}`).animate({ top: "-=600px" }, 500);
+    $(`#project-board-${key}`).animate({ bottom: "+=600px" }, 500);
   }
 }
 
@@ -294,11 +295,15 @@ function handleEnd(e) {
 
 function reset() {
   moveLayers();
-  resetGateLabelsAnimations();
-  resetLoaderAnimations();
-  resetBoardsAnimations();
-  resetStonesAnimations();
-  resetTreeAnimations();
+
+  if (animationsEnabled) {
+    resetGateLabelsAnimations();
+    resetLoaderAnimations();
+    resetBoardsAnimations();
+    resetStonesAnimations();
+    resetTreeAnimations();
+  }
+
 }
 
 function makePageScrollable() {
@@ -325,26 +330,27 @@ function runTheseFunctionsAfterScrollOrSwipe() {
   moveLayers();
 
   // Gate labels
-  pageVerticalPosition < 1500 && resetGateLabelAnimation("exp");
-  pageVerticalPosition < 9100 && resetGateLabelAnimation("projects");
-  pageVerticalPosition < 12800 && resetGateLabelAnimation("knowledge");
+  if (animationsEnabled) {
+    pageVerticalPosition < 1500 && resetGateLabelAnimation("exp");
+    pageVerticalPosition < 9100 && resetGateLabelAnimation("projects");
+    pageVerticalPosition < 12800 && resetGateLabelAnimation("knowledge");
+    pageVerticalPosition > 1700 && startLabelAnimation("exp");
+    pageVerticalPosition > 9300 && startLabelAnimation("projects");
+    pageVerticalPosition > 13000 && startLabelAnimation("knowledge");
 
-  pageVerticalPosition > 1700 && startLabelAnimation("exp");
-  pageVerticalPosition > 9300 && startLabelAnimation("projects");
-  pageVerticalPosition > 13000 && startLabelAnimation("knowledge");
+    pageVerticalPosition > 13500 && startLoaderAnimations();
+    pageVerticalPosition > 2700 && startBoardsAnimations("travix");
+    pageVerticalPosition > 3800 && startBoardsAnimations("genius");
+    pageVerticalPosition > 5600 && startBoardsAnimations("finest");
+    pageVerticalPosition > 7300 && startBoardsAnimations("abb");
 
-  pageVerticalPosition > 13500 && startLoaderAnimations();
-  pageVerticalPosition > 2700 && startBoardsAnimations("travix");
-  pageVerticalPosition > 3800 && startBoardsAnimations("genius");
-  pageVerticalPosition > 5600 && startBoardsAnimations("finest");
-  pageVerticalPosition > 7300 && startBoardsAnimations("abb");
+    pageVerticalPosition > 9300 && startStonesAnimation("speys");
+    pageVerticalPosition > 10300 && startStonesAnimation("triven");
 
-  pageVerticalPosition > 9300 && startStonesAnimation("speys");
-  pageVerticalPosition > 10300 && startStonesAnimation("triven");
+    pageVerticalPosition > 16100 && startTreeAnimations();
 
-  pageVerticalPosition > 16100 && startTreeAnimations();
-
-  pageVerticalPosition < 1500 && reset();
+    pageVerticalPosition < 1500 && reset();
+  }
 }
 
 window.onload = function (e) {
