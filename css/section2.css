@@ -1,13 +1,17 @@
 #s01-gate02 {
     left: 5200px;
-    top: var(--s04-gate-top);
+    bottom: 515px;
+}
+
+#s02-stones {
+    bottom: 0;
+    position: absolute;
 }
 
 .stone {
     width: 150px;
     height: 150px;
     background-image: url("../image/Rock.png");
-    /*background-color: darkgray;*/
     border-radius: 40px 40px 0 0;
 }
 
@@ -32,10 +36,8 @@
 
 #stone-speys {
     left: 5700px;
-    top: var(--stone-speys-top);
 }
 
 #stone-triven {
     left: 6300px;
-    top: var(--stone-triven-top);
 }

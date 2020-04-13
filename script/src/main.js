@@ -116,7 +116,7 @@ function resetStonesAnimations() {
   for (let key of Object.keys(stoneAnimationsPlayed)) {
     if (stoneAnimationsPlayed[key]) {
       stoneAnimationsPlayed[key] = false;
-      $(`#stone-${key}`).css({top: '+=600px'});
+      $(`#stone-${key}`).css({bottom: '-300px'});
       $(`#dialog-${key}`).css({
         width: "200px",
         height: "100px",
@@ -131,7 +131,7 @@ function resetStonesAnimations() {
 function startStonesAnimation(key) {
   if (!stoneAnimationsPlayed[key]) {
     stoneAnimationsPlayed[key] = true;
-    $(`#stone-${key}`).animate({ top: "-=600px" }, 500, function () {
+    $(`#stone-${key}`).animate({ bottom: "0px" }, 500, function () {
       $(`#dialog-${key}`).animate({
         width: "400px",
         height: "200px",
@@ -141,7 +141,7 @@ function startStonesAnimation(key) {
       }, 500, function () {
         if (!skipStoneDialog[key]) {
           skipStoneDialog[key] = true;
-          new Typed(`#dialog-${key}`, { strings: [dialogText[key]], typeSpeed: 5 });
+          new Typed(`#dialog-${key}`, { strings: [dialogText[key]], typeSpeed: 5, showCursor: false });
         }
       })
     });
