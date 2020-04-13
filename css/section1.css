@@ -1,10 +1,21 @@
+#s01-gate01 {
+    left: 1400px;
+    bottom: 515px;
+}
+
+#s01-main-container {
+    position: absolute;
+    bottom: 20%;
+    height: 100%;
+}
+
 #s01-welcome {
     width: 700px;
     height: 120px;
     background-image: url(../image/Welcome1.png?v=1);
     background-repeat: no-repeat;
     left: 50px;
-    top: 180px;
+    top: 40%;
     background-size: 700px;
 }
 
@@ -13,7 +24,7 @@
     height: 392px;
     background-image: url(../image/Monitor.png);
     left: 800px;
-    top: var(--s01-description-top);
+    bottom: 0;
     background-size: 450px;
 }
 
@@ -26,9 +37,9 @@
     width: 350px;
 }
 
-#s01-gate01 {
-    left: 1400px;
-    top: var(--s01-gate-top);
+#s01-project-boards {
+    bottom: 580px;
+    position: absolute;
 }
 
 .project-board {
@@ -93,25 +104,20 @@
     position: absolute;
     top: -80px;
     left: 15px;
-    /*left: 250px;*/
 }
 
 #project-board-travix {
     left: 2000px;
-    top: var(--project-board-travix-top);
 }
 
 #project-board-genius {
     left: 2800px;
-    top: var(--project-board-genius-top);
 }
 
 #project-board-finest {
     left: 3600px;
-    top: var(--project-board-finest-top);
 }
 
 #project-board-abb {
     left: 4400px;
-    top: var(--project-board-abb-top);
 }

@@ -28,221 +28,237 @@
     </div>
 </noscript>
 
-<div class="content-noscroll" id="content">
+    <div class="content-noscroll" id="content">
 
-    <!-- Helper div to set the height of a page -->
-    <div id=page></div>
+        <!-- Helper div to set the height of a page -->
+        <div id=page></div>
 
-    <!-- Entire container will stay in place during the scrolling. We will animate everything via JavaScript -->
-    <div id="container">
-        <div id="player">
-            <h4 id="player-hint">Scroll to move</h4>
-        </div>
-        <div class="layer-horizontal" id="layer-horizontal-2" data-layer-speed="0.01">
-            <div id="sky-stars"></div>
-        </div>
-        <div class="layer-horizontal" id="layer-horizontal-5" data-layer-speed="0.03"></div>
-        <div class="layer-horizontal" id="layer-horizontal-4" data-layer-speed="0.08"></div>
-
-        <div class="layer-horizontal" id="layer-horizontal-3" data-layer-speed="0.1">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 100px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 540px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 1200px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 2500px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 3100px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 3500px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 4100px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 4800px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 5300px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 5900px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 6500px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 7500px">
-            <img class="background-tree" src="image/Background/TreeA.png" alt="tree" style="left: 8100px">
-        </div>
-
-        <div class="layer-horizontal" id="layer-horizontal-1" data-layer-speed="0.5">
-            <div class="it" id="grass-and-ground-container">
-                <div id="ground"></div>
-                <div id="grass"></div>
+        <!-- Entire container will stay in place during the scrolling. We will animate everything via JavaScript -->
+        <div id="container">
+            <div id="player">
+                <h4 id="player-hint">Scroll to move</h4>
+            </div>
+            <div class="layer-horizontal" id="layer-horizontal-2" data-layer-speed="0.01">
+                <div id="sky"></div>
+                <div id="sky-stars"></div>
+            </div>
+            <div class="layer-horizontal" id="layer-horizontal-5" data-layer-speed="0.03">
+                <div class="it mountain-container">
+                    <div class="it" id="mountains-far"></div>
+                </div>
+            </div>
+            <div class="layer-horizontal" id="layer-horizontal-4" data-layer-speed="0.08">
+                <div class="it mountain-container">
+                    <div class="it" id="mountains-mid"></div>
+                </div>
             </div>
 
-            <!-- Section 1-->
-            <div class="it" id="s01-welcome">
-                <div class="label-wrapper"></div>
-            </div>
-            <div class="it" id="s01-description">
-                <div id="s01-monitor-text"></div>
+            <div class="layer-horizontal" id="layer-horizontal-3" data-layer-speed="0.1">
+                <div class="it mountain-container">
+                    <div class="it" id="mountains-close"></div>
+
+                    <div class="it mountain-close-tree" style="left: 100px"></div>
+                    <div class="it mountain-close-tree" style="left: 540px"></div>
+                    <div class="it mountain-close-tree" style="left: 1200px"></div>
+                    <div class="it mountain-close-tree" style="left: 2500px"></div>
+                    <div class="it mountain-close-tree" style="left: 3100px"></div>
+                    <div class="it mountain-close-tree" style="left: 3500px"></div>
+                    <div class="it mountain-close-tree" style="left: 4100px"></div>
+                    <div class="it mountain-close-tree" style="left: 4800px"></div>
+                    <div class="it mountain-close-tree" style="left: 5300px"></div>
+                    <div class="it mountain-close-tree" style="left: 5900px"></div>
+                    <div class="it mountain-close-tree" style="left: 6500px"></div>
+                    <div class="it mountain-close-tree" style="left: 7500px"></div>
+                    <div class="it mountain-close-tree" style="left: 8100px"></div>
+                </div>
             </div>
 
-            <div class="it" id="s01-gate01">
-                <div id="gate-label-experience"></div>
-                <div class="gate-far"></div>
-                <div class="gate-close"></div>
-            </div>
+            <div class="layer-horizontal" id="layer-horizontal-1" data-layer-speed="0.5">
+                <div class="it" id="grass-and-ground-container">
+                    <div id="ground"></div>
+                    <div id="grass"></div>
+                </div>
 
-            <div class="it project-board" id="project-board-travix">
-                <h2 class="project-board-title">
-                    <div class="label-wrapper"></div>Travix
-                </h2>
-                <div class="board-plank-standing"></div>
-                <div class="board-plank board-plan-1">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        IMPLEMENTED GOOGLE PAY AND APPLE PAY PAYMENT OPTIONS, RESULTING IN AN INCREASE IN REVENUE.
+                <div id="s01-main-container">
+                    <!-- Section 1-->
+                    <div class="it" id="s01-welcome">
+                        <div class="label-wrapper"></div>
+                    </div>
+                    <div class="it" id="s01-description">
+                        <div id="s01-monitor-text"></div>
+                    </div>
+
+                    <div class="it" id="s01-gate01">
+                        <div id="gate-label-experience"></div>
+                        <div class="gate-far"></div>
+                        <div class="gate-close"></div>
+                    </div>
+
+                    <div id="s01-project-boards">
+                        <div class="it project-board" id="project-board-travix">
+                            <h2 class="project-board-title">
+                                <div class="label-wrapper"></div>Travix
+                            </h2>
+                            <div class="board-plank-standing"></div>
+                            <div class="board-plank board-plan-1">
+                                <div class="board-plank-inner"></div>
+                                <div class="board-plank-text">
+                                    IMPLEMENTED GOOGLE PAY AND APPLE PAY PAYMENT OPTIONS, RESULTING IN AN INCREASE IN REVENUE.
+                                </div>
+                            </div>
+                            <div class="board-plank board-plan-2">
+                                <div class="board-plank-inner"></div>
+                                <div class="board-plank-text">
+                                    DELIVERED 3D SECURE 2.0 - STRONG CUSTOMER AUTHENTICATION - STANDARD, WHICH AIMED TO ENHANCE CARD-HOLDER SECURITY.
+                                </div>
+                            </div>
+                            <div class="board-plank board-plan-3">
+                                <div class="board-plank-inner"></div>
+                                <div class="board-plank-text">
+                                    CONTRIBUTED TO GDPR-COMPLIANCE WORK BY MASKING SENSITIVE DATA FROM DATABASE.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="it project-board" id="project-board-genius">
+                            <h2 class="project-board-title">
+                                <div class="label-wrapper"></div>Genius Sports
+                            </h2>
+                            <div class="board-plank-standing"></div>
+                            <div class="board-plank board-plan-1">
+                                <div class="board-plank-inner"></div>
+                                <div class="board-plank-text">
+                                    DEVELOPED MICROSERVICES REQUIRED FOR A PROPERLY FUNCTIONING RISK MANAGEMENT SYSTEM, RESULTING IN 3X FEWER ERRORS.
+                                </div>
+                            </div>
+                            <div class="board-plank board-plan-2">
+                                <div class="board-plank-inner"></div>
+                                <div class="board-plank-text">
+                                    MIGRATED AND MANAGED BUSINESS LOGIC FROM THE DATABASE’S STORED PROCEDURES INTO THE BACKEND AND COVERED WITH TESTS MAKING THE SYSTEM LESS PRONE TO ERRORS.
+                                </div>
+                            </div>
+                            <div class="board-plank board-plan-3">
+                                <div class="board-plank-inner"></div>
+                                <div class="board-plank-text">
+                                    OVERSAW MULTIPLE DEPLOYMENTS BY TAKING THE DEPLOYMENT MANAGER’S ROLE AND SYNCHRONIZING VERSIONS OF MULTIPLE MICROSERVICES.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="it project-board" id="project-board-finest">
+                            <h2 class="project-board-title">
+                                <div class="label-wrapper"></div>Finestmedia
+                            </h2>
+                            <div class="board-plank-standing"></div>
+                            <div class="board-plank board-plan-1">
+                                <div class="board-plank-inner"></div>
+                                <div class="board-plank-text">
+                                    DEVELOPED INTEGRATION WITH GOVERNMENTAL SYSTEMS USING ESTONIAN DATA EXCHANGE LAYER AND MAKING DATA MORE SECURE.
+                                </div>
+                            </div>
+                            <div class="board-plank board-plan-2">
+                                <div class="board-plank-inner"></div>
+                                <div class="board-plank-text">
+                                    DEVELOPED MULTIPLE ASP MVC FORMS SO THAT SCIENTISTS WERE ABLE TO CREATE THEIR APPLICATIONS AND ASK FOR MONEY FOR THEIR RESEARCH.
+                                </div>
+                            </div>
+                            <div class="board-plank board-plan-3">
+                                <div class="board-plank-inner"></div>
+                                <div class="board-plank-text">
+                                    CREATED AROUND 3000 TESTS WHICH MADE CODE MANY TIMES LESS PRONE TO ERRORS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="it project-board" id="project-board-abb">
+                            <h2 class="project-board-title">
+                                <div class="label-wrapper"></div>ABB</h2>
+                            <div class="board-plank-standing"></div>
+                            <div class="board-plank board-plan-1">
+                                <div class="board-plank-inner"></div>
+                                <div class="board-plank-text">
+                                    DEVELOPED DESKTOP APPLICATION WHICH GAVE OVERVIEW OF ACCIDENTS IN THE COMPANY AND RESULTING IN A REDUCTION OF ACCIDENTS BY 50% PER CENT.
+                                </div>
+                            </div>
+                            <div class="board-plank board-plan-2">
+                                <div class="board-plank-inner"></div>
+                                <div class="board-plank-text">
+                                    DEVELOPED AND DELIVERED A DESKTOP APPLICATION WHICH ALLOWED THE COMMUNICATION OF PROCESS STATUSES BETWEEN MULTIPLE COMPANIES RESULTING IN TIME SAVINGS.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2 -->
+                    <div class="it" id="s01-gate02">
+                        <div id="gate-label-projects"></div>
+                        <div class="gate-far"></div>
+                        <div class="gate-close"></div>
+                    </div>
+
+                    <div id="s02-stones">
+                        <div class="it" id="stone-speys">
+                            <div class="stone"></div>
+                            <h2 class="stone-title">SpeysCloud</h2>
+                            <div class="stone-cloud" id="dialog-speys"></div>
+                        </div>
+
+                        <div class="it" id="stone-triven">
+                            <div class="stone"></div>
+                            <h2 class="stone-title">Triven</h2>
+                            <div class="stone-cloud" id="dialog-triven"></div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3 -->
+                    <div class="it" id="s03-gate">
+                        <div id="gate-label-knowledge"></div>
+                        <div class="gate-far"></div>
+                        <div class="gate-close"></div>
+                    </div>
+
+                    <div class="it" id="s03-skills-board">
+                        <h2 id="s03-skills-board-title">
+                            <div class="label-wrapper"></div>Skills
+                        </h2>
+                        <div id="s03-skills-board-csharp">
+                            <h3 class="loading-bar-title">C#</h3>
+                            <div class="loading-shell"></div>
+                            <div id="progress-bar-charp" class="loading-bar-progress"></div>
+                        </div>
+                        <div id="s03-skills-board-js">
+                            <h3 class="loading-bar-title">JavaScript</h3>
+                            <div class="loading-shell"></div>
+                            <div id="progress-bar-js" class="loading-bar-progress"></div>
+                        </div>
+                        <div id="s03-skills-board-python">
+                            <h3 class="loading-bar-title">Python</h3>
+                            <div class="loading-shell"></div>
+                            <div id="progress-bar-python" class="loading-bar-progress"></div>
+                        </div>
+                    </div>
+
+                    <div class="it" id="s03-school">
+                        <h2 id="s03-school-title">
+                            <div class="label-wrapper"></div>
+                            Tallinn University of Technology
+                        </h2>
+                    </div>
+
+                    <div class="it" id="s03-school-degrees">
+                        <div id="s03-tree-trunk"></div>
+                        <div id="s03-tree-master" class="school-degree">
+                            <h3 class="degree-title" id="s03-degree-title-master">Master of Computer Science</h3>
+                        </div>
+                        <div id="s03-tree-bachelor" class="school-degree">
+                            <h3 class="degree-title" id="s03-degree-title-bachelor">Bachelor of Computer Science</h3>
+                        </div>
+                    </div>
+
+                    <!-- Section 4 -->
+                    <div class="it" id="s04-gate">
+                        <div class="gate-far"></div>
+                        <div class="gate-close"></div>
                     </div>
                 </div>
-                <div class="board-plank board-plan-2">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        DELIVERED 3D SECURE 2.0 - STRONG CUSTOMER AUTHENTICATION - STANDARD, WHICH AIMED TO ENHANCE CARD-HOLDER SECURITY.
-                    </div>
-                </div>
-                <div class="board-plank board-plan-3">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        CONTRIBUTED TO GDPR-COMPLIANCE WORK BY MASKING SENSITIVE DATA FROM DATABASE.
-                    </div>
-                </div>
             </div>
-
-            <div class="it project-board" id="project-board-genius">
-                <h2 class="project-board-title">
-                    <div class="label-wrapper"></div>Genius Sports
-                </h2>
-                <div class="board-plank-standing"></div>
-                <div class="board-plank board-plan-1">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        DEVELOPED MICROSERVICES REQUIRED FOR A PROPERLY FUNCTIONING RISK MANAGEMENT SYSTEM, RESULTING IN 3X FEWER ERRORS.
-                    </div>
-                </div>
-                <div class="board-plank board-plan-2">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        MIGRATED AND MANAGED BUSINESS LOGIC FROM THE DATABASE’S STORED PROCEDURES INTO THE BACKEND AND COVERED WITH TESTS MAKING THE SYSTEM LESS PRONE TO ERRORS.
-                    </div>
-                </div>
-                <div class="board-plank board-plan-3">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        OVERSAW MULTIPLE DEPLOYMENTS BY TAKING THE DEPLOYMENT MANAGER’S ROLE AND SYNCHRONIZING VERSIONS OF MULTIPLE MICROSERVICES.
-                    </div>
-                </div>
-            </div>
-
-            <div class="it project-board" id="project-board-finest">
-                <h2 class="project-board-title">
-                    <div class="label-wrapper"></div>Finestmedia
-                </h2>
-                <div class="board-plank-standing"></div>
-                <div class="board-plank board-plan-1">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        DEVELOPED INTEGRATION WITH GOVERNMENTAL SYSTEMS USING ESTONIAN DATA EXCHANGE LAYER AND MAKING DATA MORE SECURE.
-                    </div>
-                </div>
-                <div class="board-plank board-plan-2">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        DEVELOPED MULTIPLE ASP MVC FORMS SO THAT SCIENTISTS WERE ABLE TO CREATE THEIR APPLICATIONS AND ASK FOR MONEY FOR THEIR RESEARCH.
-                    </div>
-                </div>
-                <div class="board-plank board-plan-3">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        CREATED AROUND 3000 TESTS WHICH MADE CODE MANY TIMES LESS PRONE TO ERRORS.
-                    </div>
-                </div>
-            </div>
-
-            <div class="it project-board" id="project-board-abb">
-                <h2 class="project-board-title">
-                    <div class="label-wrapper"></div>ABB</h2>
-                <div class="board-plank-standing"></div>
-                <div class="board-plank board-plan-1">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        DEVELOPED DESKTOP APPLICATION WHICH GAVE OVERVIEW OF ACCIDENTS IN THE COMPANY AND RESULTING IN A REDUCTION OF ACCIDENTS BY 50% PER CENT.
-                    </div>
-                </div>
-                <div class="board-plank board-plan-2">
-                    <div class="board-plank-inner"></div>
-                    <div class="board-plank-text">
-                        DEVELOPED AND DELIVERED A DESKTOP APPLICATION WHICH ALLOWED THE COMMUNICATION OF PROCESS STATUSES BETWEEN MULTIPLE COMPANIES RESULTING IN TIME SAVINGS.
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 2 -->
-            <div class="it" id="s01-gate02">
-                <div id="gate-label-projects"></div>
-                <div class="gate-far"></div>
-                <div class="gate-close"></div>
-            </div>
-
-            <div class="it" id="stone-speys">
-                <div class="stone"></div>
-                <h2 class="stone-title">SpeysCloud</h2>
-                <div class="stone-cloud" id="dialog-speys"></div>
-            </div>
-
-            <div class="it" id="stone-triven">
-                <div class="stone"></div>
-                <h2 class="stone-title">Triven</h2>
-                <div class="stone-cloud" id="dialog-triven"></div>
-            </div>
-
-            <!-- Section 3 -->
-            <div class="it" id="s03-gate">
-                <div id="gate-label-knowledge"></div>
-                <div class="gate-far"></div>
-                <div class="gate-close"></div>
-            </div>
-
-            <div class="it" id="s03-skills-board">
-                <h2 id="s03-skills-board-title">
-                    <div class="label-wrapper"></div>Skills
-                </h2>
-                <div id="s03-skills-board-csharp">
-                    <h3 class="loading-bar-title">C#</h3>
-                    <div class="loading-shell"></div>
-                    <div id="progress-bar-charp" class="loading-bar-progress"></div>
-                </div>
-                <div id="s03-skills-board-js">
-                    <h3 class="loading-bar-title">JavaScript</h3>
-                    <div class="loading-shell"></div>
-                    <div id="progress-bar-js" class="loading-bar-progress"></div>
-                </div>
-                <div id="s03-skills-board-python">
-                    <h3 class="loading-bar-title">Python</h3>
-                    <div class="loading-shell"></div>
-                    <div id="progress-bar-python" class="loading-bar-progress"></div>
-                </div>
-            </div>
-
-            <div class="it" id="s03-school">
-                <h2 id="s03-school-title">
-                    <div class="label-wrapper"></div>
-                    Tallinn University of Technology
-                </h2>
-            </div>
-
-            <div class="it" id="s03-school-degrees">
-                <div id="s03-tree-trunk"></div>
-                <div id="s03-tree-master" class="school-degree">
-                    <h3 class="degree-title" id="s03-degree-title-master">Master of Computer Science</h3>
-                </div>
-                <div id="s03-tree-bachelor" class="school-degree">
-                    <h3 class="degree-title" id="s03-degree-title-bachelor">Bachelor of Computer Science</h3>
-                </div>
-            </div>
-
-            <!-- Section 4 -->
-            <div class="it" id="s04-gate">
-                <div class="gate-far"></div>
-                <div class="gate-close"></div>
-            </div>
-        </div>
         </div>
     </div>
 </div>
