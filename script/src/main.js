@@ -12,8 +12,8 @@ const layers = {
   LAYER_1: mapLayer("layer-horizontal-1"),
   LAYER_2: mapLayer("layer-horizontal-2"),
   LAYER_3: mapLayer("layer-horizontal-3"),
-  LAYER_4: mapLayer("layer-horizontal-4"),
-  LAYER_5: mapLayer("layer-horizontal-5"),
+  // LAYER_4: mapLayer("layer-horizontal-4"),
+  // LAYER_5: mapLayer("layer-horizontal-5"),
 };
 const player = document.getElementById("player");
 const layerKeys = Object.keys(layers);
