@@ -3,7 +3,7 @@
  */
 let canScrollOrSwipe = false;
 let previousPageVerticalPosition = 0, pageVerticalPosition = 0, deltaPageVerticalPosition = 0;
-let touchStartX = 0, touchCurrentX = 0, touchEndX = 0, pageVerticalPositionOnTouch = 0, touchSpeed = 2;
+let touchStartX = 0, touchCurrentX = 0, touchEndX = 0, pageVerticalPositionOnTouch = 0, touchSpeed = 3;
 
 const pageDiv = document.getElementById("page");
 const containerDiv = document.getElementById("container");

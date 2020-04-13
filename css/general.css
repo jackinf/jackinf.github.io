@@ -30,7 +30,7 @@ body {
 }
 
 #page {
-    height: 18000px; /* set total height according to sum of all layers*/
+    height: 21000px; /* set total height according to sum of all layers*/
 }
 
 #container {
@@ -100,7 +100,7 @@ body {
 }
 
 #grass-and-ground-container {
-    width: 10000px;
+    width: 12000px;
     top: 80%;
     height: 90%;
 }
