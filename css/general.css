@@ -87,15 +87,11 @@ body {
 
 #layer-horizontal-4 {
     width: 15000px;
-    background-image: url("../image/Background/zMountains2.png");
-    background-repeat: repeat-x;
     bottom: 0;
 }
 
 #layer-horizontal-5 {
     width: 10000px;
-    background-image: url("../image/Background/zMountains3.png");
-    background-repeat: repeat-x;
     bottom: 0;
 }
 
@@ -252,4 +248,22 @@ body {
     width: 150px;
     height: 250px;
     top: -310px;
+}
+
+#mountains-mid {
+    background-image: url("../image/Background/zMountains2.png");
+    background-repeat: repeat-x;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: -690px;
+}
+
+#mountains-far {
+    background-image: url("../image/Background/zMountains3.png");
+    background-repeat: repeat-x;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: -690px;
 }
