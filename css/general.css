@@ -77,8 +77,6 @@ body {
 
 #layer-horizontal-2 {
     width: 20000px;
-    background-image: url("../image/Background/zSky.png");
-    background-size: 350px;
 }
 
 #layer-horizontal-3 {
@@ -215,9 +213,17 @@ body {
     width: 150px;
 }
 
+#sky {
+    background-image: url("../image/Background/zSky.png");
+    height: 80%;
+    background-size: contain;
+    position: absolute;
+    width: 20%;
+}
+
 #sky-stars {
     background-image: url("../image/Background/zStars.png");
     width: 2500px;
-    height: 600px;
     opacity: 0.5;
+    height: 80%;
 }
