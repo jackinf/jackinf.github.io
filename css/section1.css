@@ -25,7 +25,6 @@
     background-image: url(../image/Monitor.png);
     left: 800px;
     bottom: 0;
-    /*top: var(--s01-description-top);*/
     background-size: 450px;
 }
 
@@ -105,25 +104,20 @@
     position: absolute;
     top: -80px;
     left: 15px;
-    /*left: 250px;*/
 }
 
 #project-board-travix {
     left: 2000px;
-    /*top: var(--project-board-travix-top);*/
 }
 
 #project-board-genius {
     left: 2800px;
-    /*top: var(--project-board-genius-top);*/
 }
 
 #project-board-finest {
     left: 3600px;
-    /*top: var(--project-board-finest-top);*/
 }
 
 #project-board-abb {
     left: 4400px;
-    /*top: var(--project-board-abb-top);*/
 }
