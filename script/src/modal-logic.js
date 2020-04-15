@@ -66,9 +66,9 @@ $(function () {
     monitorDiv.onclick = () => {
       resetModalCss();
       monitorDiv.style.cursor = "pointer";
-      modalContentDiv.innerText = "8+ years of software engineering experience with strong knowledge in building web applications in C#, JavaScript. Also strong familiarity with Python. " +
-        "Experienced working in international teams, both in Estonia and in the Netherlands.";
-      modalContentOuterDiv.style["height"] = "55%";
+      modalContentDiv.innerText = "I have 8+ years of software engineering experience and strong knowledge in building applications using C#, JavaScript & Python. " +
+        "Experienced working in international teams as a senior full-stack developer. I'm from Estonia and currently living in the Netherlands.";
+      modalContentOuterDiv.style["height"] = "60%";
       modalContentOuterDiv.style["font-size"] = "3em";
       $(modalDiv).fadeIn(500);
     }
