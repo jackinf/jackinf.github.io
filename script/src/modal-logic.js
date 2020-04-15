@@ -64,9 +64,12 @@ $(function () {
   function activateMonitor() {
     const monitorDiv = document.getElementById("s01-description");
     monitorDiv.onclick = () => {
-      monitorDiv.style.cursor = "pointer";
-      modalContentDiv.innerText = "WELCOME TO MY WEBPAGE! CONTINUE SCROLLING TO DISCOVER MY EXPERIENCE!";
       resetModalCss();
+      monitorDiv.style.cursor = "pointer";
+      modalContentDiv.innerText = "8+ years of software engineering experience with strong knowledge in building web applications in C#, JavaScript. Also strong familiarity with Python. " +
+        "Experienced working in international teams, both in Estonia and in the Netherlands.";
+      modalContentOuterDiv.style["height"] = "55%";
+      modalContentOuterDiv.style["font-size"] = "3em";
       $(modalDiv).fadeIn(500);
     }
   }
