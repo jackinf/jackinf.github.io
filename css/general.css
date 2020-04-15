@@ -267,3 +267,59 @@ body {
     height: 100%;
     top: -690px;
 }
+
+/*
+    Modal window
+ */
+
+#wooden-modal {
+    position: fixed;
+    /*display: none;*/
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+#wooden-modal-back {
+    background-color: black;
+    opacity: 0.4;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+#wooden-modal-content-inner {
+    background-color: black;
+    opacity: 0.5;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#wooden-modal-content-outer {
+    background-image: url(../image/Boardsign.png);
+    height: 90%;
+    width: 93%;
+    margin-left: 3%;
+    margin-top: 3%;
+    position: absolute;
+    z-index: 10000;
+    text-transform: uppercase;
+    color: white;
+    font-size: 3em;
+    cursor: pointer;
+    line-height: 1.5em;
+}
+
+#wooden-modal-content {
+    position: absolute;
+    padding: 30px;
+}
+
+/* Why does not this work? */
+@media only screen and (max-width: 500px) {
+    #wooden-modal-content-outer {
+        font-size: 5em !important;
+    }
+}
