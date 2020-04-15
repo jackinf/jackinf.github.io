@@ -27,26 +27,26 @@ $(function () {
     $(modalDiv).fadeIn(500);
   });
 
-  activatePlank("#project-board-travix > .board-plan-1");
-  activatePlank("#project-board-travix > .board-plan-2");
-  activatePlank("#project-board-travix > .board-plan-3");
+  activatePlank("#project-board-travix > .board-plan-1", "IMPLEMENTED GOOGLE PAY AND APPLE PAY PAYMENT OPTIONS, RESULTING IN AN INCREASE IN REVENUE.");
+  activatePlank("#project-board-travix > .board-plan-2", "DELIVERED 3D SECURE 2.0 - STRONG CUSTOMER AUTHENTICATION - STANDARD, WHICH AIMED TO ENHANCE CARD-HOLDER SECURITY.");
+  activatePlank("#project-board-travix > .board-plan-3", "CONTRIBUTED TO GDPR-COMPLIANCE WORK BY MASKING SENSITIVE DATA FROM DATABASE.");
 
-  activatePlank("#project-board-genius > .board-plan-1");
-  activatePlank("#project-board-genius > .board-plan-2");
-  activatePlank("#project-board-genius > .board-plan-3");
+  activatePlank("#project-board-genius > .board-plan-1", "DEVELOPED MICROSERVICES REQUIRED FOR A PROPERLY FUNCTIONING RISK MANAGEMENT SYSTEM RESULTING IN 3X FEWER ERRORS");
+  activatePlank("#project-board-genius > .board-plan-2", "MIGRATED AND MANAGED BUSINESS LOGIC FROM THE DATABASE’S STORED PROCEDURES INTO THE BACKEND AND COVERED WITH TESTS MAKING THE SYSTEM LESS PRONE TO ERRORS.");
+  activatePlank("#project-board-genius > .board-plan-3", "OVERSAW MULTIPLE DEPLOYMENTS BY TAKING THE DEPLOYMENT MANAGER’S ROLE AND SYNCHRONIZING VERSIONS OF MULTIPLE MICROSERVICES.");
 
-  activatePlank("#project-board-finest > .board-plan-1");
-  activatePlank("#project-board-finest > .board-plan-2");
-  activatePlank("#project-board-finest > .board-plan-3");
+  activatePlank("#project-board-finest > .board-plan-1", "DEVELOPED INTEGRATION WITH GOVERNMENTAL SYSTEMS USING ESTONIAN DATA EXCHANGE LAYER AND MAKING DATA MORE SECURE.");
+  activatePlank("#project-board-finest > .board-plan-2", "DEVELOPED MULTIPLE ASP MVC FORMS SO THAT SCIENTISTS WERE ABLE TO CREATE THEIR APPLICATIONS AND ASK FOR MONEY FOR THEIR RESEARCH.");
+  activatePlank("#project-board-finest > .board-plan-3", "CREATED AROUND 3000 TESTS WHICH MADE CODE MANY TIMES LESS PRONE TO ERRORS.");
 
-  activatePlank("#project-board-abb > .board-plan-1");
-  activatePlank("#project-board-abb > .board-plan-2");
+  activatePlank("#project-board-abb > .board-plan-1", "DEVELOPED DESKTOP APPLICATION WHICH GAVE OVERVIEW OF ACCIDENTS IN THE COMPANY AND RESULTING IN A REDUCTION OF ACCIDENTS BY 50% PER CENT.");
+  activatePlank("#project-board-abb > .board-plan-2", "DEVELOPED AND DELIVERED A DESKTOP APPLICATION WHICH ALLOWED THE COMMUNICATION OF PROCESS STATUSES BETWEEN MULTIPLE COMPANIES RESULTING IN TIME SAVINGS.");
 
   activateMonitor();
 
   activateStones();
 
-  function activatePlank(plankName) {
+  function activatePlank(plankName, text) {
     const currentBoard = $(plankName)[0];
     const plankTextEl = $(`${plankName} > .board-plank-text`)[0];
 
@@ -54,7 +54,7 @@ $(function () {
     if (currentBoard && plankTextEl) {
       currentBoard.style.cursor = "pointer";
       currentBoard.onclick = () => {
-        modalContentDiv.innerText = plankTextEl.innerText;
+        modalContentDiv.innerText = text;
         resetModalCss();
         $(modalDiv).fadeIn(500);
       }

@@ -98,6 +98,20 @@
     font-size: 1.3em;
 }
 
+.board-plank-text-inner {
+    width: 600px;
+    height: 100px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.board-hint {
+    position: absolute;
+    left: 200px;
+    bottom: 10px;
+    opacity: 0.7;
+}
+
 .project-board-title {
     font-family: '01-Digit', "Courier New", monospace;
     font-size: 3em;
