@@ -299,8 +299,9 @@ body {
 
 #wooden-modal-content-outer {
     background-image: url(../image/Boardsign.png);
-    height: 90%;
+    height: 45%;
     width: 93%;
+    top: 20%;
     margin-left: 3%;
     margin-top: 3%;
     position: absolute;
