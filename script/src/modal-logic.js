@@ -7,19 +7,25 @@ modalDiv.onclick = () => $(modalDiv).fadeOut(modalFadeOutSpeed);
 
 $(function () {
   let defaultFontSize = "3em";
-  let defaultHeight = "55%";
+  let defaultHeight = "60%";
   let defaultTop = "20%";
+  let defaultWidth = "70%";
+  let defaultLeft = "15%";
+
+  if (outerWidth < 1100) {
+    defaultWidth = "none";
+    defaultLeft = "none";
+  }
   if (outerWidth < 600) {
-    const modalOuterContent = $("#wooden-modal-content-outer")[0];
-    if (modalOuterContent) {
-      defaultFontSize = "4em";
-      defaultTop = "10%";
-    }
+    defaultFontSize = "4em";
+    defaultTop = "10%";
   }
 
   function resetModalCss() {
     modalContentOuterDiv.style["top"] = defaultTop;
+    modalContentOuterDiv.style["left"] = defaultLeft;
     modalContentOuterDiv.style["height"] = defaultHeight;
+    modalContentOuterDiv.style["width"] = defaultWidth;
     modalContentOuterDiv.style["font-size"] = defaultFontSize;
   }
 
