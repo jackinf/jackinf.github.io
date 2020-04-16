@@ -309,6 +309,7 @@ body {
     text-transform: uppercase;
     color: white;
     font-size: 3em;
+    font-family: 'VT323', monospace;
     cursor: pointer;
     line-height: 1.5em;
 }
