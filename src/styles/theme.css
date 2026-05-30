@@ -1,0 +1,70 @@
+/* ------------------------------------------------------------------ *
+ * Design tokens. Modern-minimalist palette with a single blue accent. *
+ * Light is the default; [data-theme="dark"] overrides.                 *
+ * ------------------------------------------------------------------ */
+
+:root {
+  /* Typography */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Fluid type scale */
+  --text-xs: 0.78rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.25rem, 1rem + 1vw, 1.5rem);
+  --text-2xl: clamp(1.6rem, 1.2rem + 1.6vw, 2rem);
+  --text-3xl: clamp(2.2rem, 1.5rem + 3.2vw, 3.6rem);
+
+  /* Spacing / layout */
+  --maxw: 880px;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --gap: clamp(1rem, 0.6rem + 1.6vw, 1.6rem);
+  --section-gap: clamp(3.5rem, 2rem + 6vw, 6rem);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur: 0.6s;
+
+  /* Light palette */
+  --bg: #fbfbfc;
+  --bg-soft: #f3f4f6;
+  --surface: #ffffff;
+  --surface-2: #f7f8fa;
+  --border: #e6e8ec;
+  --border-strong: #d6d9df;
+  --text: #14161a;
+  --text-muted: #5b6470;
+  --text-subtle: #868e9a;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.1);
+  --accent-contrast: #ffffff;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.06);
+  --shadow-lg: 0 12px 40px rgba(16, 24, 40, 0.12);
+}
+
+[data-theme="dark"] {
+  --bg: #0e0f11;
+  --bg-soft: #131519;
+  --surface: #16181d;
+  --surface-2: #1b1e24;
+  --border: #262a31;
+  --border-strong: #343a44;
+  --text: #e9ebef;
+  --text-muted: #a2abb8;
+  --text-subtle: #727b88;
+  --accent: #6c9bff;
+  --accent-soft: rgba(108, 155, 255, 0.14);
+  --accent-contrast: #0e0f11;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 50px rgba(0, 0, 0, 0.5);
+}
+
+html {
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+}

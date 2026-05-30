@@ -1,304 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/section1.css">
-    <link rel="stylesheet" href="css/section2.css">
-    <link rel="stylesheet" href="css/section3.css">
-    <link rel="stylesheet" href="css/section4.css">
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <script src="script/jquery-3.7.1.min.js"></script>
-    <script src="script/jquery-ui.min.js"></script>
-    <script src="script/detect-browser-device.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-    <title>Zeka's resume</title>
-</head>
-<body>
-<noscript>
-    <div id="javascript-banner-container">
-        <div id="javascript-banner">
-            <div id="javascript-banner-left"></div>
-            <div id="javascript-banner-middle">
-                <div id="javascript-banner-text-a">PLEASE TURN ON YOUR</div>
-                <div id="javascript-banner-text-b">JAVASCRIPT</div>
-            </div>
-            <div id="javascript-banner-right"></div>
-        </div>
-    </div>
-</noscript>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jevgeni Rumjantsev — Senior Software Engineer · Payments &amp; Fintech</title>
+    <meta
+      name="description"
+      content="Jevgeni Rumjantsev — Senior Software Engineer with 12+ years building scalable, fault-tolerant payments backends. Node.js & Rust. AI-augmented delivery with Claude Code."
+    />
+    <meta name="author" content="Jevgeni Rumjantsev" />
+    <meta name="theme-color" content="#0e0f11" />
 
-<div class="content-noscroll" id="content">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Jevgeni Rumjantsev — Senior Software Engineer" />
+    <meta
+      property="og:description"
+      content="Payments & Fintech specialist. Node.js & Rust. AI-augmented delivery."
+    />
+    <meta property="og:url" content="https://jackinf.github.io" />
 
-    <!-- Dummy full-height div that gives the page its total scroll distance -->
-    <div id="page"></div>
-
-    <!-- Fixed container; all visual movement is driven by JavaScript -->
-    <div id="container">
-        <div id="player">
-            <h4 id="player-hint">Scroll to move</h4>
-        </div>
-
-        <div id="wooden-modal">
-            <div id="wooden-modal-content-outer">
-                <div id="wooden-modal-content-inner"></div>
-                <div id="wooden-modal-content"></div>
-            </div>
-            <div id="wooden-modal-back"></div>
-        </div>
-
-        <!-- Parallax layers (speed set via data-layer-speed; lower = further away) -->
-        <div class="layer-horizontal" id="layer-horizontal-2" data-layer-speed="0.01">
-            <div id="sky"></div>
-            <div id="sky-stars"></div>
-        </div>
-        <div class="layer-horizontal" id="layer-horizontal-5" data-layer-speed="0.03">
-            <div class="it mountain-container">
-                <div class="it" id="mountains-far"></div>
-            </div>
-        </div>
-        <div class="layer-horizontal" id="layer-horizontal-4" data-layer-speed="0.08">
-            <div class="it mountain-container">
-                <div class="it" id="mountains-mid"></div>
-            </div>
-        </div>
-        <div class="layer-horizontal" id="layer-horizontal-3" data-layer-speed="0.1">
-            <div class="it mountain-container">
-                <div class="it" id="mountains-close"></div>
-
-                <div class="it mountain-close-tree" style="left: 100px"></div>
-                <div class="it mountain-close-tree" style="left: 540px"></div>
-                <div class="it mountain-close-tree" style="left: 1200px"></div>
-                <div class="it mountain-close-tree" style="left: 2500px"></div>
-                <div class="it mountain-close-tree" style="left: 3100px"></div>
-                <div class="it mountain-close-tree" style="left: 3500px"></div>
-                <div class="it mountain-close-tree" style="left: 4100px"></div>
-                <div class="it mountain-close-tree" style="left: 4800px"></div>
-                <div class="it mountain-close-tree" style="left: 5300px"></div>
-                <div class="it mountain-close-tree" style="left: 5900px"></div>
-                <div class="it mountain-close-tree" style="left: 6500px"></div>
-                <div class="it mountain-close-tree" style="left: 7500px"></div>
-                <div class="it mountain-close-tree" style="left: 8100px"></div>
-            </div>
-        </div>
-
-        <!-- Foreground layer (speed 0.5) — ground, all interactive content -->
-        <div class="layer-horizontal" id="layer-horizontal-1" data-layer-speed="0.5">
-            <div class="it" id="grass-and-ground-container">
-                <div id="ground"></div>
-                <div id="grass"></div>
-            </div>
-
-            <div id="s01-main-container">
-
-                <!-- Welcome / monitor -->
-                <div class="it" id="s01-welcome">
-                    <div class="label-wrapper"></div>
-                </div>
-                <div class="it" id="s01-description">
-                    <div id="s01-monitor-text"></div>
-                </div>
-
-                <!-- Gate: Experience -->
-                <div class="it" id="s01-gate01">
-                    <div id="gate-label-experience"></div>
-                    <div class="gate-far"></div>
-                    <div class="gate-close"></div>
-                </div>
-
-                <!-- Section 1: Professional experience -->
-                <div id="s01-project-boards">
-
-                    <div class="it project-board" id="project-board-travix">
-                        <h2 class="project-board-title">
-                            <div class="label-wrapper"></div>
-                            Travix
-                        </h2>
-                        <div class="board-plank-standing"></div>
-                        <div class="board-plank board-plan-1">
-                            <div class="board-plank-inner"></div>
-                            <div class="board-plank-text">
-                                <div class="board-plank-text-inner">GOOGLE PAY &amp; APPLE PAY</div>
-                            </div>
-                            <div class="board-hint">👉 click for more info 👈</div>
-                        </div>
-                        <div class="board-plank board-plan-2">
-                            <div class="board-plank-inner"></div>
-                            <div class="board-plank-text">
-                                <div class="board-plank-text-inner">3DS 2.0 SECURITY</div>
-                            </div>
-                            <div class="board-hint">👉 click for more info 👈</div>
-                        </div>
-                        <div class="board-plank board-plan-3">
-                            <div class="board-plank-inner"></div>
-                            <div class="board-plank-text">
-                                <div class="board-plank-text-inner">GDPR-COMPLIANCE, DATASTORE</div>
-                            </div>
-                            <div class="board-hint">👉 click for more info 👈</div>
-                        </div>
-                    </div>
-
-                    <div class="it project-board" id="project-board-genius">
-                        <h2 class="project-board-title">
-                            <div class="label-wrapper"></div>
-                            Genius Sports
-                        </h2>
-                        <div class="board-plank-standing"></div>
-                        <div class="board-plank board-plan-1">
-                            <div class="board-plank-inner"></div>
-                            <div class="board-plank-text">
-                                <div class="board-plank-text-inner">MICROSERVICES</div>
-                            </div>
-                            <div class="board-hint">👉 click for more info 👈</div>
-                        </div>
-                        <div class="board-plank board-plan-2">
-                            <div class="board-plank-inner"></div>
-                            <div class="board-plank-text">
-                                <div class="board-plank-text-inner">DATABASE STORED PROCEDURES</div>
-                            </div>
-                            <div class="board-hint">👉 click for more info 👈</div>
-                        </div>
-                        <div class="board-plank board-plan-3">
-                            <div class="board-plank-inner"></div>
-                            <div class="board-plank-text">
-                                <div class="board-plank-text-inner">RELEASE MANAGER</div>
-                            </div>
-                            <div class="board-hint">👉 click for more info 👈</div>
-                        </div>
-                    </div>
-
-                    <div class="it project-board" id="project-board-finest">
-                        <h2 class="project-board-title">
-                            <div class="label-wrapper"></div>
-                            Finestmedia
-                        </h2>
-                        <div class="board-plank-standing"></div>
-                        <div class="board-plank board-plan-1">
-                            <div class="board-plank-inner"></div>
-                            <div class="board-plank-text">
-                                <div class="board-plank-text-inner">GOVERNMENTAL SECURITY PROTOCOL</div>
-                            </div>
-                            <div class="board-hint">👉 click for more info 👈</div>
-                        </div>
-                        <div class="board-plank board-plan-2">
-                            <div class="board-plank-inner"></div>
-                            <div class="board-plank-text">
-                                <div class="board-plank-text-inner">MANY ASP MVC FORMS</div>
-                            </div>
-                            <div class="board-hint">👉 click for more info 👈</div>
-                        </div>
-                        <div class="board-plank board-plan-3">
-                            <div class="board-plank-inner"></div>
-                            <div class="board-plank-text">
-                                <div class="board-plank-text-inner">3000 TESTS</div>
-                            </div>
-                            <div class="board-hint">👉 click for more info 👈</div>
-                        </div>
-                    </div>
-
-                    <div class="it project-board" id="project-board-abb">
-                        <h2 class="project-board-title">
-                            <div class="label-wrapper"></div>
-                            ABB
-                        </h2>
-                        <div class="board-plank-standing"></div>
-                        <div class="board-plank board-plan-1">
-                            <div class="board-plank-inner"></div>
-                            <div class="board-plank-text">
-                                <div class="board-plank-text-inner">STATISTICAL APP</div>
-                            </div>
-                            <div class="board-hint">👉 click for more info 👈</div>
-                        </div>
-                        <div class="board-plank board-plan-2">
-                            <div class="board-plank-inner"></div>
-                            <div class="board-plank-text">
-                                <div class="board-plank-text-inner">INFORMATIONAL APP</div>
-                            </div>
-                            <div class="board-hint">👉 click for more info 👈</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Gate: Side Projects -->
-                <div class="it" id="s01-gate02">
-                    <div id="gate-label-projects"></div>
-                    <div class="gate-far"></div>
-                    <div class="gate-close"></div>
-                </div>
-
-                <!-- Section 2: Side projects -->
-                <div id="s02-stones">
-                    <div class="it" id="stone-speys">
-                        <div class="stone"></div>
-                        <h2 class="stone-title">SpeysCloud</h2>
-                        <div class="stone-cloud" id="dialog-speys"></div>
-                    </div>
-                    <div class="it" id="stone-triven">
-                        <div class="stone"></div>
-                        <h2 class="stone-title">Triven</h2>
-                        <div class="stone-cloud" id="dialog-triven"></div>
-                    </div>
-                </div>
-
-                <!-- Gate: Knowledge -->
-                <div class="it" id="s03-gate">
-                    <div id="gate-label-knowledge"></div>
-                    <div class="gate-far"></div>
-                    <div class="gate-close"></div>
-                </div>
-
-                <!-- Section 3: Skills -->
-                <div class="it" id="s03-skills-board">
-                    <h2 id="s03-skills-board-title">
-                        <div class="label-wrapper"></div>
-                        Skills
-                    </h2>
-                    <div id="s03-skills-board-csharp">
-                        <h3 class="loading-bar-title">C#</h3>
-                        <div class="loading-shell"></div>
-                        <div id="progress-bar-charp" class="loading-bar-progress"></div>
-                    </div>
-                    <div id="s03-skills-board-js">
-                        <h3 class="loading-bar-title">JavaScript</h3>
-                        <div class="loading-shell"></div>
-                        <div id="progress-bar-js" class="loading-bar-progress"></div>
-                    </div>
-                    <div id="s03-skills-board-python">
-                        <h3 class="loading-bar-title">Python</h3>
-                        <div class="loading-shell"></div>
-                        <div id="progress-bar-python" class="loading-bar-progress"></div>
-                    </div>
-                </div>
-
-                <!-- Section 3: Education -->
-                <div class="it" id="s03-school">
-                    <h2 id="s03-school-title">
-                        <div class="label-wrapper"></div>
-                        Tallinn University of Technology
-                    </h2>
-                </div>
-                <div class="it" id="s03-school-degrees">
-                    <div id="s03-tree-trunk"></div>
-                    <div id="s03-tree-master" class="school-degree">
-                        <h3 class="degree-title" id="s03-degree-title-master">Master of Computer Science</h3>
-                    </div>
-                    <div id="s03-tree-bachelor" class="school-degree">
-                        <h3 class="degree-title" id="s03-degree-title-bachelor">Bachelor of Computer Science</h3>
-                    </div>
-                </div>
-
-                <!-- Gate: End -->
-                <div class="it" id="s04-gate">
-                    <div class="gate-far"></div>
-                    <div class="gate-close"></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<script type="module" src="script/src/main.js"></script>
-</body>
+    <!-- favicon link injected at build time (see scripts/build.ts) to avoid
+         Bun resolving the public/ asset during bundling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
 </html>

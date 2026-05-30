@@ -1,0 +1,190 @@
+/* ------------------------------------------------------------------ *
+ * Print / "Download CV" — collapses the page to one tight A4 page.     *
+ * Smaller font, no nav/footer/buttons/animations, ATS-friendly flow.   *
+ * Tuned to fit all content on a SINGLE A4 page — verify after edits.   *
+ * ------------------------------------------------------------------ */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 7mm 10mm;
+  }
+
+  :root {
+    /* Force light, ink-friendly tokens regardless of theme. */
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #ffffff;
+    --text: #000000;
+    --text-muted: #1c1c1c;
+    --text-subtle: #444444;
+    --accent: #1a4fd6;
+    --border: #cfd3da;
+    --border-strong: #aab0ba;
+  }
+
+  html {
+    font-size: 7.2pt;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    line-height: 1.22;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide interactive / decorative chrome and per-role tag rows. */
+  .nav,
+  .footer,
+  .hero__actions,
+  .hero__eyebrow,
+  .stats,
+  .theme-toggle,
+  .role .tags,
+  .project .tags {
+    display: none !important;
+  }
+
+  /* Everything visible immediately, no motion. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+
+  /* Tighten vertical rhythm to fit one page. */
+  .section,
+  .hero {
+    padding-block: 0 !important;
+    border-top: none !important;
+    margin-bottom: 5pt;
+  }
+  .hero {
+    margin-bottom: 4pt;
+  }
+
+  .hero__name {
+    font-size: 15pt;
+    margin-bottom: 0;
+  }
+  .hero__title {
+    font-size: 8.5pt;
+  }
+  .hero__summary {
+    font-size: 7.3pt;
+    margin-top: 2.5pt;
+    max-width: none;
+    color: #1c1c1c;
+  }
+  .contacts {
+    margin-top: 3pt;
+    gap: 1pt 9pt;
+    font-size: 7pt;
+  }
+
+  .section__head {
+    margin-bottom: 3pt;
+  }
+  .section__title {
+    font-size: 9.5pt;
+  }
+  .section__num {
+    font-size: 7pt;
+  }
+
+  /* Experience — compact, avoid splitting a role across pages. */
+  .timeline {
+    gap: 4pt;
+  }
+  .role {
+    padding-left: 0;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .role::before,
+  .role::after {
+    display: none;
+  }
+  .role__company {
+    font-size: 8.8pt;
+  }
+  .role__period,
+  .role__sub {
+    font-size: 7pt;
+  }
+  .role__list {
+    margin-top: 1.5pt;
+    gap: 0.5pt;
+  }
+  .role__list li {
+    font-size: 7.3pt;
+    padding-left: 0.9rem;
+    color: #1c1c1c;
+  }
+
+  .project:hover,
+  .earlier__item:hover {
+    transform: none;
+  }
+
+  /* Earlier roles — 3-up compact cards. */
+  .earlier {
+    gap: 4pt;
+    margin-top: 4pt;
+  }
+  .earlier__item {
+    padding: 3pt 5pt;
+    break-inside: avoid;
+  }
+  .earlier__summary {
+    font-size: 7pt;
+    margin-top: 1.5pt;
+  }
+
+  .projects {
+    gap: 5pt;
+  }
+  .project {
+    padding: 4pt 6pt;
+    break-inside: avoid;
+  }
+  .project__desc {
+    font-size: 7pt;
+    margin-top: 1.5pt;
+  }
+
+  .skills {
+    gap: 4pt 12pt;
+  }
+  .skillgroup {
+    break-inside: avoid;
+  }
+  .skillgroup__label {
+    margin-bottom: 1.5pt;
+  }
+  .chip {
+    font-size: 6.8pt;
+    padding: 0.5pt 4pt;
+    background: #fff;
+    border-color: #cfd3da;
+  }
+
+  .education {
+    gap: 1.5pt;
+  }
+  .edu {
+    padding-bottom: 1.5pt;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+}

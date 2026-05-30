@@ -1,0 +1,70 @@
+/**
+ * Production build for the portfolio.
+ *
+ * 1. Bundles the React app from the HTML entrypoint into `dist/` (minified, hashed assets).
+ * 2. Copies everything in `public/` to `dist/` (favicon, cv.md, og image, etc.).
+ * 3. Copies the legacy 8-bit resume from `game/` to `dist/game/` so it stays live.
+ *
+ * Output `dist/` is what GitHub Actions uploads to GitHub Pages.
+ */
+import { rm, mkdir, cp, readdir, readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+
+const root = new URL("..", import.meta.url).pathname;
+const dist = `${root}dist`;
+
+console.log("→ Cleaning dist/");
+await rm(dist, { recursive: true, force: true });
+await mkdir(dist, { recursive: true });
+
+console.log("→ Bundling React app from index.html");
+const result = await Bun.build({
+  entrypoints: [`${root}index.html`],
+  outdir: dist,
+  minify: true,
+  sourcemap: "linked",
+  naming: {
+    entry: "[dir]/[name].[ext]",
+    chunk: "assets/[name]-[hash].[ext]",
+    asset: "assets/[name]-[hash].[ext]",
+  },
+});
+
+if (!result.success) {
+  console.error("✗ Build failed:");
+  for (const log of result.logs) console.error(log);
+  process.exit(1);
+}
+console.log(`  bundled ${result.outputs.length} file(s)`);
+
+// Post-process the built index.html:
+//  - strip the original dev <script src="./src/main.tsx"> Bun leaves behind
+//    (Bun injects the hashed bundle into <head>; the dev tag would 404)
+//  - inject the favicon <link> here so Bun never tries to resolve the
+//    public/ asset during bundling (it 404s at build time otherwise)
+const htmlPath = `${dist}/index.html`;
+const html = await readFile(htmlPath, "utf8");
+let out = html.replace(
+  /\s*<script[^>]*src="\.\/src\/main\.tsx"[^>]*><\/script>/g,
+  "",
+);
+out = out.replace(
+  "</head>",
+  '  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />\n  </head>',
+);
+if (out !== html) {
+  await writeFile(htmlPath, out);
+  console.log("  post-processed index.html (favicon + dev script)");
+}
+
+if (existsSync(`${root}public`)) {
+  console.log("→ Copying public/ → dist/");
+  for (const entry of await readdir(`${root}public`)) {
+    await cp(`${root}public/${entry}`, `${dist}/${entry}`, { recursive: true });
+  }
+}
+
+console.log("→ Copying game/ → dist/game/");
+await cp(`${root}game`, `${dist}/game`, { recursive: true });
+
+console.log("✓ Build complete → dist/");

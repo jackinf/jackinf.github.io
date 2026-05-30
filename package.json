@@ -1,0 +1,22 @@
+{
+  "name": "jevgeni-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal portfolio of Jevgeni Rumjantsev — Senior Software Engineer (Payments & Fintech)",
+  "scripts": {
+    "dev": "bun ./index.html",
+    "build": "bun run scripts/build.ts",
+    "preview": "bun run scripts/serve.ts"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0"
+  }
+}
