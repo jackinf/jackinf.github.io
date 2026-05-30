@@ -1,4 +1,20 @@
-# jackinf.github.io — Portfolio
+<div align="center">
+
+# jackinf.github.io — Personal Portfolio
+
+### Fast single-page portfolio & print-to-PDF CV, built with Bun + React
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
+[![React](https://img.shields.io/badge/React%2019-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Bun](https://img.shields.io/badge/Bun-000000?style=for-the-badge&logo=bun&logoColor=white)](https://bun.sh/)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/docs/Web/HTML)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)](https://pages.github.com/)
+[![Repo](https://img.shields.io/badge/GitHub-jackinf%2Fjackinf.github.io-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jackinf/jackinf.github.io)
+
+</div>
+
+## Overview
 
 Personal portfolio of **Jevgeni Rumjantsev** — Senior Software Engineer (Payments & Fintech).
 A fast, single-page, modern-minimalist site with light/dark modes and a print-to-PDF
@@ -7,16 +23,45 @@ beyond React), deployed to GitHub Pages via GitHub Actions.
 
 Live: https://jackinf.github.io
 
-## Develop
+## Features
+
+- Single-page React 19 portfolio composed of Nav, Hero, Experience, Projects, Skills, Education, and Footer sections.
+- Light/dark theme toggle (`useTheme`) and scroll-reveal animations (`useReveal`).
+- Print-to-PDF single-page CV via dedicated `print.css`.
+- Single source of truth for all content in `src/data/cv.ts` — website and printable CV both read from it.
+- Bun-native build (`scripts/build.ts`) producing minified, hashed assets in `dist/`, with no Vite or bundler config.
+- Legacy 8-bit gamified résumé preserved under `game/`, served at `/game/`.
+- Automated GitHub Pages deployment via GitHub Actions.
+
+## Tech Stack
+
+| Area | Technology |
+| --- | --- |
+| Language | TypeScript, JavaScript |
+| UI | React 19, React DOM 19 |
+| Runtime / Toolchain | Bun (≥ 1.2) — dev server, bundler, scripts |
+| Markup / Styles | HTML5, CSS (theme/global/print) |
+| Deployment | GitHub Pages via GitHub Actions |
+
+## Getting Started
+
+### Prerequisites
 
 Requires [Bun](https://bun.sh) ≥ 1.2.
 
+### Installation
+
 ```bash
 bun install
+```
+
+### Running
+
+```bash
 bun run dev      # dev server with HMR (Bun serves ./index.html)
 ```
 
-## Build & preview
+### Build & preview
 
 ```bash
 bun run build    # bundles to dist/, copies public/ and game/ into dist/
@@ -24,11 +69,12 @@ bun run preview  # serves dist/ at http://localhost:4173
 ```
 
 `scripts/build.ts` does three things:
+
 1. Bundles the React app from `index.html` into `dist/` (minified, hashed assets).
 2. Copies everything in `public/` to `dist/` (favicon, `cv.md`).
 3. Copies the legacy 8-bit résumé from `game/` to `dist/game/`.
 
-## Structure
+## Project Structure
 
 ```
 index.html            # app entry (loads src/main.tsx)
