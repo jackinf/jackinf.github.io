@@ -37,8 +37,8 @@ const s = StyleSheet.create({
     color: INK,
     lineHeight: 1.4,
   },
-  name: { fontSize: 22, fontFamily: "Helvetica-Bold", letterSpacing: -0.5, lineHeight: 1.1 },
-  title: { fontSize: 11, color: ACCENT, fontFamily: "Helvetica-Bold", marginTop: 4, lineHeight: 1.2 },
+  name: { fontSize: 22, fontFamily: "Helvetica-Bold", letterSpacing: -0.5, lineHeight: 1.15 },
+  title: { fontSize: 11, color: ACCENT, fontFamily: "Helvetica-Bold", marginTop: 6, lineHeight: 1.2 },
   contact: { fontSize: 8.5, color: MUTE, marginTop: 4 },
   summary: { marginTop: 8, color: "#333", fontSize: 9 },
   sectionTitle: {
