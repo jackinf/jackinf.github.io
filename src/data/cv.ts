@@ -46,7 +46,7 @@ export const profile = {
   name: "Jevgeni Rumjantsev",
   title: "Senior Software Engineer",
   tagline: "Payments & Fintech · AI-Augmented Delivery",
-  location: "Amsterdam, Netherlands",
+  location: "Barcelona, Spain",
   phone: "+31 6 457 554 07",
   phoneHref: "tel:+31645755407",
   email: "zeka.rum@gmail.com",
