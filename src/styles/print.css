@@ -40,11 +40,26 @@
   .footer,
   .hero__actions,
   .hero__eyebrow,
+  .hero__cta,
+  .hero__aside,
+  .hero__stats,
   .stats,
+  .bg,
+  .minimap,
+  .spinner,
   .theme-toggle,
   .role .tags,
+  .exp__stack,
   .project .tags {
     display: none !important;
+  }
+
+  /* The polished CV is generated as a PDF (see src/cv/CvDocument.tsx);
+     this print stylesheet is only a graceful Ctrl+P fallback. */
+  .num {
+    color: #000 !important;
+    background: none !important;
+    font-weight: 700;
   }
 
   /* Everything visible immediately, no motion. */
