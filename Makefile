@@ -6,7 +6,7 @@ BUN := $(shell command -v bun 2>/dev/null || echo $(HOME)/.bun/bin/bun)
 
 .DEFAULT_GOAL := help
 
-.PHONY: help install dev run build preview test typecheck clean reinstall
+.PHONY: help install dev run build preview deploy test typecheck clean reinstall
 
 help: ## Show this help
 	@echo "Usage: make <target>"
@@ -28,6 +28,9 @@ build: ## Bundle to dist/ (copies public/ and game/)
 	$(BUN) run build
 
 preview: build ## Build, then serve dist/ at :4173
+
+deploy: build ## Build and publish dist/ to gh-pages branch
+	npx gh-pages -d dist
 	$(BUN) run preview
 
 typecheck: ## Type-check with tsc (no emit)
