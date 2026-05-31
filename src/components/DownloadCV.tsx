@@ -1,45 +1,111 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+type Variant = "designed" | "ats";
+type Status = "idle" | "working" | "error";
 
 /**
- * Generates a polished, deterministic PDF on the client via @react-pdf/renderer
- * (lazy-loaded) and downloads it. No Chrome "Print to PDF".
+ * Downloads a deterministic, client-generated PDF (via @react-pdf/renderer,
+ * lazy-loaded — no Chrome "Print to PDF"). Offers two variants:
+ *
+ *  - "designed" — the polished, one-page, visually-styled CV.
+ *  - "ats"      — a single-column, keyword-rich CV tuned to pass Applicant
+ *                 Tracking Systems / AI résumé filters.
  */
 export function DownloadCV() {
-  const [state, setState] = useState<"idle" | "working" | "error">("idle");
+  const [status, setStatus] = useState<Status>("idle");
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
 
-  const onClick = async () => {
-    if (state === "working") return;
-    setState("working");
+  // Close the menu on outside click / Escape.
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const download = async (variant: Variant) => {
+    if (status === "working") return;
+    setOpen(false);
+    setStatus("working");
     try {
-      const { buildCvBlob } = await import("../cv/CvDocument.tsx");
-      const blob = await buildCvBlob();
+      const [blob, filename] =
+        variant === "ats"
+          ? [
+              await (await import("../cv/AtsCvDocument.tsx")).buildAtsCvBlob(),
+              "Jevgeni_Rumjantsev_CV_ATS.pdf",
+            ]
+          : [
+              await (await import("../cv/CvDocument.tsx")).buildCvBlob(),
+              "Jevgeni_Rumjantsev_CV.pdf",
+            ];
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "Jevgeni_Rumjantsev_CV.pdf";
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 4000);
-      setState("idle");
+      setStatus("idle");
     } catch (err) {
       console.error("CV generation failed", err);
-      setState("error");
+      setStatus("error");
     }
   };
 
+  const label =
+    status === "working"
+      ? "Building PDF…"
+      : status === "error"
+        ? "Retry — Download CV"
+        : "Download CV";
+
   return (
-    <button
-      type="button"
-      className="btn btn--primary"
-      onClick={onClick}
-      disabled={state === "working"}
-    >
-      {state === "working"
-        ? "Building PDF…"
-        : state === "error"
-          ? "Retry download"
-          : "Download CV"}
-    </button>
+    <div className="dlcv" ref={wrapRef}>
+      <button
+        type="button"
+        className="btn btn--primary dlcv__main"
+        onClick={() => setOpen((o) => !o)}
+        disabled={status === "working"}
+        aria-haspopup="menu"
+        aria-expanded={open}
+      >
+        {label}
+        <span className="dlcv__caret" aria-hidden="true">▾</span>
+      </button>
+
+      {open && (
+        <div className="dlcv__menu" role="menu">
+          <button
+            type="button"
+            className="dlcv__item"
+            role="menuitem"
+            onClick={() => download("designed")}
+          >
+            <span className="dlcv__item-title">Designed CV</span>
+            <span className="dlcv__item-sub">One page · polished layout</span>
+          </button>
+          <button
+            type="button"
+            className="dlcv__item"
+            role="menuitem"
+            onClick={() => download("ats")}
+          >
+            <span className="dlcv__item-title">ATS-friendly CV</span>
+            <span className="dlcv__item-sub">Keyword-rich · plain · passes filters</span>
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
