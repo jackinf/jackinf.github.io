@@ -1434,3 +1434,64 @@ main {
 @media (max-width: 680px) {
   .nav__game { display: none; }
 }
+
+/* ================= Download-CV split button + menu ================= */
+.dlcv {
+  position: relative;
+  display: inline-block;
+}
+.dlcv__main {
+  gap: 0.45rem;
+}
+.dlcv__caret {
+  font-size: 0.7em;
+  opacity: 0.85;
+}
+.dlcv__menu {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 60;
+  min-width: 230px;
+  display: flex;
+  flex-direction: column;
+  padding: 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  animation: dlcvIn 0.16s var(--ease);
+}
+@keyframes dlcvIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dlcv__menu { animation: none; }
+}
+.dlcv__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  transition: background 0.15s var(--ease);
+}
+.dlcv__item:hover,
+.dlcv__item:focus-visible {
+  background: var(--accent-soft);
+}
+.dlcv__item-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+.dlcv__item-sub {
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+}
