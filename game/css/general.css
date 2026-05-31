@@ -1,0 +1,327 @@
+@font-face {
+    font-family: '04b03';
+    src:url('../font/04b03.ttf.woff') format('woff'),
+    url('../font/04b03.ttf.svg#04b03') format('svg'),
+    url('../font/04b03.ttf.eot'),
+    url('../font/04b03.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: '01-Digit';
+    src:url('../font/01-Digit.ttf.woff') format('woff'),
+    url('../font/01-Digit.ttf.svg#01-Digit') format('svg'),
+    url('../font/01-Digit.ttf.eot'),
+    url('../font/01-Digit.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: '04b03';
+}
+
+.content-noscroll {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#page {
+    height: 21000px; /* set total height according to sum of all layers*/
+}
+
+#container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#player {
+    position: absolute;
+    background-image: url("../image/PlayerB.png");
+    background-repeat: repeat-x;
+    width: 60px;
+    height: 100px;
+    bottom: 20%;
+    left: 200px;
+    z-index: 100;
+}
+
+#player-hint {
+    position: absolute;
+    top: -40px;
+    width: 200px;
+    left: -10px;
+    color: whitesmoke;
+}
+
+.layer-horizontal {
+    position: absolute;
+    height: 100%;
+}
+
+.layer-vertical {
+    position: absolute;
+}
+
+#layer-horizontal-1 {
+    width: 5000px;
+    bottom: 0;
+}
+
+#layer-horizontal-2 {
+    width: 20000px;
+    bottom: 0;
+}
+
+#layer-horizontal-3 {
+    width: 20000px;
+    bottom: 0;
+}
+
+#layer-horizontal-4 {
+    width: 15000px;
+    bottom: 0;
+}
+
+#layer-horizontal-5 {
+    width: 10000px;
+    bottom: 0;
+}
+
+.it {
+    position: absolute;
+}
+
+#grass-and-ground-container {
+    width: 12000px;
+    top: 80%;
+    height: 90%;
+}
+
+#ground {
+    position: absolute;
+    background-image: url("../image/GroundFromWeb2.png");
+    background-size: 200px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+#grass {
+    position: absolute;
+    width: 100%;
+    top: -75px;
+    height: 300px;
+    background-image: url("../image/GroundFromWeb.png");
+    background-repeat: repeat-x;
+    background-size: 200px;
+    z-index: 110;
+}
+
+.gate-far {
+    position: absolute;
+    width: 400px;
+    height: 600px;
+    background-image: url("../image/GateFar.png");
+    background-repeat: no-repeat;
+    background-size: 400px;
+}
+
+.gate-close {
+    position: absolute;
+    width: 200px;
+    height: 600px;
+    background-image: url("../image/GateClose.png");
+    background-repeat: no-repeat;
+    background-size: 132px;
+    left: 268px;
+    top: 137px;
+    z-index: 120;
+}
+
+.label-wrapper {
+    position: absolute;
+    background-color: white;
+    opacity: 0.15;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    left: -5px;
+    top: -5px;
+}
+
+.loading-shell {
+    position: absolute;
+    background-image: url("../image/loading-shell1.png");
+    width: 320px;
+    height: 50px;
+    left: 30px;
+}
+
+.loading-bar-title {
+    position: absolute;
+    left: 40px;
+    top: 40px;
+}
+
+#gate-label-experience {
+    position: absolute;
+    background-image: url("../image/LabelExp.png");
+    width: 400px;
+    height: 150px;
+    top: -60px;
+    left: 24px;
+    background-repeat: no-repeat;
+}
+
+#gate-label-projects {
+    position: absolute;
+    background-image: url("../image/LabelSideProjects.png");
+    width: 400px;
+    height: 150px;
+    top: -60px;
+    left: 24px;
+    background-repeat: no-repeat;
+}
+
+#gate-label-knowledge {
+    position: absolute;
+    background-image: url("../image/LabelKnowledge.png");
+    width: 400px;
+    height: 150px;
+    top: -60px;
+    left: 24px;
+    background-repeat: no-repeat;
+}
+
+/*
+    Background
+ */
+
+.background-tree {
+    position: absolute;
+    top: 370px;
+    width: 150px;
+}
+
+#sky {
+    background-image: url("../image/Background/zSky.png");
+    background-size: contain;
+    height: 80%;
+    position: absolute;
+    width: 20%;
+}
+
+#sky-stars {
+    background-image: url("../image/Background/zStars.png");
+    width: 2500px;
+    opacity: 0.5;
+    height: 80%;
+}
+
+.mountain-container {
+    width: 10000px;
+    top: 80%;
+    height: 90%;
+}
+
+#mountains-close {
+    background-image: url("../image/Background/zMountains1.png");
+    background-repeat: repeat-x;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: -690px;
+}
+
+.mountain-close-tree {
+    background-image: url("../image/Background/TreeA.png");
+    background-size: 150px;
+    width: 150px;
+    height: 250px;
+    top: -310px;
+}
+
+#mountains-mid {
+    background-image: url("../image/Background/zMountains2.png");
+    background-repeat: repeat-x;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: -690px;
+}
+
+#mountains-far {
+    background-image: url("../image/Background/zMountains3.png");
+    background-repeat: repeat-x;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: -690px;
+}
+
+/*
+    Modal window
+ */
+
+#wooden-modal {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+#wooden-modal-back {
+    background-color: black;
+    opacity: 0.4;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+#wooden-modal-content-inner {
+    background-color: black;
+    opacity: 0.5;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#wooden-modal-content-outer {
+    background-image: url(../image/Boardsign.png);
+    height: 45%;
+    width: 93%;
+    top: 20%;
+    margin-left: 3%;
+    margin-top: 3%;
+    position: absolute;
+    z-index: 10000;
+    text-transform: uppercase;
+    color: white;
+    font-size: 3em;
+    font-family: 'VT323', monospace;
+    cursor: pointer;
+    line-height: 1.5em;
+}
+
+#wooden-modal-content {
+    position: absolute;
+    padding: 30px;
+}
+
+/* Why does not this work? */
+@media only screen and (max-width: 500px) {
+    #wooden-modal-content-outer {
+        font-size: 5em !important;
+    }
+}
