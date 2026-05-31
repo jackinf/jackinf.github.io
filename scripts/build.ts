@@ -22,6 +22,9 @@ const result = await Bun.build({
   entrypoints: [`${root}index.html`],
   outdir: dist,
   minify: true,
+  // Code-split so the heavy PDF renderer (@react-pdf/renderer) lands in its
+  // own chunk and is fetched only when "Download CV" is clicked.
+  splitting: true,
   sourcemap: "linked",
   naming: {
     entry: "[dir]/[name].[ext]",

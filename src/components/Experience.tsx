@@ -1,65 +1,68 @@
-import { earlier, experience } from "../data/cv.ts";
 import { Reveal } from "./Reveal.tsx";
+import { experience, type DomainId } from "../data/cv.ts";
+import { highlightNumbers } from "../lib/highlight.tsx";
 
-export function Experience() {
+interface ExperienceProps {
+  domain: DomainId;
+}
+
+export function Experience({ domain }: ExperienceProps) {
+  const filtering = domain !== "all";
+
   return (
     <section className="section" id="experience">
-      <div className="container">
-        <Reveal className="section__head">
-          <span className="section__num">01</span>
-          <h2 className="section__title">Experience</h2>
+      <div className="section__head">
+        <Reveal as="h2" className="section__title">
+          Experience
         </Reveal>
-
-        <div className="timeline">
-          {experience.map((role, i) => (
+        <Reveal as="p" className="section__sub">
+          The full, unredacted history — from ABB in 2012 to crypto payments today,
+          across {experience.length} roles and eight industries.
+        </Reveal>
+      </div>
+      <div className="exp">
+        {experience.map((role, i) => {
+          const matches = filtering && role.domains.includes(domain);
+          const dimmed = filtering && !matches;
+          return (
             <Reveal
+              className={`exp__item${role.current ? " exp__item--current" : ""}${
+                matches ? " exp__item--match" : ""
+              }${dimmed ? " exp__item--dim" : ""}`}
               key={role.company}
-              as="article"
-              className={`role${role.current ? " role--current" : ""}`}
               delay={i * 60}
             >
-              <div className="role__head">
-                <h3 className="role__company">
-                  {role.company}
-                  {role.current && <span className="tag-current">Current</span>}
-                </h3>
-                <span className="role__period">{role.period}</span>
+              <div className="exp__head">
+                <div>
+                  <h3 className="exp__company">
+                    {role.company}
+                    {role.companyNote && (
+                      <span className="exp__note"> · {role.companyNote}</span>
+                    )}
+                    {role.current && <span className="exp__badge">Current</span>}
+                  </h3>
+                  <p className="exp__role">{role.role}</p>
+                </div>
+                <div className="exp__meta">
+                  <span className="exp__period">{role.period}</span>
+                  <span className="exp__location">{role.location}</span>
+                </div>
               </div>
-              <div className="role__sub">
-                <span className="role__role">{role.role}</span>
-                {role.companyNote && <span>· {role.companyNote}</span>}
-                <span>· {role.location}</span>
-              </div>
-
-              <ul className="role__list">
+              <ul className="exp__highlights">
                 {role.highlights.map((h) => (
-                  <li key={h}>{h}</li>
+                  <li key={h}>{highlightNumbers(h)}</li>
                 ))}
               </ul>
-
               {role.stack && (
-                <div className="tags">
+                <ul className="exp__stack">
                   {role.stack.map((t) => (
-                    <span className="tag" key={t}>{t}</span>
+                    <li key={t}>{t}</li>
                   ))}
-                </div>
+                </ul>
               )}
             </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="earlier">
-          {earlier.map((e) => (
-            <div className="earlier__item" key={e.company}>
-              <div className="earlier__top">
-                <span className="earlier__company">{e.company}</span>
-                <span className="earlier__period">{e.period}</span>
-              </div>
-              <div className="earlier__role">{e.role}</div>
-              <p className="earlier__summary">{e.summary}</p>
-            </div>
-          ))}
-        </Reveal>
+          );
+        })}
       </div>
     </section>
   );

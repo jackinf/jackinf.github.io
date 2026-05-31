@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Theme } from "../hooks/useTheme.ts";
 import { ThemeToggle } from "./ThemeToggle.tsx";
-import { DownloadIcon } from "./icons.tsx";
+import { DownloadCV } from "./DownloadCV.tsx";
 
 interface Props {
   theme: Theme;
@@ -26,16 +26,14 @@ export function Nav({ theme, onToggleTheme }: Props) {
         </a>
         <nav className="nav__links">
           <a className="nav__link" href="#experience">Experience</a>
+          <a className="nav__link" href="#languages">Languages</a>
           <a className="nav__link" href="#projects">Projects</a>
           <a className="nav__link" href="#skills">Skills</a>
-          <button
-            type="button"
-            className="btn btn--primary"
-            onClick={() => window.print()}
-          >
-            <DownloadIcon />
-            CV
-          </button>
+          <a className="nav__link" href="#education">Education</a>
+          <a className="nav__link nav__game" href="/game/" title="The gamified version">
+            ▶ Game
+          </a>
+          <DownloadCV />
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
         </nav>
       </div>
