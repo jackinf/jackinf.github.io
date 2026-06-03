@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState, type CSSProperties, type WheelEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type PointerEvent,
+} from "react";
 import { domains, type DomainId } from "../data/cv.ts";
 
 interface Props {
@@ -8,17 +14,24 @@ interface Props {
 
 /** Degrees between items on the cylindrical picker wheel. */
 const STEP = 30;
+/** Vertical drag distance (px) that advances the wheel by one item. */
+const DRAG_STEP = 34;
 
 /**
  * A 3-D cylindrical picker wheel ("spinner") for choosing a domain. The
- * selected domain re-frames the headline shown beside it. Fully keyboard- and
- * pointer-operable; falls back to a flat list under prefers-reduced-motion.
+ * selected domain re-frames the headline shown beside it. Operated by
+ * grabbing and dragging the wheel up/down, by the arrow buttons, or by the
+ * keyboard. Mouse-wheel scrolling is intentionally NOT bound — on trackpads
+ * it spins far too fast. Falls back to a flat list under prefers-reduced-motion.
  */
 export function DomainSpinner({ value, onChange }: Props) {
   const index = Math.max(0, domains.findIndex((d) => d.id === value));
   const active = domains[index];
   const [reduce, setReduce] = useState(false);
+  const [dragging, setDragging] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null);
+  // Drag bookkeeping. `moved` suppresses the click that follows a real drag.
+  const drag = useRef({ active: false, startY: 0, moved: false });
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -33,10 +46,32 @@ export function DomainSpinner({ value, onChange }: Props) {
     onChange(domains[next].id);
   };
 
-  // Wheel scroll / drag handling.
-  const onWheel = (e: WheelEvent) => {
-    e.preventDefault();
-    step(e.deltaY > 0 ? 1 : -1);
+  // ---- Drag-to-spin ----
+  const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
+    if (reduce) return;
+    drag.current = { active: true, startY: e.clientY, moved: false };
+    setDragging(true);
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+  };
+
+  const onPointerMove = (e: PointerEvent<HTMLDivElement>) => {
+    const d = drag.current;
+    if (!d.active) return;
+    const dy = e.clientY - d.startY;
+    if (Math.abs(dy) >= DRAG_STEP) {
+      // Drag down → bring the previous item down into focus, and vice versa.
+      step(dy > 0 ? -1 : 1);
+      d.startY = e.clientY;
+      d.moved = true;
+    }
+  };
+
+  const endDrag = (e: PointerEvent<HTMLDivElement>) => {
+    if (!drag.current.active) return;
+    drag.current.active = false;
+    setDragging(false);
+    e.currentTarget.releasePointerCapture?.(e.pointerId);
+    // Keep `moved` true until the click handler has had a chance to read it.
   };
 
   return (
@@ -55,10 +90,15 @@ export function DomainSpinner({ value, onChange }: Props) {
         </button>
 
         <div
-          className={`spinner__stage${reduce ? " is-flat" : ""}`}
+          className={`spinner__stage${reduce ? " is-flat" : ""}${
+            dragging ? " is-dragging" : ""
+          }`}
           tabIndex={0}
           ref={wheelRef}
-          onWheel={reduce ? undefined : onWheel}
+          onPointerDown={reduce ? undefined : onPointerDown}
+          onPointerMove={reduce ? undefined : onPointerMove}
+          onPointerUp={reduce ? undefined : endDrag}
+          onPointerCancel={reduce ? undefined : endDrag}
           onKeyDown={(e) => {
             if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
               e.preventDefault();
@@ -94,7 +134,14 @@ export function DomainSpinner({ value, onChange }: Props) {
                           "--c": d.color,
                         } as CSSProperties)
                   }
-                  onClick={() => onChange(d.id)}
+                  onClick={() => {
+                    // Ignore the click that fires at the end of a drag gesture.
+                    if (drag.current.moved) {
+                      drag.current.moved = false;
+                      return;
+                    }
+                    onChange(d.id);
+                  }}
                 >
                   <span className="spinner__icon" aria-hidden="true">
                     {d.icon}
@@ -117,7 +164,7 @@ export function DomainSpinner({ value, onChange }: Props) {
           ▼
         </button>
       </div>
-      <p className="spinner__hint">Spin to re-frame ↻</p>
+      <p className="spinner__hint">Drag to spin ↕</p>
     </div>
   );
 }

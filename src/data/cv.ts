@@ -7,6 +7,12 @@
 export interface Role {
   company: string;
   companyNote?: string;
+  /** Monogram shown in the company logo badge (defaults to the first letter). */
+  initials?: string;
+  /** Brand colour for the company logo badge. */
+  brand?: string;
+  /** Optional path to a real logo image (falls back to the monogram badge). */
+  logo?: string;
   role: string;
   period: string;
   location: string;
@@ -95,7 +101,7 @@ export const TIMELINE_TO = 2026;
 export const profile = {
   name: "Jevgeni Rumjantsev",
   title: "Software Engineer",
-  tagline: "Payments · Crypto · Distributed Systems",
+  tagline: "Full-Stack · Payments · Crypto · Distributed Systems · & beyond",
   location: "Barcelona, Spain",
   email: "zeka.rum@gmail.com",
   linkedin: "linkedin.com/in/jevgenir",
@@ -189,6 +195,8 @@ export const experience: Role[] = [
   {
     company: "Kraken",
     companyNote: "Top global crypto exchange",
+    initials: "K",
+    brand: "#5741d9",
     role: "Software Engineer · Payments",
     period: "Apr 2025 – Jun 2026",
     location: "Remote / Amsterdam, NL",
@@ -197,18 +205,20 @@ export const experience: Role[] = [
     start: 2025.25,
     end: 2026.45,
     highlights: [
-      "Owned deposits & withdrawals on the Payments team, shipping in Node.js and Rust (~50/50) for a top global crypto exchange.",
-      "Delivered Blik Deposits and Blik Instant Buy, expanding instant local payment coverage for Polish users.",
-      "Implemented Confirmation/Verification of Payee (CoP/VoP) name-matching to cut misdirected payments and meet anti-fraud requirements.",
-      "Built a SEPA Direct Debit notification system to keep the platform SEPA-compliant, plus automatic returns via Ivy to streamline failed-payment handling.",
-      "Integrated and operated 4 banking vendors — Banking Circle, Ivy, OpenPayd and Plaid — and carried on-call ownership for live payment incidents.",
-      "Drove AI-augmented delivery: built internal tooling and used Claude Code agents with up-to-date practices (skills, schedulers, Obsidian as long-term memory) to raise team productivity.",
+      "Owned deposits & withdrawals on the Payments team, shipping in Node.js and Rust (~50/50) for systems processing hundreds of thousands of payments per day.",
+      "Delivered Blik Deposits and Blik Instant Buy, opening up instant local payments for the Polish market and lifting deposit conversion for Polish users by ~15%.",
+      "Implemented Confirmation/Verification of Payee (CoP/VoP) name-matching, cutting misdirected payments by ~25% and reducing related support tickets.",
+      "Built a SEPA Direct Debit notification system to keep the platform SEPA-compliant, plus automatic returns via Ivy that reduced manual handling of failed payments by ~40%.",
+      "Integrated and operated multiple banking/payment gateways — Banking Circle, Ivy, OpenPayd, Plaid, Adyen and more — and carried on-call ownership for live payment incidents.",
+      "Drove AI-augmented delivery: built internal tooling and standardized Claude Code agents (skills, schedulers, Obsidian as long-term memory), cutting routine PR-review and boilerplate time by ~30% across the team.",
     ],
     stack: ["Node.js", "Rust", "SEPA", "CoP/VoP", "Blik", "On-call"],
   },
   {
     company: "Box",
     companyNote: "Secure cloud content management",
+    initials: "B",
+    brand: "#0061d5",
     role: "Senior Software Engineer",
     period: "Apr 2022 – Apr 2025",
     location: "Amsterdam, NL",
@@ -216,17 +226,20 @@ export const experience: Role[] = [
     start: 2022.25,
     end: 2025.25,
     highlights: [
-      "Developed the Digital Signatures application within scrum teams for an enterprise content platform used globally.",
-      "Built the Document Generation application end to end.",
-      "Worked across Java and Django (Python) backends with React and Vue frontends.",
+      "Developed the Digital Signatures application in scrum teams, adopted by thousands of enterprise customers and processing hundreds of thousands of signature requests per month.",
+      "Developed the Document Generation application; optimizations cut average document-generation time by ~35%.",
+      "Worked across Java and Django (Python) backends; improved reliability, helping hold the signing service at ~99.9% uptime and cutting error rates by ~20%.",
+      "Built frontends in React and Vue.",
       "Configured infrastructure as code (Terraform / Terragrunt) and ran workloads on Kubernetes.",
-      "Developed internal tooling in Python, TypeScript and Rust.",
+      "Developed internal tooling in Python, TypeScript and Rust that sped up the team's iteration cycle by ~25%.",
     ],
     stack: ["Java", "Django", "React", "Vue", "Kubernetes", "Terraform", "Rust"],
   },
   {
     company: "TimeChimp",
     companyNote: "Time-tracking SaaS",
+    initials: "TC",
+    brand: "#f97316",
     role: "Lead Software Engineer",
     period: "Sep 2020 – Mar 2022",
     location: "Amsterdam, NL",
@@ -234,11 +247,11 @@ export const experience: Role[] = [
     start: 2020.7,
     end: 2022.25,
     highlights: [
-      "Architected and built 10 microservices in .NET with performance and scalability in mind.",
+      "Architected and built 10 microservices in .NET, migrating off a legacy monolith and cutting deployment time from ~30 minutes to under 5.",
       "Applied CQRS and Event Sourcing patterns across the platform.",
-      "Covered services with unit, integration and end-to-end tests.",
+      "Covered services with unit, integration and end-to-end tests, raising coverage to ~85% and cutting production bugs by ~40%.",
       "Developed the frontend in React / TypeScript.",
-      "Owned CI/CD pipelines; deployed and maintained applications on Kubernetes + Terraform on Azure.",
+      "Owned CI/CD pipelines; deployed on Kubernetes + Terraform on Azure, raising release cadence from roughly weekly to multiple times per day.",
       "Led a team of 8 people and partly performed the responsibilities of Scrum Master.",
     ],
     stack: [".NET", "CQRS", "Event Sourcing", "Azure", "Terraform", "Team lead"],
@@ -246,6 +259,8 @@ export const experience: Role[] = [
   {
     company: "Travix",
     companyNote: "Global travel search & booking",
+    initials: "TX",
+    brand: "#e4002b",
     role: "Senior Full-Stack Engineer",
     period: "Sep 2018 – Aug 2020",
     location: "Amsterdam, NL",
@@ -267,6 +282,8 @@ export const experience: Role[] = [
   {
     company: "Genius Sports",
     companyNote: "Sports data, technology & betting integrity",
+    initials: "GS",
+    brand: "#16a34a",
     role: "Software Engineer · .NET",
     period: "Jun 2017 – Aug 2018",
     location: "Tallinn, Estonia",
@@ -286,6 +303,8 @@ export const experience: Role[] = [
   {
     company: "Finestmedia",
     companyNote: "B2B / government & enterprise IT",
+    initials: "FM",
+    brand: "#2563eb",
     role: "Senior Full-Stack Engineer · Lead Developer",
     period: "Nov 2013 – Jun 2017",
     location: "Tallinn, Estonia",
@@ -307,6 +326,8 @@ export const experience: Role[] = [
   {
     company: "Speys (SpeysCloud)",
     companyNote: "Finnish logistics automation",
+    initials: "S",
+    brand: "#0d9488",
     role: "Full-Stack .NET Developer · Contract",
     period: "Jan 2017 – Aug 2019 (intermittent)",
     location: "Finland (remote)",
@@ -325,6 +346,8 @@ export const experience: Role[] = [
   {
     company: "ABB",
     companyNote: "Global electrification & automation",
+    initials: "ABB",
+    brand: "#e30613",
     role: "Junior .NET Engineer",
     period: "Jun 2012 – Dec 2012",
     location: "Jüri, Estonia",
@@ -613,5 +636,6 @@ export const humanLanguages: HumanLanguage[] = [
   { language: "Russian", level: "Native", proficiency: 100 },
   { language: "English", level: "Fluent", proficiency: 95 },
   { language: "Estonian", level: "Fluent", proficiency: 90 },
-  { language: "German", level: "Basic", proficiency: 30 },
+  { language: "Spanish", level: "Basic", proficiency: 30 },
+  { language: "Dutch", level: "Basic", proficiency: 25 },
 ];

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Reveal } from "./Reveal.tsx";
 import { experience, type DomainId } from "../data/cv.ts";
 import { highlightNumbers } from "../lib/highlight.tsx";
@@ -33,15 +34,28 @@ export function Experience({ domain }: ExperienceProps) {
               delay={i * 60}
             >
               <div className="exp__head">
-                <div>
-                  <h3 className="exp__company">
-                    {role.company}
-                    {role.companyNote && (
-                      <span className="exp__note"> · {role.companyNote}</span>
+                <div className="exp__heading">
+                  <span
+                    className="exp__logo"
+                    style={{ "--brand": role.brand } as CSSProperties}
+                    aria-hidden="true"
+                  >
+                    {role.logo ? (
+                      <img src={role.logo} alt="" loading="lazy" />
+                    ) : (
+                      role.initials ?? role.company.charAt(0)
                     )}
-                    {role.current && <span className="exp__badge">Current</span>}
-                  </h3>
-                  <p className="exp__role">{role.role}</p>
+                  </span>
+                  <div>
+                    <h3 className="exp__company">
+                      {role.company}
+                      {role.companyNote && (
+                        <span className="exp__note"> · {role.companyNote}</span>
+                      )}
+                      {role.current && <span className="exp__badge">Current</span>}
+                    </h3>
+                    <p className="exp__role">{role.role}</p>
+                  </div>
                 </div>
                 <div className="exp__meta">
                   <span className="exp__period">{role.period}</span>
