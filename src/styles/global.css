@@ -672,29 +672,58 @@ main {
     transparent 60%
   );
 }
+/* A small constellation of blurred colour orbs scattered across the
+   backdrop — smaller and more numerous than a single big glow, each drifting
+   on its own slow loop from a different corner. */
 .bg__layer--blob {
-  width: 46vw;
-  height: 46vw;
   border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.22;
+  filter: blur(60px);
   transition: background 0.9s var(--ease), transform 1.2s var(--ease);
   will-change: transform;
 }
 .bg__layer--blob-a {
-  top: -12vw;
-  left: -8vw;
+  width: 30vw;
+  height: 30vw;
+  top: -8vw;
+  left: -6vw;
   background: var(--c1);
+  opacity: 0.2;
   animation: floatA 22s ease-in-out infinite;
 }
 .bg__layer--blob-b {
-  bottom: -14vw;
-  right: -6vw;
+  width: 26vw;
+  height: 26vw;
+  bottom: -10vw;
+  right: -5vw;
   background: var(--c2);
+  opacity: 0.2;
   animation: floatB 26s ease-in-out infinite;
 }
-[data-theme="dark"] .bg__layer--blob {
-  opacity: 0.3;
+.bg__layer--blob-c {
+  width: 19vw;
+  height: 19vw;
+  top: 28%;
+  right: 14%;
+  background: var(--c2);
+  opacity: 0.15;
+  animation: floatC 30s ease-in-out infinite;
+}
+.bg__layer--blob-d {
+  width: 15vw;
+  height: 15vw;
+  bottom: 16%;
+  left: 10%;
+  background: var(--c1);
+  opacity: 0.14;
+  animation: floatD 34s ease-in-out infinite;
+}
+[data-theme="dark"] .bg__layer--blob-a,
+[data-theme="dark"] .bg__layer--blob-b {
+  opacity: 0.28;
+}
+[data-theme="dark"] .bg__layer--blob-c,
+[data-theme="dark"] .bg__layer--blob-d {
+  opacity: 0.2;
 }
 @keyframes floatA {
   0%, 100% { transform: translate(0, 0) scale(1); }
@@ -703,6 +732,14 @@ main {
 @keyframes floatB {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(-5vw, -4vw) scale(1.08); }
+}
+@keyframes floatC {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-4vw, 5vw) scale(1.14); }
+}
+@keyframes floatD {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(4vw, -5vw) scale(1.12); }
 }
 @media (prefers-reduced-motion: reduce) {
   .bg__layer--blob { animation: none; }
@@ -721,12 +758,23 @@ main {
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(1.5rem, 1rem + 3vw, 3rem);
-  align-items: center;
+  /* Top-aligned so the wheel doesn't bob when the headline re-frames. */
+  align-items: start;
 }
 @media (min-width: 880px) {
   .hero__grid {
     grid-template-columns: 1.5fr 1fr;
   }
+}
+/* Semi-transparent panel so the drifting background never fights the copy. */
+.hero__inner {
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  box-shadow: var(--shadow);
 }
 .hero__eyebrow {
   color: var(--text-subtle);
@@ -741,7 +789,15 @@ main {
 }
 .hero__lead {
   margin-top: 1.4rem;
-  min-height: 6.5em;
+  /* Reserve space for the tallest blurb so re-framing never shifts the layout. */
+  min-height: 9.5rem;
+}
+@media (min-width: 880px) {
+  /* At the two-column width the longest summary is ~7 lines of text-lg
+     (1.125rem × 1.6 ≈ 1.8rem each) — reserve enough that no blurb shifts it. */
+  .hero__lead {
+    min-height: 13rem;
+  }
 }
 .hero__summary {
   max-width: 56ch;
@@ -781,24 +837,20 @@ main {
   background: transparent;
 }
 
-/* Stats strip (v2) */
+/* Stats strip (v2) — borderless row, flush to the hero edges (no side padding). */
 .hero__stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  margin-top: 3rem;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem 1.75rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
 }
 @media (min-width: 760px) {
   .hero__stats { grid-template-columns: repeat(6, 1fr); }
 }
 .stat {
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
-  backdrop-filter: blur(4px);
-  padding: 1rem 1.1rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -818,7 +870,6 @@ main {
   line-height: 1.3;
 }
 .stat--counter {
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
   grid-column: span 1;
 }
 .stat--counter .stat__value {
@@ -867,8 +918,16 @@ main {
   height: 132px;
   perspective: 640px;
   outline: none;
+  cursor: grab;
+  /* Don't let the browser steal vertical drags for page scrolling. */
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
   -webkit-mask-image: linear-gradient(transparent, #000 28%, #000 72%, transparent);
   mask-image: linear-gradient(transparent, #000 28%, #000 72%, transparent);
+}
+.spinner__stage.is-dragging {
+  cursor: grabbing;
 }
 .spinner__wheel {
   position: absolute;
@@ -908,6 +967,8 @@ main {
   height: auto;
   max-height: 168px;
   overflow-y: auto;
+  cursor: auto;
+  touch-action: auto;
   -webkit-mask-image: none;
   mask-image: none;
 }
@@ -963,8 +1024,36 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-start;
   gap: 0.25rem 1rem;
+}
+.exp__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+.exp__logo {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.03em;
+  color: #fff;
+  background: var(--brand, var(--accent));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 2px 6px color-mix(in srgb, var(--brand, var(--accent)) 35%, transparent);
+  overflow: hidden;
+}
+.exp__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .exp__company {
   font-size: var(--text-lg);

@@ -21,6 +21,8 @@ export function AnimatedBackground() {
       <span className="bg__layer bg__layer--pattern" />
       <span className="bg__layer bg__layer--blob bg__layer--blob-a" />
       <span className="bg__layer bg__layer--blob bg__layer--blob-b" />
+      <span className="bg__layer bg__layer--blob bg__layer--blob-c" />
+      <span className="bg__layer bg__layer--blob bg__layer--blob-d" />
     </div>
   );
 }

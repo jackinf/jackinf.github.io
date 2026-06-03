@@ -50,8 +50,23 @@
   .theme-toggle,
   .role .tags,
   .exp__stack,
+  .exp__logo,
   .project .tags {
     display: none !important;
+  }
+
+  /* Flatten the hero panel so it reads as plain ink on paper. */
+  .hero__inner {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+  }
+  /* Don't reserve the on-screen fixed height for the headline in print. */
+  .hero__lead {
+    height: auto !important;
+    min-height: 0 !important;
   }
 
   /* The polished CV is generated as a PDF (see src/cv/CvDocument.tsx);
