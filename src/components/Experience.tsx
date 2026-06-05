@@ -1,78 +1,83 @@
 import type { CSSProperties } from "react";
 import { Reveal } from "./Reveal.tsx";
-import { experience, type DomainId } from "../data/cv.ts";
+import { experience } from "../data/cv.ts";
 import { highlightNumbers } from "../lib/highlight.tsx";
 
-interface ExperienceProps {
-  domain: DomainId;
-}
-
-export function Experience({ domain }: ExperienceProps) {
-  const filtering = domain !== "all";
-
+export function Experience() {
   return (
     <section className="section" id="experience">
       <div className="section__head">
+        <Reveal as="span" className="section__num">
+          01 / Experience
+        </Reveal>
         <Reveal as="h2" className="section__title">
-          Experience
+          A decade across eight industries
         </Reveal>
         <Reveal as="p" className="section__sub">
-          The full, unredacted history — from ABB in 2012 to crypto payments today,
-          across {experience.length} roles and eight industries.
+          From government portals and logistics to travel payments, sports data,
+          SaaS, secure content and crypto — the full track record, in detail.
         </Reveal>
       </div>
+
       <div className="exp">
         {experience.map((role, i) => {
-          const matches = filtering && role.domains.includes(domain);
-          const dimmed = filtering && !matches;
+          // "Software Engineer · Payments" → bold lead + muted "· Payments".
+          const [lead, ...rest] = role.role.split("·");
           return (
             <Reveal
-              className={`exp__item${role.current ? " exp__item--current" : ""}${
-                matches ? " exp__item--match" : ""
-              }${dimmed ? " exp__item--dim" : ""}`}
+              as="article"
               key={role.company}
-              delay={i * 60}
+              id={`exp-${i}`}
+              className="exp__item"
+              delay={i * 50}
+              style={{ "--brand": role.brand } as CSSProperties}
             >
+              <span className="exp__mesh" aria-hidden="true" />
               <div className="exp__head">
-                <div className="exp__heading">
-                  <span
-                    className="exp__logo"
-                    style={{ "--brand": role.brand } as CSSProperties}
-                    aria-hidden="true"
-                  >
-                    {role.logo ? (
-                      <img src={role.logo} alt="" loading="lazy" />
-                    ) : (
-                      role.initials ?? role.company.charAt(0)
-                    )}
-                  </span>
-                  <div>
-                    <h3 className="exp__company">
-                      {role.company}
-                      {role.companyNote && (
-                        <span className="exp__note"> · {role.companyNote}</span>
-                      )}
-                      {role.current && <span className="exp__badge">Current</span>}
-                    </h3>
-                    <p className="exp__role">{role.role}</p>
-                  </div>
+                <div
+                  className="exp__badge"
+                  style={{ background: role.brand }}
+                  aria-hidden="true"
+                >
+                  {role.initials ?? role.company.charAt(0)}
                 </div>
-                <div className="exp__meta">
-                  <span className="exp__period">{role.period}</span>
-                  <span className="exp__location">{role.location}</span>
+                <div className="exp__hd-main">
+                  <div className="exp__top">
+                    <div className="exp__id">
+                      <div className="exp__company">
+                        {role.company}
+                        {role.current && (
+                          <span className="exp__tag-current">Current</span>
+                        )}
+                      </div>
+                      <div className="exp__role">
+                        {lead.trim()}
+                        {rest.length > 0 && <span> · {rest.join("·").trim()}</span>}
+                      </div>
+                    </div>
+                    <div className="exp__meta">
+                      <span className="exp__period">{role.period}</span>
+                      <span className="exp__loc">{role.location}</span>
+                    </div>
+                  </div>
+                  <div className="exp__note">{role.note}</div>
                 </div>
               </div>
-              <ul className="exp__highlights">
+
+              <ul className="exp__list">
                 {role.highlights.map((h) => (
                   <li key={h}>{highlightNumbers(h)}</li>
                 ))}
               </ul>
+
               {role.stack && (
-                <ul className="exp__stack">
+                <div className="exp__stack">
                   {role.stack.map((t) => (
-                    <li key={t}>{t}</li>
+                    <span key={t} className="exp__chip">
+                      {t}
+                    </span>
                   ))}
-                </ul>
+                </div>
               )}
             </Reveal>
           );

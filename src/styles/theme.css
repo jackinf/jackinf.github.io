@@ -18,7 +18,7 @@
   --text-3xl: clamp(2.2rem, 1.5rem + 3.2vw, 3.6rem);
 
   /* Spacing / layout */
-  --maxw: 880px;
+  --maxw: 1040px;
   --radius: 14px;
   --radius-sm: 8px;
   --gap: clamp(1rem, 0.6rem + 1.6vw, 1.6rem);
@@ -27,6 +27,9 @@
   /* Motion */
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --dur: 0.6s;
+
+  /* Secondary accent (used by the redesigned background, bento viz & meters). */
+  --accent2: #16a34a;
 
   /* Light palette */
   --bg: #fbfbfc;

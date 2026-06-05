@@ -3,8 +3,11 @@ import { skills } from "../data/cv.ts";
 
 export function Skills() {
   return (
-    <section className="section section--tight" id="skills">
+    <section className="section" id="skills">
       <div className="section__head">
+        <Reveal as="span" className="section__num">
+          05 / Technical skills
+        </Reveal>
         <Reveal as="h2" className="section__title">
           Technical skills
         </Reveal>
@@ -12,21 +15,26 @@ export function Skills() {
           A decade of accumulated tooling, grouped by what it's for.
         </Reveal>
       </div>
-      <div className="skills">
+
+      <Reveal className="skills">
         {skills.map((group, i) => (
-          <Reveal className="skill" key={group.label} delay={i * 50}>
-            <h3 className="skill__label">
-              <span className="skill__index">{String(i + 1).padStart(2, "0")}</span>
-              {group.label}
-            </h3>
-            <ul className="skill__items">
+          <div className="skillgroup" key={group.label}>
+            <div className="skillgroup__head">
+              <span className="skillgroup__num">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="skillgroup__label">{group.label}</span>
+            </div>
+            <div className="skillgroup__items">
               {group.items.map((item) => (
-                <li key={item}>{item}</li>
+                <span key={item} className="chip">
+                  {item}
+                </span>
               ))}
-            </ul>
-          </Reveal>
+            </div>
+          </div>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }
