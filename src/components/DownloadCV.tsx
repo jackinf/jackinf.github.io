@@ -5,11 +5,13 @@ type Status = "idle" | "working" | "error";
 
 /**
  * Downloads a deterministic, client-generated PDF (via @react-pdf/renderer,
- * lazy-loaded — no Chrome "Print to PDF"). Offers two variants:
+ * lazy-loaded — no Chrome "Print to PDF"). Rendered as a split button:
  *
- *  - "designed" — the polished, one-page, visually-styled CV.
- *  - "ats"      — a single-column, keyword-rich CV tuned to pass Applicant
- *                 Tracking Systems / AI résumé filters.
+ *  - The main blue button downloads the "designed" CV in one click — the
+ *    polished, one-page, visually-styled variant — with no extra menu step.
+ *  - The divided caret segment reveals the "ats" variant: a single-column,
+ *    keyword-rich CV tuned to pass Applicant Tracking Systems / AI résumé
+ *    filters (the designed variant is repeated there for completeness).
  */
 export function DownloadCV() {
   const [status, setStatus] = useState<Status>("idle");
@@ -72,17 +74,30 @@ export function DownloadCV() {
 
   return (
     <div className="dlcv" ref={wrapRef}>
-      <button
-        type="button"
-        className="btn btn--primary dlcv__main"
-        onClick={() => setOpen((o) => !o)}
-        disabled={status === "working"}
-        aria-haspopup="menu"
-        aria-expanded={open}
-      >
-        {label}
-        <span className="dlcv__caret" aria-hidden="true">▾</span>
-      </button>
+      <div className="dlcv__split">
+        {/* Primary action: one click downloads the polished PDF — no menu. */}
+        <button
+          type="button"
+          className="btn btn--primary dlcv__main"
+          onClick={() => download("designed")}
+          disabled={status === "working"}
+        >
+          {label}
+        </button>
+        {/* Secondary: an explicit, divided segment for the other format. */}
+        <button
+          type="button"
+          className="btn btn--primary dlcv__toggle"
+          onClick={() => setOpen((o) => !o)}
+          disabled={status === "working"}
+          aria-haspopup="menu"
+          aria-expanded={open}
+          aria-label="More CV formats"
+          title="More CV formats"
+        >
+          <span className="dlcv__caret" aria-hidden="true">▾</span>
+        </button>
+      </div>
 
       {open && (
         <div className="dlcv__menu" role="menu">
