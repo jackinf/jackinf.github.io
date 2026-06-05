@@ -1065,8 +1065,20 @@ main { display: block; }
 
 /* ============================ Download-CV split button + menu ============================ */
 .dlcv { position: relative; display: inline-block; }
-.dlcv__main { gap: 0.45rem; }
-.dlcv__caret { font-size: 0.7em; opacity: 0.85; }
+/* Split button: solid primary action + a divided caret for other formats. */
+.dlcv__split { display: inline-flex; }
+.dlcv__main {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.dlcv__toggle {
+  padding-inline: 0.7rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-color: color-mix(in srgb, var(--accent-contrast) 35%, transparent);
+  margin-left: -1px;
+}
+.dlcv__caret { font-size: 0.8em; opacity: 0.9; }
 .dlcv__menu {
   position: absolute;
   top: calc(100% + 0.4rem);
