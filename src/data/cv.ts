@@ -15,7 +15,11 @@ export interface Role {
   logo?: string;
   role: string;
   period: string;
+  /** Compact period label for the hero career list + side minimap (e.g. "2025 – now"). */
+  short: string;
   location: string;
+  /** One-line description of the company, shown under the role in the experience card. */
+  note: string;
   /** True for current / most recent role — gets visual emphasis. */
   current?: boolean;
   highlights: string[];
@@ -89,6 +93,16 @@ export interface Domain {
   blurb: string;
   /** Accent colour used for the selector + background tint. */
   color: string;
+}
+
+/** A hero "story" framing — the auto-advancing progress slider cycles these. */
+export interface Framing {
+  /** Short label shown under each story segment. */
+  label: string;
+  /** Segment fill colour (kept once the segment is done). */
+  color: string;
+  /** Rotating description shown below the slider when this framing is active. */
+  blurb: string;
 }
 
 /** First day of professional work — drives the dynamic "years of experience" panel. */
@@ -191,6 +205,65 @@ export const domains: Domain[] = [
   },
 ];
 
+/**
+ * Left-hand hero "story" framings. The auto-advancing progress slider cycles
+ * these (~6s each); the paragraph below swaps to the active framing's blurb.
+ */
+export const framings: Framing[] = [
+  {
+    label: "Overview",
+    color: "#6c9bff",
+    blurb:
+      "A polyglot engineer who builds reliable systems end to end — backend, frontend, infra and the glue in between — and has done it across eight very different industries over 14 years.",
+  },
+  {
+    label: "Payments",
+    color: "#2d7dd2",
+    blurb:
+      "Ships payment systems that move real money — Apple/Google Pay, 3-D Secure 2.0 SCA, SEPA Direct Debit, Confirmation of Payee and multi-vendor banking — measured in conversion and revenue.",
+  },
+  {
+    label: "Crypto",
+    color: "#f7931a",
+    blurb:
+      "Owns deposits & withdrawals at a top global crypto exchange — instant local rails, banking-vendor integrations and the on-call ownership that high-value money movement demands.",
+  },
+  {
+    label: "Distributed",
+    color: "#16a34a",
+    blurb:
+      "Designs distributed, fault-tolerant systems — microservices, CQRS, Event Sourcing and pub/sub messaging that stay correct and observable while processing hundreds of thousands of transactions a day.",
+  },
+  {
+    label: "Cloud",
+    color: "#0ea5e9",
+    blurb:
+      "Delivers cloud SaaS at scale — digital signatures, document generation and time-tracking platforms on Kubernetes, held at ~99.9% uptime with Terraform, Grafana and Prometheus.",
+  },
+  {
+    label: "Builder",
+    color: "#db2777",
+    blurb:
+      "Builds for the love of it — a 2D tank game in Rust/Bevy, a realtime multiplayer drawing game, and engine explorations across Unity, MonoGame and DirectX 11. Daily user of AI coding agents.",
+  },
+];
+
+/** Curated key tech surfaced in the hero's right-hand career panel. */
+export const keyTech: string[] = [
+  "Rust",
+  "Node.js",
+  "C# / .NET",
+  "Java",
+  "Python",
+  "React",
+  "Kubernetes",
+  "PostgreSQL",
+  "CQRS",
+  "Event Sourcing",
+  "Terraform",
+  "AMQP",
+];
+
 export const experience: Role[] = [
   {
     company: "Kraken",
@@ -199,7 +272,9 @@ export const experience: Role[] = [
     brand: "#5741d9",
     role: "Software Engineer · Payments",
     period: "Apr 2025 – Jun 2026",
+    short: "2025 – now",
     location: "Remote / Amsterdam, NL",
+    note: "One of the largest global crypto exchanges — fiat deposits & withdrawals at scale.",
     current: true,
     domains: ["crypto", "payments"],
     start: 2025.25,
@@ -221,7 +296,9 @@ export const experience: Role[] = [
     brand: "#0061d5",
     role: "Senior Software Engineer",
     period: "Apr 2022 – Apr 2025",
+    short: "2022 – 2025",
     location: "Amsterdam, NL",
+    note: "Secure cloud content management used by enterprises globally.",
     domains: ["content", "saas"],
     start: 2022.25,
     end: 2025.25,
@@ -242,7 +319,9 @@ export const experience: Role[] = [
     brand: "#f97316",
     role: "Lead Software Engineer",
     period: "Sep 2020 – Mar 2022",
+    short: "2020 – 2022",
     location: "Amsterdam, NL",
+    note: "Time-tracking SaaS startup for businesses.",
     domains: ["saas"],
     start: 2020.7,
     end: 2022.25,
@@ -263,7 +342,9 @@ export const experience: Role[] = [
     brand: "#e4002b",
     role: "Senior Full-Stack Engineer",
     period: "Sep 2018 – Aug 2020",
+    short: "2018 – 2020",
     location: "Amsterdam, NL",
+    note: "Global travel search & booking platform operating multiple flight brands.",
     domains: ["payments"],
     start: 2018.7,
     end: 2020.65,
@@ -286,7 +367,9 @@ export const experience: Role[] = [
     brand: "#16a34a",
     role: "Software Engineer · .NET",
     period: "Jun 2017 – Aug 2018",
+    short: "2017 – 2018",
     location: "Tallinn, Estonia",
+    note: "Sports data, technology & betting-integrity company.",
     domains: ["betting"],
     start: 2017.45,
     end: 2018.65,
@@ -307,7 +390,9 @@ export const experience: Role[] = [
     brand: "#2563eb",
     role: "Senior Full-Stack Engineer · Lead Developer",
     period: "Nov 2013 – Jun 2017",
+    short: "2013 – 2017",
     location: "Tallinn, Estonia",
+    note: "B2B IT for Estonian government & enterprise clients.",
     domains: ["govtech"],
     start: 2013.85,
     end: 2017.45,
@@ -330,7 +415,9 @@ export const experience: Role[] = [
     brand: "#0d9488",
     role: "Full-Stack .NET Developer · Contract",
     period: "Jan 2017 – Aug 2019 (intermittent)",
+    short: "2017 – 2019",
     location: "Finland (remote)",
+    note: "Finnish logistics automation — B2B parcel tracking.",
     domains: ["logistics"],
     start: 2017.0,
     end: 2019.65,
@@ -350,7 +437,9 @@ export const experience: Role[] = [
     brand: "#e30613",
     role: "Junior .NET Engineer",
     period: "Jun 2012 – Dec 2012",
+    short: "2012",
     location: "Jüri, Estonia",
+    note: "Global electrification & automation technology.",
     domains: ["govtech"],
     start: 2012.45,
     end: 2012.95,

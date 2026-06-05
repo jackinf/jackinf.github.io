@@ -1,7 +1,8 @@
 /* ------------------------------------------------------------------ *
  * Print / "Download CV" — collapses the page to one tight A4 page.     *
- * Smaller font, no nav/footer/buttons/animations, ATS-friendly flow.   *
- * Tuned to fit all content on a SINGLE A4 page — verify after edits.   *
+ * The polished CV is generated as a real PDF (src/cv/CvDocument.tsx);   *
+ * this stylesheet is only a graceful Ctrl+P fallback. Decorative and    *
+ * animated chrome is dropped; the textual CV content is kept & tightened.*
  * ------------------------------------------------------------------ */
 
 @media print {
@@ -23,10 +24,7 @@
     --border-strong: #aab0ba;
   }
 
-  html {
-    font-size: 7.2pt;
-  }
-
+  html { font-size: 7.2pt; }
   body {
     background: #fff;
     color: #000;
@@ -35,23 +33,23 @@
     print-color-adjust: exact;
   }
 
-  /* Hide interactive / decorative chrome and per-role tag rows. */
+  /* Drop interactive / decorative / animated chrome. */
   .nav,
   .footer,
-  .hero__actions,
-  .hero__eyebrow,
-  .hero__cta,
-  .hero__aside,
-  .hero__stats,
-  .stats,
   .bg,
   .minimap,
-  .spinner,
+  .ribbon,
+  .career,
+  .story,
+  #capabilities,
+  .hero__contact,
+  .hero__cta,
+  .hero__stats,
   .theme-toggle,
-  .role .tags,
-  .exp__stack,
-  .exp__logo,
-  .project .tags {
+  .dlcv,
+  .exp__mesh,
+  .exp__badge,
+  .exp__stack {
     display: none !important;
   }
 
@@ -63,158 +61,77 @@
     backdrop-filter: none !important;
     padding: 0 !important;
   }
-  /* Don't reserve the on-screen fixed height for the headline in print. */
-  .hero__lead {
-    height: auto !important;
-    min-height: 0 !important;
+  .hero__grid {
+    display: block !important;
+    padding: 0 !important;
   }
 
-  /* The polished CV is generated as a PDF (see src/cv/CvDocument.tsx);
-     this print stylesheet is only a graceful Ctrl+P fallback. */
   .num {
     color: #000 !important;
     background: none !important;
     font-weight: 700;
   }
 
-  /* Everything visible immediately, no motion. */
   [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
 
-  .container {
-    max-width: none;
-    padding: 0;
-  }
-
   /* Tighten vertical rhythm to fit one page. */
   .section,
   .hero {
-    padding-block: 0 !important;
-    border-top: none !important;
+    max-width: none !important;
+    padding: 0 !important;
     margin-bottom: 5pt;
   }
-  .hero {
-    margin-bottom: 4pt;
-  }
+  .hero { margin-bottom: 4pt; }
 
-  .hero__name {
-    font-size: 15pt;
-    margin-bottom: 0;
-  }
-  .hero__title {
-    font-size: 8.5pt;
-  }
-  .hero__summary {
-    font-size: 7.3pt;
-    margin-top: 2.5pt;
-    max-width: none;
-    color: #1c1c1c;
-  }
-  .contacts {
-    margin-top: 3pt;
-    gap: 1pt 9pt;
-    font-size: 7pt;
-  }
+  .hero__name { font-size: 15pt; margin-bottom: 0; }
+  .hero__title { font-size: 9pt; }
+  .hero__tagline { font-size: 7.5pt; }
 
-  .section__head {
-    margin-bottom: 3pt;
-  }
-  .section__title {
-    font-size: 9.5pt;
-  }
-  .section__num {
-    font-size: 7pt;
-  }
+  .section__head { margin-bottom: 3pt; }
+  .section__title { font-size: 9.5pt; }
+  .section__num { font-size: 7pt; }
+  .section__sub { font-size: 7pt; color: #1c1c1c; }
 
-  /* Experience — compact, avoid splitting a role across pages. */
-  .timeline {
-    gap: 4pt;
-  }
-  .role {
-    padding-left: 0;
+  /* Experience — compact, never split a role across pages. */
+  .exp { gap: 4pt; }
+  .exp__item {
+    border: 1px solid #cfd3da !important;
+    border-radius: 4pt;
+    padding: 4pt 6pt !important;
+    margin: 0 !important;
     break-inside: avoid;
     page-break-inside: avoid;
   }
-  .role::before,
-  .role::after {
-    display: none;
-  }
-  .role__company {
-    font-size: 8.8pt;
-  }
-  .role__period,
-  .role__sub {
-    font-size: 7pt;
-  }
-  .role__list {
-    margin-top: 1.5pt;
-    gap: 0.5pt;
-  }
-  .role__list li {
-    font-size: 7.3pt;
-    padding-left: 0.9rem;
-    color: #1c1c1c;
-  }
+  .exp__item:hover { box-shadow: none !important; }
+  .exp__company { font-size: 8.8pt; }
+  .exp__role,
+  .exp__period,
+  .exp__loc,
+  .exp__note { font-size: 7pt; }
+  .exp__meta { border-left: none !important; padding-left: 0 !important; margin-left: 0 !important; }
+  .exp__list { margin-top: 1.5pt; gap: 0.5pt; }
+  .exp__list li { font-size: 7.3pt; padding-left: 0.9rem; color: #1c1c1c; }
 
-  .project:hover,
-  .earlier__item:hover {
-    transform: none;
-  }
+  /* Languages, projects, skills, education. */
+  .lang { padding: 4pt 6pt; box-shadow: none; break-inside: avoid; }
 
-  /* Earlier roles — 3-up compact cards. */
-  .earlier {
-    gap: 4pt;
-    margin-top: 4pt;
-  }
-  .earlier__item {
-    padding: 3pt 5pt;
-    break-inside: avoid;
-  }
-  .earlier__summary {
-    font-size: 7pt;
-    margin-top: 1.5pt;
-  }
+  .projects { gap: 5pt; }
+  .project { padding: 4pt 6pt; break-inside: avoid; }
+  .project:hover { transform: none; box-shadow: none; }
+  .project__desc { font-size: 7pt; margin-top: 1.5pt; }
 
-  .projects {
-    gap: 5pt;
-  }
-  .project {
-    padding: 4pt 6pt;
-    break-inside: avoid;
-  }
-  .project__desc {
-    font-size: 7pt;
-    margin-top: 1.5pt;
-  }
+  .skills { gap: 4pt 12pt; }
+  .skillgroup { break-inside: avoid; }
+  .skillgroup__head { margin-bottom: 1.5pt; padding-bottom: 1.5pt; }
+  .chip { font-size: 6.8pt; padding: 0.5pt 4pt; background: #fff; border-color: #cfd3da; }
 
-  .skills {
-    gap: 4pt 12pt;
-  }
-  .skillgroup {
-    break-inside: avoid;
-  }
-  .skillgroup__label {
-    margin-bottom: 1.5pt;
-  }
-  .chip {
-    font-size: 6.8pt;
-    padding: 0.5pt 4pt;
-    background: #fff;
-    border-color: #cfd3da;
-  }
+  .edu { gap: 6pt; }
+  .degree { padding: 4pt 6pt; break-inside: avoid; }
+  .cert { break-inside: avoid; }
 
-  .education {
-    gap: 1.5pt;
-  }
-  .edu {
-    padding-bottom: 1.5pt;
-  }
-
-  a {
-    color: #000;
-    text-decoration: none;
-  }
+  a { color: #000; text-decoration: none; }
 }

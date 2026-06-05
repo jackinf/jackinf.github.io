@@ -26,10 +26,10 @@ export function Nav({ theme, onToggleTheme }: Props) {
         </a>
         <nav className="nav__links">
           <a className="nav__link" href="#experience">Experience</a>
+          <a className="nav__link" href="#capabilities">What I do</a>
           <a className="nav__link" href="#languages">Languages</a>
           <a className="nav__link" href="#projects">Projects</a>
           <a className="nav__link" href="#skills">Skills</a>
-          <a className="nav__link" href="#education">Education</a>
           <a className="nav__link nav__game" href="/game/" title="The gamified version">
             ▶ Game
           </a>
