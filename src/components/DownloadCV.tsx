@@ -16,11 +16,22 @@ type Status = "idle" | "working" | "error";
 export function DownloadCV() {
   const [status, setStatus] = useState<Status>("idle");
   const [open, setOpen] = useState(false);
+  // The menu is fixed-positioned (anchored to the button via measured coords)
+  // so it can't be clipped by an ancestor's `overflow: hidden` — the hero is a
+  // glass panel that clips its children.
+  const [pos, setPos] = useState<{ top: number; right: number } | null>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  // Close the menu on outside click / Escape.
+  // Close the menu on outside click / Escape; keep it anchored on scroll/resize.
   useEffect(() => {
     if (!open) return;
+    const place = () => {
+      const el = wrapRef.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      setPos({ top: r.bottom + 6, right: window.innerWidth - r.right });
+    };
+    place();
     const onDown = (e: MouseEvent) => {
       if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
         setOpen(false);
@@ -29,9 +40,13 @@ export function DownloadCV() {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     document.addEventListener("mousedown", onDown);
     document.addEventListener("keydown", onKey);
+    window.addEventListener("scroll", place, true);
+    window.addEventListener("resize", place);
     return () => {
       document.removeEventListener("mousedown", onDown);
       document.removeEventListener("keydown", onKey);
+      window.removeEventListener("scroll", place, true);
+      window.removeEventListener("resize", place);
     };
   }, [open]);
 
@@ -99,8 +114,12 @@ export function DownloadCV() {
         </button>
       </div>
 
-      {open && (
-        <div className="dlcv__menu" role="menu">
+      {open && pos && (
+        <div
+          className="dlcv__menu"
+          role="menu"
+          style={{ top: pos.top, right: pos.right }}
+        >
           <button
             type="button"
             className="dlcv__item"
