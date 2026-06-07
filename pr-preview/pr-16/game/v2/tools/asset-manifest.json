@@ -1,0 +1,245 @@
+{
+  "stylePrefix": "Minimalistic modern digital art, clean vector-style illustration with subtle gradients, muted pastel color palette (soft navy #1a1a2e, dusty rose #e8c4c4, warm cream #f5f0e8, sage green #a8c5a0, slate blue #6b7b8d), flat design with soft drop shadows, thin clean outlines. No text, no watermarks. Transparent background.",
+  "assets": [
+    {
+      "key": "char-idle",
+      "path": "assets/character/char-idle.png",
+      "aspectRatio": "16:9",
+      "prompt": "Small stylized developer character, side view, standing idle with subtle breathing animation. Wears hoodie and laptop bag. Chibi proportions. 4 frames side by side in horizontal strip, transparent bg."
+    },
+    {
+      "key": "char-walk",
+      "path": "assets/character/char-walk.png",
+      "aspectRatio": "16:9",
+      "prompt": "Same developer character, side view, 8-frame walk cycle showing full stride. Frames in horizontal strip, transparent bg."
+    },
+    {
+      "key": "char-wave",
+      "path": "assets/character/char-wave.png",
+      "aspectRatio": "16:9",
+      "prompt": "Same developer character, side view, waving hand greeting. 4 frames in horizontal strip, transparent bg."
+    },
+    {
+      "key": "bg-sky",
+      "path": "assets/backgrounds/bg-sky.png",
+      "aspectRatio": "16:9",
+      "prompt": "Wide gradient sky, deep navy blue top to warm peach/rose at horizon. Subtle geometric stars and crescent moon. No ground."
+    },
+    {
+      "key": "bg-city-far",
+      "path": "assets/backgrounds/bg-city-far.png",
+      "aspectRatio": "16:9",
+      "prompt": "Far-away minimalistic city skyline silhouette, muted dark blue-gray. Simple geometric buildings. Seamlessly tileable horizontally, transparent bg."
+    },
+    {
+      "key": "bg-hills-mid",
+      "path": "assets/backgrounds/bg-hills-mid.png",
+      "aspectRatio": "16:9",
+      "prompt": "Rolling hills, soft sage green and dusty blue. Few abstract geometric trees. Seamlessly tileable horizontally, transparent bg."
+    },
+    {
+      "key": "bg-trees-near",
+      "path": "assets/backgrounds/bg-trees-near.png",
+      "aspectRatio": "16:9",
+      "prompt": "Near-distance stylized geometric trees and bushes, darker sage green. Triangular/circular shapes. Tileable horizontally, transparent bg."
+    },
+    {
+      "key": "bg-ground",
+      "path": "assets/backgrounds/bg-ground.png",
+      "aspectRatio": "16:9",
+      "prompt": "Flat ground/path surface. Smooth dark slate with subtle texture, clean grass edge on top in sage green. Tileable horizontally, transparent bg."
+    },
+    {
+      "key": "gate-arch",
+      "path": "assets/sections/gate-arch.png",
+      "aspectRatio": "1:1",
+      "prompt": "Minimalistic decorative archway/gate, modern clean design with thin metal frame, subtle glow. Section divider, transparent bg."
+    },
+    {
+      "key": "signpost",
+      "path": "assets/sections/signpost.png",
+      "aspectRatio": "1:1",
+      "prompt": "Modern minimalistic directional signpost with blank arrow-shaped planks pointing right. Clean metal post, warm cream/brown planks, transparent bg."
+    },
+    {
+      "key": "intro-terminal",
+      "path": "assets/sections/intro-terminal.png",
+      "aspectRatio": "1:1",
+      "prompt": "Modern floating holographic computer terminal, sleek rounded edges, dark screen with subtle blue glow, futuristic design, transparent bg."
+    },
+    {
+      "key": "intro-desk",
+      "path": "assets/sections/intro-desk.png",
+      "aspectRatio": "16:9",
+      "prompt": "Minimalistic modern desk setup from side view: monitor, coffee cup, small plant, keyboard. Warm tones, transparent bg."
+    },
+    {
+      "key": "exp-board",
+      "path": "assets/sections/exp-board.png",
+      "aspectRatio": "1:1",
+      "prompt": "Modern minimalistic notice/kanban board on standing post, wooden frame, cream background. Empty board surface. Side view, transparent bg."
+    },
+    {
+      "key": "exp-building-1",
+      "path": "assets/sections/exp-building-1.png",
+      "aspectRatio": "1:1",
+      "prompt": "Minimalistic modern office building, glass facade, warm window lighting. Side view, transparent bg."
+    },
+    {
+      "key": "exp-building-2",
+      "path": "assets/sections/exp-building-2.png",
+      "aspectRatio": "1:1",
+      "prompt": "Different minimalistic office building, smaller, rooftop garden element. Side view, transparent bg."
+    },
+    {
+      "key": "exp-building-3",
+      "path": "assets/sections/exp-building-3.png",
+      "aspectRatio": "1:1",
+      "prompt": "Minimalistic startup office, creative facade, large windows, colorful accents. Side view, transparent bg."
+    },
+    {
+      "key": "exp-building-4",
+      "path": "assets/sections/exp-building-4.png",
+      "aspectRatio": "1:1",
+      "prompt": "Minimalistic industrial/engineering building, subtle mechanical facade elements. Side view, transparent bg."
+    },
+    {
+      "key": "project-laptop",
+      "path": "assets/sections/project-laptop.png",
+      "aspectRatio": "1:1",
+      "prompt": "Open laptop from slight angle, modern thin design, screen glowing with abstract colorful UI, transparent bg."
+    },
+    {
+      "key": "project-cloud",
+      "path": "assets/sections/project-cloud.png",
+      "aspectRatio": "1:1",
+      "prompt": "Minimalistic cloud computing symbol, stylized cloud with subtle server nodes inside, soft blue/white, transparent bg."
+    },
+    {
+      "key": "project-speech-bubble",
+      "path": "assets/sections/project-speech-bubble.png",
+      "aspectRatio": "1:1",
+      "prompt": "Modern clean speech bubble, rounded rectangle with tail at bottom-left, subtle shadow, cream/white, transparent bg."
+    },
+    {
+      "key": "skills-panel",
+      "path": "assets/sections/skills-panel.png",
+      "aspectRatio": "16:9",
+      "prompt": "Modern floating UI panel, dark translucent bg with border glow, rounded corners. Dashboard-style, transparent bg."
+    },
+    {
+      "key": "skills-bar-empty",
+      "path": "assets/sections/skills-bar-empty.png",
+      "aspectRatio": "16:9",
+      "prompt": "Empty progress bar track, rounded rectangle, dark translucent with thin glowing border, transparent bg."
+    },
+    {
+      "key": "skills-bar-fill",
+      "path": "assets/sections/skills-bar-fill.png",
+      "aspectRatio": "16:9",
+      "prompt": "Filled progress bar, rounded rectangle, gradient sage green to teal, subtle inner glow, transparent bg."
+    },
+    {
+      "key": "skills-icon-csharp",
+      "path": "assets/sections/skills-icon-csharp.png",
+      "aspectRatio": "1:1",
+      "prompt": "Minimalistic C# programming language icon, purple/violet tones, transparent bg."
+    },
+    {
+      "key": "skills-icon-js",
+      "path": "assets/sections/skills-icon-js.png",
+      "aspectRatio": "1:1",
+      "prompt": "Minimalistic JavaScript icon, yellow tones, transparent bg."
+    },
+    {
+      "key": "skills-icon-python",
+      "path": "assets/sections/skills-icon-python.png",
+      "aspectRatio": "1:1",
+      "prompt": "Minimalistic Python icon, blue and yellow tones, transparent bg."
+    },
+    {
+      "key": "edu-university",
+      "path": "assets/sections/edu-university.png",
+      "aspectRatio": "1:1",
+      "prompt": "Minimalistic university building, classical architecture as clean geometric shapes, columns, triangular roof. Warm stone, transparent bg."
+    },
+    {
+      "key": "edu-diploma",
+      "path": "assets/sections/edu-diploma.png",
+      "aspectRatio": "1:1",
+      "prompt": "Minimalistic diploma/degree certificate, rolled scroll with ribbon/seal, cream and gold, transparent bg."
+    },
+    {
+      "key": "edu-tree",
+      "path": "assets/sections/edu-tree.png",
+      "aspectRatio": "1:1",
+      "prompt": "Stylized knowledge tree, geometric trunk branching into two main branches with leaf clusters for degree levels. Warm wood/green, transparent bg."
+    },
+    {
+      "key": "contact-mailbox",
+      "path": "assets/sections/contact-mailbox.png",
+      "aspectRatio": "1:1",
+      "prompt": "Modern stylized mailbox/message terminal, subtle glow indicating incoming messages, transparent bg."
+    },
+    {
+      "key": "contact-icons",
+      "path": "assets/sections/contact-icons.png",
+      "aspectRatio": "16:9",
+      "prompt": "Row of 4 minimalistic icons (mail envelope, GitHub cat, LinkedIn square, generic link), geometric, side by side, transparent bg."
+    },
+    {
+      "key": "ui-scroll-indicator",
+      "path": "assets/ui/ui-scroll-indicator.png",
+      "aspectRatio": "16:9",
+      "prompt": "4-frame animated scroll/mouse indicator, arrow pointing right with pulse. Horizontal strip, transparent bg."
+    },
+    {
+      "key": "ui-nav-dot-active",
+      "path": "assets/ui/ui-nav-dot-active.png",
+      "aspectRatio": "1:1",
+      "prompt": "Small filled circle, warm cream, subtle glow, transparent bg."
+    },
+    {
+      "key": "ui-nav-dot-inactive",
+      "path": "assets/ui/ui-nav-dot-inactive.png",
+      "aspectRatio": "1:1",
+      "prompt": "Small hollow circle, muted gray outline, transparent bg."
+    },
+    {
+      "key": "deco-lamp-post",
+      "path": "assets/decorative/deco-lamp-post.png",
+      "aspectRatio": "1:1",
+      "prompt": "Modern minimalistic street lamp, thin pole with geometric lantern, warm glow cone downward, transparent bg."
+    },
+    {
+      "key": "deco-bench",
+      "path": "assets/decorative/deco-bench.png",
+      "aspectRatio": "1:1",
+      "prompt": "Modern minimalistic park bench, wooden seat on metal frame, side view, transparent bg."
+    },
+    {
+      "key": "deco-plant-pot",
+      "path": "assets/decorative/deco-plant-pot.png",
+      "aspectRatio": "1:1",
+      "prompt": "Modern minimalistic potted succulent, geometric pot, transparent bg."
+    },
+    {
+      "key": "deco-particles",
+      "path": "assets/decorative/deco-particles.png",
+      "aspectRatio": "16:9",
+      "prompt": "4 soft glowing firefly sprites, small dots with radial glow, warm cream/gold, horizontal strip, transparent bg."
+    },
+    {
+      "key": "deco-birds",
+      "path": "assets/decorative/deco-birds.png",
+      "aspectRatio": "16:9",
+      "prompt": "6-frame bird silhouette flight animation, small dark silhouettes, horizontal strip, transparent bg."
+    },
+    {
+      "key": "exp-board-card",
+      "path": "assets/sections/exp-board-card.png",
+      "aspectRatio": "1:1",
+      "prompt": "Single clean card/plank for notice board, rounded corners, subtle shadow, cream/white with thin border, transparent bg."
+    }
+  ]
+}
