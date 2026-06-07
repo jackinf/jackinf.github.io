@@ -8,7 +8,7 @@ export function Footer() {
         <div className="footer__meta">
           © 2026 {profile.name} · Built with Bun &amp; React
           <br />
-          <a className="footer__game" href="/game/">
+          <a className="footer__game" href="game/">
             Try the 8-bit résumé version
             <ArrowIcon className="icon arrow" />
           </a>

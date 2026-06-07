@@ -53,7 +53,9 @@ let out = html.replace(
 );
 out = out.replace(
   "</head>",
-  '  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />\n  </head>',
+  // Relative href (not "/favicon.svg") so the build works both at the site
+  // root AND under a subpath (e.g. PR previews at /pr-preview/pr-N/).
+  '  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />\n  </head>',
 );
 if (out !== html) {
   await writeFile(htmlPath, out);
@@ -69,5 +71,10 @@ if (existsSync(`${root}public`)) {
 
 console.log("→ Copying game/ → dist/game/");
 await cp(`${root}game`, `${dist}/game`, { recursive: true });
+
+// GitHub Pages serves the deploy branch (gh-pages) through Jekyll by default,
+// which skips files/dirs beginning with "_". A .nojekyll file disables that so
+// hashed asset names are served verbatim.
+await writeFile(`${dist}/.nojekyll`, "");
 
 console.log("✓ Build complete → dist/");

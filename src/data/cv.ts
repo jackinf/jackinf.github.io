@@ -491,7 +491,8 @@ export const projects: Project[] = [
     description:
       "This site (Bun + React 19) plus a sidescroller game that tells the same story — built and maintained with AI coding agents.",
     tags: ["React", "Bun", "TypeScript", "Canvas"],
-    url: "/game/",
+    // Relative (not "/game/") so it resolves under PR-preview subpaths too.
+    url: "game/",
   },
 ];
 

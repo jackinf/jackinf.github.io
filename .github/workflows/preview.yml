@@ -1,0 +1,93 @@
+name: PR Preview
+
+# Publishes every pull request to a live URL so changes can be reviewed before
+# merging:  https://jackinf.github.io/pr-preview/pr-<number>/
+# The preview is rebuilt on each push and removed when the PR closes.
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# Share the gh-pages serialization group with the production deploy so writes to
+# the branch never race. Don't cancel in-progress runs (a half-pushed branch is
+# worse than a slightly stale preview).
+concurrency:
+  group: gh-pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy-preview:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run build
+
+      - name: Deploy preview to gh-pages/pr-preview/pr-${{ github.event.number }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
+          target-folder: pr-preview/pr-${{ github.event.number }}
+          # clean is scoped to target-folder, so this only refreshes THIS
+          # preview — other previews and the production root are untouched.
+          clean: true
+          commit-message: "Deploy preview for PR #${{ github.event.number }}"
+
+      - name: Comment the preview URL (first time only)
+        if: github.event.action == 'opened' || github.event.action == 'reopened'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const n = context.issue.number;
+            const url = `https://jackinf.github.io/pr-preview/pr-${n}/`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: n,
+              body: [
+                `🚀 **Live preview:** ${url}`,
+                '',
+                'Rebuilt on every push to this PR, and removed automatically when it closes.',
+                '_First publish can take a minute to appear._',
+              ].join('\n'),
+            });
+
+  cleanup-preview:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 0
+
+      - name: Remove this PR's preview directory
+        run: |
+          set -e
+          dir="pr-preview/pr-${{ github.event.number }}"
+          if [ -d "$dir" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git rm -rf "$dir"
+            git commit -m "Remove preview for PR #${{ github.event.number }}"
+            git push
+          else
+            echo "No preview directory at $dir — nothing to clean up."
+          fi
