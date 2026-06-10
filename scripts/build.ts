@@ -17,9 +17,9 @@ console.log("→ Cleaning dist/");
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
-console.log("→ Bundling React app from index.html");
+console.log("→ Bundling React app from index.html + 3D town from game-3d/index.html");
 const result = await Bun.build({
-  entrypoints: [`${root}index.html`],
+  entrypoints: [`${root}index.html`, `${root}game-3d/index.html`],
   outdir: dist,
   minify: true,
   // Code-split so the heavy PDF renderer (@react-pdf/renderer) lands in its
@@ -40,26 +40,30 @@ if (!result.success) {
 }
 console.log(`  bundled ${result.outputs.length} file(s)`);
 
-// Post-process the built index.html:
-//  - strip the original dev <script src="./src/main.tsx"> Bun leaves behind
+// Post-process the built HTML entrypoints:
+//  - strip the original dev <script src=".../src/...js|ts|tsx"> Bun leaves behind
 //    (Bun injects the hashed bundle into <head>; the dev tag would 404)
 //  - inject the favicon <link> here so Bun never tries to resolve the
 //    public/ asset during bundling (it 404s at build time otherwise)
-const htmlPath = `${dist}/index.html`;
-const html = await readFile(htmlPath, "utf8");
-let out = html.replace(
-  /\s*<script[^>]*src="\.\/src\/main\.tsx"[^>]*><\/script>/g,
-  "",
-);
-out = out.replace(
-  "</head>",
+for (const page of ["index.html", "game-3d/index.html"]) {
+  const htmlPath = `${dist}/${page}`;
+  if (!existsSync(htmlPath)) continue;
+  const html = await readFile(htmlPath, "utf8");
+  let out = html.replace(
+    /\s*<script[^>]*src="\.{1,2}\/(?:src|\.\.\/src)\/[^"]*"[^>]*><\/script>/g,
+    "",
+  );
   // Relative href (not "/favicon.svg") so the build works both at the site
   // root AND under a subpath (e.g. PR previews at /pr-preview/pr-N/).
-  '  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />\n  </head>',
-);
-if (out !== html) {
-  await writeFile(htmlPath, out);
-  console.log("  post-processed index.html (favicon + dev script)");
+  const toRoot = page.includes("/") ? "../" : "./";
+  out = out.replace(
+    "</head>",
+    `  <link rel="icon" href="${toRoot}favicon.svg" type="image/svg+xml" />\n  </head>`,
+  );
+  if (out !== html) {
+    await writeFile(htmlPath, out);
+    console.log(`  post-processed ${page} (favicon + dev script)`);
+  }
 }
 
 if (existsSync(`${root}public`)) {

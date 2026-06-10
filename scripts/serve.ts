@@ -24,9 +24,17 @@ const server = Bun.serve({
     let filePath = `${dist}${path}`;
 
     // Fallback to the requested directory's index, else the root index.
+    // Paths with a file extension get a real 404 (matches GitHub Pages, and
+    // the 3D app probes for optional assets and must not receive HTML).
     if (!existsSync(filePath) || statSync(filePath).isDirectory()) {
       const dirIndex = `${dist}${path.replace(/\/?$/, "/")}index.html`;
-      filePath = existsSync(dirIndex) ? dirIndex : `${dist}/index.html`;
+      if (existsSync(dirIndex)) {
+        filePath = dirIndex;
+      } else if (/\.[a-z0-9]+$/i.test(path)) {
+        return new Response("Not found", { status: 404 });
+      } else {
+        filePath = `${dist}/index.html`;
+      }
     }
 
     return new Response(Bun.file(filePath));
