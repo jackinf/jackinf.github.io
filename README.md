@@ -88,7 +88,7 @@ src/
 public/               # favicon.svg, cv.md
 scripts/              # build.ts, serve.ts
 game/                 # legacy 8-bit gamified résumé (served at /game/)
-.github/workflows/    # deploy.yml — Bun build + Pages deploy
+.github/workflows/    # deploy.yml (prod → gh-pages root) + preview.yml (PR previews)
 ```
 
 ## Editing content
@@ -101,11 +101,30 @@ sync when you change `cv.ts`.
 ## Deployment
 
 Pushes to `master` trigger `.github/workflows/deploy.yml`, which builds with Bun and
-publishes `dist/` to GitHub Pages.
+publishes `dist/` to the **`gh-pages`** branch root (preserving any live PR previews
+under `pr-preview/`).
 
 > **One-time setup:** In the GitHub repo, go to **Settings → Pages → Build and
-> deployment → Source** and select **"GitHub Actions"**. (Previously this repo served
-> from the branch root; the Actions workflow replaces that.)
+> deployment → Source** and select **"Deploy from a branch"**, then choose the
+> **`gh-pages`** branch and **`/ (root)`** folder. This single Pages source serves both
+> production (`/`) and PR previews (`/pr-preview/pr-N/`).
+
+### PR previews
+
+Every pull request is published to a live URL so changes can be reviewed before merging:
+
+```
+https://jackinf.github.io/pr-preview/pr-<number>/
+```
+
+`.github/workflows/preview.yml` builds the PR and deploys it to `gh-pages` under
+`pr-preview/pr-<number>/`, posts the link as a comment, rebuilds on each push, and
+removes the directory when the PR closes. Production redeploys never wipe active
+previews (`clean-exclude`), and all asset paths are relative so the same build works
+at the root and under a preview subpath.
+
+> Because `pull_request` workflows run from the version on the **base** branch, previews
+> activate for PRs opened **after** this workflow lands on `master`.
 
 ## Legacy site
 

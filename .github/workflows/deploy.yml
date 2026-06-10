@@ -6,17 +6,17 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
-# Allow one concurrent deployment; cancel in-progress runs for newer pushes.
+# Serialize every write to the gh-pages branch (production + PR previews share
+# this group) so concurrent deploys can't race on the same branch. Don't cancel
+# an in-progress deploy — let it finish, then run the next.
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: gh-pages-deploy
+  cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,18 +33,13 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to gh-pages (site root)
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          folder: dist
+          branch: gh-pages
+          clean: true
+          # Keep live PR previews intact when production redeploys.
+          clean-exclude: |
+            pr-preview
+            pr-preview/**

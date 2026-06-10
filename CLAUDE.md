@@ -32,10 +32,19 @@ Bun may not be on PATH; if `bun` is not found, use `~/.bun/bin/bun` or
 5. **The legacy site is in `game/`** and is copied verbatim into `dist/game/` by the
    build. It uses relative asset paths — do not add root-absolute (`/...`) asset URLs
    there. It's a separate vanilla HTML/JS project (see `game/CLAUDE.md`).
-6. **User GitHub Pages site** serves from `/`, so asset URLs are root-relative and need
-   no base path.
+6. **Asset URLs must be document-relative, not root-absolute.** The same build is served
+   at `/` (production) and under `/pr-preview/pr-N/` (PR previews), so use `./favicon.svg`,
+   `game/`, `./assets/...` — never `/favicon.svg` or `/game/`. Bun already emits relative
+   `./assets/...`; keep new links relative too.
 
 ## Deploy
 
-Push to `master` → Actions builds and deploys `dist/`. Requires repo
-**Settings → Pages → Source = "GitHub Actions"** (one-time, manual).
+Push to `master` → `.github/workflows/deploy.yml` builds and publishes `dist/` to the
+**`gh-pages`** branch root (with `clean-exclude: pr-preview` so live previews survive).
+Requires repo **Settings → Pages → Source = "Deploy from a branch" → `gh-pages` → `/`**
+(one-time, manual).
+
+**PR previews:** `.github/workflows/preview.yml` deploys each PR to
+`gh-pages/pr-preview/pr-N/`, served at `https://jackinf.github.io/pr-preview/pr-N/`,
+rebuilt per push and cleaned up on close. `pull_request` workflows run from the **base**
+branch, so previews only apply to PRs opened after this lands on `master`.
