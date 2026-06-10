@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 type Variant = "designed" | "ats";
 type Status = "idle" | "working" | "error";
@@ -16,11 +17,15 @@ type Status = "idle" | "working" | "error";
 export function DownloadCV() {
   const [status, setStatus] = useState<Status>("idle");
   const [open, setOpen] = useState(false);
-  // The menu is fixed-positioned (anchored to the button via measured coords)
-  // so it can't be clipped by an ancestor's `overflow: hidden` — the hero is a
-  // glass panel that clips its children.
+  // The menu is rendered through a portal to <body> and fixed-positioned,
+  // anchored to the button via measured viewport coords. This is required
+  // because the hero is a glass panel with `backdrop-filter`, which both
+  // clips its children (overflow: hidden) AND becomes the containing block
+  // for `position: fixed` descendants — so an in-tree fixed menu was pinned
+  // to the panel and cut off. Portaling to <body> escapes that context.
   const [pos, setPos] = useState<{ top: number; right: number } | null>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   // Close the menu on outside click / Escape; keep it anchored on scroll/resize.
   useEffect(() => {
@@ -33,7 +38,12 @@ export function DownloadCV() {
     };
     place();
     const onDown = (e: MouseEvent) => {
-      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+      const t = e.target as Node;
+      // The menu lives in a portal outside wrapRef, so check it separately.
+      if (
+        !wrapRef.current?.contains(t) &&
+        !menuRef.current?.contains(t)
+      ) {
         setOpen(false);
       }
     };
@@ -114,32 +124,38 @@ export function DownloadCV() {
         </button>
       </div>
 
-      {open && pos && (
-        <div
-          className="dlcv__menu"
-          role="menu"
-          style={{ top: pos.top, right: pos.right }}
-        >
-          <button
-            type="button"
-            className="dlcv__item"
-            role="menuitem"
-            onClick={() => download("designed")}
+      {open &&
+        pos &&
+        createPortal(
+          <div
+            className="dlcv__menu"
+            role="menu"
+            ref={menuRef}
+            style={{ top: pos.top, right: pos.right }}
           >
-            <span className="dlcv__item-title">Designed CV</span>
-            <span className="dlcv__item-sub">One page · polished layout</span>
-          </button>
-          <button
-            type="button"
-            className="dlcv__item"
-            role="menuitem"
-            onClick={() => download("ats")}
-          >
-            <span className="dlcv__item-title">ATS-friendly CV</span>
-            <span className="dlcv__item-sub">Keyword-rich · plain · passes filters</span>
-          </button>
-        </div>
-      )}
+            <button
+              type="button"
+              className="dlcv__item"
+              role="menuitem"
+              onClick={() => download("designed")}
+            >
+              <span className="dlcv__item-title">Designed CV</span>
+              <span className="dlcv__item-sub">One page · polished layout</span>
+            </button>
+            <button
+              type="button"
+              className="dlcv__item"
+              role="menuitem"
+              onClick={() => download("ats")}
+            >
+              <span className="dlcv__item-title">ATS-friendly CV</span>
+              <span className="dlcv__item-sub">
+                Keyword-rich · plain · passes filters
+              </span>
+            </button>
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }
