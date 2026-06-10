@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@google/genai": "^1.43.0",
-    "sharp": "^0.34.5"
-  }
-}
