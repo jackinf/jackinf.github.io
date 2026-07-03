@@ -41,7 +41,7 @@ Senior engineer with 12+ years building scalable, fault-tolerant backends across
 ## Earlier Experience
 
 - **Genius Sports** — Software Engineer. Built unit-tested, high-performance .NET microservices for sports data. *(Jun 2017 – Aug 2018 · Tallinn)*
-- **Finestmedia** — Software Engineer. Developed the Estonian Government application-submission portal (.NET Framework). *(Aug 2013 – Jun 2017 · Tallinn)*
+- **Finestmedia** — Software Engineer. Developed the Estonian Government application-submission portal (.NET Framework); also maintained an older Estonian government project (v1.5) on a Java stack (2013 – 2015). *(Aug 2013 – Jun 2017 · Tallinn)*
 - **Speys (part-time)** — Software Engineer. Built 5 .NET microservices and 3 React/TS frontends for B2B parcel tracking. *(Jun 2017 – Jun 2019)*
 
 ## Selected Projects

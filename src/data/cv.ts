@@ -399,6 +399,7 @@ export const experience: Role[] = [
     highlights: [
       "Developed Estonia's national research-grant submission portal (3 years) — ASP MVC, ASP Web API, ASMX/WCF.",
       "Worked with X-Road, the Estonian government data-exchange layer, making cross-system data more secure.",
+      "Maintained an older Estonian government project (v1.5) on a Java stack (2013 – 2015).",
       "Implemented rights-management and authentication systems.",
       "Set up and optimized RavenDB (NoSQL): query optimization, database structure and setup.",
       "Built a file-uploading component that made uploads 5x faster and considerably safer.",
@@ -533,6 +534,7 @@ export const languageTracks: LanguageTrack[] = [
     name: "Java",
     color: "#e76f00",
     spans: [
+      { from: 2013.85, to: 2015.0 },
       { from: 2016.75, to: 2016.95 },
       { from: 2022.25, to: 2025.25 },
     ],
