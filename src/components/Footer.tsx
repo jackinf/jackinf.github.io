@@ -12,6 +12,11 @@ export function Footer() {
             Try the 8-bit résumé version
             <ArrowIcon className="icon arrow" />
           </a>
+          <br />
+          <a className="footer__game" href="numbers/">
+            Engineering by the numbers
+            <ArrowIcon className="icon arrow" />
+          </a>
         </div>
         <div className="footer__links">
           <a href={`mailto:${profile.email}`} aria-label="Email">

@@ -22,6 +22,8 @@ Bun may not be on PATH; if `bun` is not found, use `~/.bun/bin/bun` or
 
 1. **Content lives in `src/data/cv.ts`.** All sections render from it. Do not hardcode
    copy in components. Keep `public/cv.md` in sync with `cv.ts` for the download link.
+   The metrics page (`numbers/index.html` → `src/numbers/`) renders entirely from
+   `src/data/numbers.ts` under the same rule.
 2. **Theming via CSS custom properties** in `src/styles/theme.css`; light is default,
    `[data-theme="dark"]` overrides. `useTheme` toggles the `data-theme` attribute and
    persists to localStorage.

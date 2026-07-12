@@ -17,9 +17,11 @@ console.log("→ Cleaning dist/");
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
-console.log("→ Bundling React app from index.html + 3D town from game-3d/index.html");
+console.log(
+  "→ Bundling React app from index.html + 3D town from game-3d/index.html + numbers/index.html",
+);
 const result = await Bun.build({
-  entrypoints: [`${root}index.html`, `${root}game-3d/index.html`],
+  entrypoints: [`${root}index.html`, `${root}game-3d/index.html`, `${root}numbers/index.html`],
   outdir: dist,
   minify: true,
   // Code-split so the heavy PDF renderer (@react-pdf/renderer) lands in its
@@ -45,7 +47,7 @@ console.log(`  bundled ${result.outputs.length} file(s)`);
 //    (Bun injects the hashed bundle into <head>; the dev tag would 404)
 //  - inject the favicon <link> here so Bun never tries to resolve the
 //    public/ asset during bundling (it 404s at build time otherwise)
-for (const page of ["index.html", "game-3d/index.html"]) {
+for (const page of ["index.html", "game-3d/index.html", "numbers/index.html"]) {
   const htmlPath = `${dist}/${page}`;
   if (!existsSync(htmlPath)) continue;
   const html = await readFile(htmlPath, "utf8");

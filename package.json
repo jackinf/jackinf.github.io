@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Personal portfolio of Jevgeni Rumjantsev — Senior Software Engineer (Payments & Fintech)",
   "scripts": {
-    "dev": "bun ./index.html ./game-3d/index.html",
+    "dev": "bun ./index.html ./game-3d/index.html ./numbers/index.html",
     "build": "bun run scripts/build.ts",
     "preview": "bun run scripts/serve.ts"
   },

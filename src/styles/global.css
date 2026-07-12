@@ -1113,6 +1113,82 @@ main { display: block; }
 .dlcv__item-title { font-size: var(--text-sm); font-weight: 600; }
 .dlcv__item-sub { font-size: var(--text-xs); color: var(--text-subtle); }
 
+/* ============================ "/" jump palette ============================ */
+/* Shared by the main page and numbers/ (see components/JumpPalette.tsx). */
+.nm-pal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 16vh 1rem 0;
+}
+.nm-pal__box {
+  width: min(460px, 100%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: nmPalIn 0.18s var(--ease);
+}
+@keyframes nmPalIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .nm-pal__box { animation: none; } }
+.nm-pal__title {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-subtle);
+  padding: 0.85rem 1rem 0.35rem;
+}
+.nm-pal__list { list-style: none; padding: 0.35rem; display: flex; flex-direction: column; gap: 2px; }
+.nm-pal__item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0.55rem 0.7rem;
+  border-radius: 8px;
+  color: var(--text);
+  font: inherit;
+}
+.nm-pal__item.is-active {
+  background: color-mix(in srgb, var(--brand, var(--accent)) 10%, transparent);
+  box-shadow: inset 3px 0 0 var(--brand, var(--accent));
+}
+.nm-pal__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand, var(--accent)); flex: none; }
+.nm-pal__num { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-subtle); }
+.nm-pal__label { font-weight: 600; font-size: var(--text-sm); }
+.nm-pal__meta {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-subtle);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 48%;
+}
+.nm-pal__hint {
+  border-top: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-subtle);
+}
+
 /* ============================ Footer ============================ */
 .footer {
   border-top: 1px solid var(--border);
