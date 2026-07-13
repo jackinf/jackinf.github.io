@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Question to Story Map</title>
+<style>
+  :root {
+    --bg: #eef0f3;
+    --surface: #f8f9fa;
+    --surface-2: #ffffff;
+    --text: #14161a;
+    --muted: #414957;
+    --subtle: #5d6875;
+    --line: #d9dde3;
+    --kraken: #5741d9;
+    --box: #0061d5;
+    --timechimp: #c2570a;
+    --travix: #c00024;
+    --personal: #0d7a70;
+    --opener: #6d28d9;
+    --general: #475569;
+    --warn-bg: #fdf3e4;
+    --warn-ink: #8a5a13;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101216;
+      --surface: #171a20;
+      --surface-2: #1d2129;
+      --text: #e9ebef;
+      --muted: #b3bac4;
+      --subtle: #8b94a1;
+      --line: #2a2f38;
+      --kraken: #8f7dff;
+      --box: #5aa2ff;
+      --timechimp: #f5924a;
+      --travix: #ff6a80;
+      --personal: #3fbfb2;
+      --opener: #a78bfa;
+      --general: #9aa6b5;
+      --warn-bg: #2a2213;
+      --warn-ink: #e5b567;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    padding: 2.5rem 1.25rem 5rem;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; }
+
+  header.page { margin-bottom: 2rem; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 0.4rem;
+  }
+  h1 { font-size: 1.7rem; letter-spacing: -0.01em; }
+  .page__sub { color: var(--muted); margin-top: 0.4rem; max-width: 62ch; }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.6rem 1.8rem 1.3rem;
+    box-shadow: 0 1px 2px rgba(15, 20, 30, 0.05);
+  }
+
+  /* ---- map table ---- */
+  .map__cols {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(300px, 1.35fr);
+    gap: 1.2rem;
+    padding: 0 0.2rem 0.55rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--subtle);
+  }
+  .grp { padding: 0.4rem 0.2rem 0.2rem; }
+  .grp + .grp { border-top: 1px dashed var(--line); }
+  .grp__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--grp, var(--general));
+    padding: 0.7rem 0 0.35rem;
+  }
+  .grp__dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--grp, var(--general));
+  }
+  .qrow {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(300px, 1.35fr);
+    gap: 1.2rem;
+    align-items: baseline;
+    padding: 0.42rem 0;
+  }
+  .qrow + .qrow { border-top: 1px solid color-mix(in srgb, var(--line) 55%, transparent); }
+  .qrow__q { font-weight: 600; font-size: 0.95rem; }
+  .qrow__q small {
+    display: block;
+    font-weight: 400;
+    color: var(--subtle);
+    font-size: 0.78rem;
+  }
+  .qrow__stories { display: flex; flex-wrap: wrap; gap: 0.4rem 0.45rem; }
+
+  a.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    line-height: 1;
+    padding: 0.42rem 0.7rem;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--brand);
+    background: color-mix(in srgb, var(--brand) 10%, var(--surface-2));
+    border: 1px solid color-mix(in srgb, var(--brand) 38%, transparent);
+    transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    cursor: pointer;
+  }
+  a.pill::before {
+    content: "";
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--brand);
+    flex: none;
+  }
+  a.pill:hover {
+    background: color-mix(in srgb, var(--brand) 20%, var(--surface-2));
+    border-color: var(--brand);
+    box-shadow: 0 1px 6px color-mix(in srgb, var(--brand) 25%, transparent);
+  }
+  a.pill:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  a.pill--backup {
+    background: transparent;
+    border-style: dashed;
+    color: color-mix(in srgb, var(--brand) 78%, var(--muted));
+  }
+  a.pill--backup::before { opacity: 0.55; }
+  .pill__tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+  .bang {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--warn-ink);
+    background: var(--warn-bg);
+    border-radius: 6px;
+    padding: 0.1rem 0.35rem;
+    cursor: help;
+  }
+  .map__foot {
+    margin-top: 0.9rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--subtle);
+    text-align: right;
+  }
+
+  /* ---- story cards ---- */
+  .stories { margin-top: 3rem; }
+  .stories > h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.3rem;
+  }
+  .stories__sub { color: var(--muted); margin-bottom: 1.4rem; font-size: 0.92rem; }
+  .co {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--brand);
+    margin: 2rem 0 0.8rem;
+  }
+  .co::before {
+    content: "";
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--brand);
+  }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 860px) {
+    .cards { grid-template-columns: 1fr; }
+    .qrow, .map__cols { grid-template-columns: 1fr; gap: 0.3rem; }
+    .map__cols span:last-child { display: none; }
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    border-radius: 12px;
+    padding: 1.05rem 1.15rem 1rem;
+    scroll-margin-top: 1.5rem;
+    transition: box-shadow 400ms ease, border-color 400ms ease;
+  }
+  .card.is-flash {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 30%, transparent);
+  }
+  .card__slot {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 0.25rem;
+  }
+  .card h3 { font-size: 1.02rem; margin-bottom: 0.5rem; }
+  .card p { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.5rem; }
+  .card p b { color: var(--text); }
+  .card .num {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--brand);
+    display: block;
+    margin: 0.35rem 0 0.5rem;
+  }
+  .card .warn {
+    font-size: 0.8rem;
+    color: var(--warn-ink);
+    background: var(--warn-bg);
+    border-radius: 8px;
+    padding: 0.45rem 0.6rem;
+    margin-top: 0.4rem;
+  }
+  .card .back {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--subtle);
+    text-decoration: none;
+  }
+  .card .back:hover { color: var(--brand); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page">
+    <p class="eyebrow">Revolut · Senior Backend · HoE + PO panel</p>
+    <h1>Question to Story Map</h1>
+    <p class="page__sub">Left: the behavioural question. Right: the stories to reach for, lead first, backups dashed. Click a story to jump to its card. One story per interview where marked.</p>
+  </header>
+
+  <div class="panel" id="map">
+    <div class="map__cols"><span>behavioural question</span><span>stories</span></div>
+
+    <!-- Openers -->
+    <div class="grp" style="--grp: var(--opener)">
+      <div class="grp__title"><span class="grp__dot"></span>Openers</div>
+      <div class="qrow">
+        <div class="qrow__q">Why Revolut?</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--opener)" href="#opener-why-revolut">RAPT hooks <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Why did you leave Kraken?</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--opener)" href="#opener-layoff">Layoff script <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">What are you looking for that Kraken didn't give?</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--opener)" href="#opener-last-mile">The last mile <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disagreement -->
+    <div class="grp" style="--grp: var(--kraken)">
+      <div class="grp__title"><span class="grp__dot"></span>Disagreement &amp; pushback</div>
+      <div class="qrow">
+        <div class="qrow__q">Disagreed with a product decision</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-advance-notices">SEPA advance notices <span class="pill__tag">lead</span></a>
+          <span class="bang" title="Dual-slotted with the cross-team row. Use for ONE of the two.">! one slot</span>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Disagreed with a colleague</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-rust-proxy">Node secrets vs Rust proxy <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Disagreed with your manager <small>reserve slot</small></div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--box)" href="#story-wdio">WDIO e2e tooling <span class="pill__tag">lead</span></a>
+          <a class="pill pill--backup" style="--brand: var(--timechimp)" href="#story-tc-cqrs">TimeChimp CQRS pushback <span class="pill__tag">backup</span></a>
+          <span class="bang" title="Don't spend WDIO twice: unasked improvement OR manager disagreement.">! one use</span>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Gave blunt feedback / pushed back on consensus</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--timechimp)" href="#story-tc-cqrs">TimeChimp strong-consistency push <span class="pill__tag">lead</span></a>
+          <span class="bang" title="Same event as the speed-vs-perfect trade-off story. Never both in one interview.">! collision</span>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Disagreement where YOU were wrong</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-near-miss">Pivot to SEPA Instant near-miss <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pressure & delivery -->
+    <div class="grp" style="--grp: var(--kraken)">
+      <div class="grp__title"><span class="grp__dot"></span>Pressure &amp; delivery</div>
+      <div class="qrow">
+        <div class="qrow__q">Serious time pressure, what did you cut?</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-blik-deadline">Blik: happy-path first <span class="pill__tag">lead</span></a>
+          <a class="pill pill--backup" style="--brand: var(--kraken)" href="#story-advance-notices">SEPA advance notices <span class="pill__tag">backup</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Self-imposed urgency / Get it Done</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-failure-emails">SEPA Instant Buy failure emails <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Incomplete info / ambiguous requirements</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-copvop">CoP/VoP name matching <span class="pill__tag">lead</span></a>
+          <a class="pill pill--backup" style="--brand: var(--kraken)" href="#story-blik-deadline">Blik mid-flight re-target <span class="pill__tag">backup</span></a>
+          <a class="pill pill--backup" style="--brand: var(--kraken)" href="#story-advance-notices">SEPA advance notices <span class="pill__tag">backup</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Other team, other priorities <small>cross-team</small></div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-advance-notices">SEPA advance notices, scheduler angle <span class="pill__tag">lead</span></a>
+          <span class="bang" title="Dual-slotted with the product-disagreement row. Use for ONE of the two.">! one slot</span>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Speed vs perfect solution trade-off</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--timechimp)" href="#story-tc-cqrs">TimeChimp CQRS consistency <span class="pill__tag">lead</span></a>
+          <span class="bang" title="Trade-off OR disagreement flavor, not both.">! collision</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Failures & incidents -->
+    <div class="grp" style="--grp: var(--travix)">
+      <div class="grp__title"><span class="grp__dot"></span>Failures &amp; incidents</div>
+      <div class="qrow">
+        <div class="qrow__q">Most serious production incident</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--box)" href="#story-metadata-outage">Box Metadata API outage <span class="pill__tag">lead</span></a>
+          <a class="pill pill--backup" style="--brand: var(--travix)" href="#story-travix-rollback">Travix strict-serialization rollback <span class="pill__tag">backup</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Mistake that affected a customer</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-near-miss">SEPA Instant near-miss <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Failure you owned <small>engineering version</small></div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--box)" href="#story-docgen-queue">Box DocGen queue episode <span class="pill__tag">lead</span></a>
+          <span class="bang" title="If both Box stories come up: 'same service, different episode'. Never call this one a production incident.">! framing</span>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Deploy gone wrong / how do you know changes work</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-migration-cron">Migration + cron flag story <span class="pill__tag">lead</span></a>
+          <a class="pill pill--backup" style="--brand: var(--travix)" href="#story-travix-rollback">Travix rollback <span class="pill__tag">backup</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data & measurement -->
+    <div class="grp" style="--grp: var(--box)">
+      <div class="grp__title"><span class="grp__dot"></span>Data &amp; measurement</div>
+      <div class="qrow">
+        <div class="qrow__q">Shipped it, data said it wasn't working</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-bank-weighting">Bank-list weighting <span class="pill__tag">lead</span></a>
+          <a class="pill pill--backup" style="--brand: var(--kraken)" href="#story-migration-cron">Migration + cron <span class="pill__tag">backup</span></a>
+          <span class="bang" title="Bank weighting = product data story; migration/cron = operational. Don't double-book.">! don't double-book</span>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Walk me through a % on your CV</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-ivy">Ivy automatic returns ~40% <span class="pill__tag">lead</span></a>
+          <a class="pill pill--backup" style="--brand: var(--kraken)" href="#story-ai-feedback">AI ~30% cycle time <span class="pill__tag">backup</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback & people -->
+    <div class="grp" style="--grp: var(--timechimp)">
+      <div class="grp__title"><span class="grp__dot"></span>Feedback &amp; people</div>
+      <div class="qrow">
+        <div class="qrow__q">Tough / critical feedback received</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-ai-feedback">AI slop PRs <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Mentorship / grew the team / leadership</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--timechimp)" href="#story-tc-mentorship">TimeChimp v2, team of 8 <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Influenced another team's roadmap</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--box)" href="#story-search-permissions">Box search permissions <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Users loved it / magical UX / Deliver WOW</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--travix)" href="#story-wallets">Google Pay + Apple Pay <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Initiative, craft & extras -->
+    <div class="grp" style="--grp: var(--personal)">
+      <div class="grp__title"><span class="grp__dot"></span>Initiative, craft &amp; extras</div>
+      <div class="qrow">
+        <div class="qrow__q">Improved something nobody asked for</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--box)" href="#story-wdio">WDIO e2e library <span class="pill__tag">lead</span></a>
+          <a class="pill pill--backup" style="--brand: var(--kraken)" href="#story-ai-feedback">AI adoption ~30% <span class="pill__tag">backup</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Java depth / "you'll write Java daily"</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--box)" href="#story-docgen-java">Box DocGen, Java 17/21 <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">AI-assisted work you're proud of</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--kraken)" href="#story-agent-session">Blik agent session <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Non-computer system you hacked</div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--personal)" href="#story-spain">Spain bureaucracy tracker <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+      <div class="qrow">
+        <div class="qrow__q">Reliability track record <small>general ammo</small></div>
+        <div class="qrow__stories">
+          <a class="pill" style="--brand: var(--box)" href="#story-reliability">Box reliability wins <span class="pill__tag">lead</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="map__foot">solid pill = lead · dashed pill = backup · ! = collision or framing warning (hover it)</div>
+  </div>
+
+  <!-- ============ STORY CARDS ============ -->
+  <section class="stories">
+    <h2>Behavioural stories</h2>
+    <p class="stories__sub">Land the number in the last sentence. Repeat both halves of compound questions back first. Say alert, threshold, runbook out loud on every failure path.</p>
+
+    <div class="co" style="--brand: var(--opener)">Openers</div>
+    <div class="cards" style="--brand: var(--opener)">
+      <article class="card" id="opener-why-revolut">
+        <div class="card__slot">opener · 60-90s</div>
+        <h3>Why Revolut? (RAPT)</h3>
+        <p><b>R, Rails:</b> career on the money-movement critical path. Kraken deposits and withdrawals, CoP/VoP, PSP integrations; 3DS2 and wallets at Travix. <b>A, App:</b> you are a user with opinions; strongest hook is instant FX exchange. Open the app the day before. <b>P, Pace:</b> end-to-end by default, on-call, launch-ready twice under a hard deadline. <b>T, Team:</b> "where the funnel numbers and the code meet."</p>
+        <span class="num">One-liner: built the rails, use the app, already work at your pace.</span>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+      <article class="card" id="opener-layoff">
+        <div class="card__slot">opener · ~20s, past tense, calm</div>
+        <h3>Why did you leave Kraken?</h3>
+        <p>Layoff in May 2026, ~150 affected, cut by area not by individual review. Say the plain word "layoff" once, exactly one defensive clause, then pivot to wins: Blik launch-ready, CoP/VoP live, automatic returns cutting manual handling ~40%. Since then: deliberate search, prep, building. Never "resting", no euphemisms, no bitterness.</p>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+      <article class="card" id="opener-last-mile">
+        <div class="card__slot">opener · what Kraken didn't give</div>
+        <h3>The last mile</h3>
+        <p>One warm sentence about Kraken (real scale, on-call ownership, hard payments problems). One specific unmet want backed by a verifiable fact: best work is launch-ready but still dark, waiting on a commercial contract. Land on this team: the distance between the code and the product decision is short. Never adjectives.</p>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+    </div>
+
+    <div class="co" style="--brand: var(--kraken)">Kraken</div>
+    <div class="cards" style="--brand: var(--kraken)">
+      <article class="card" id="story-advance-notices">
+        <div class="card__slot">product disagreement · cross-team (pick one)</div>
+        <h3>SEPA advance notices</h3>
+        <p><b>Product angle:</b> spec said the first email must include all six fields; four don't exist before the first payment. Challenged it, verified the rulebook minimum myself, shipped the compliant minimal version before SDD go-live, full field set 4 weeks later. <b>Cross-team angle:</b> didn't ask the scheduler team to reprioritize; "I needed 1 hour of their attention and their review, a much easier yes."</p>
+        <span class="num">Shipped in 2 weeks, zero roadmap impact on the other team.</span>
+        <p>Risk framing: without the notice every recurring debit is refundable for 8 weeks no questions asked, 13 months if claimed unauthorized.</p>
+        <div class="warn">Dual-slotted: use for product disagreement OR cross-team, never both. Not the "SEPA reroute email" (that one is color detail only).</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-blik-deadline">
+        <div class="card__slot">deadline pressure · ambiguity backup</div>
+        <h3>Blik Deposits: happy-path first</h3>
+        <p>Cut edge-case automation and breadth (shipped dark, pivot dropped plain deposits), refused to cut correctness on the money path: idempotent transitions, HMAC validation, reconciliation cron, sweeper. Safe to cut = rare + visible + manually recoverable. Nothing fails silently. Ambiguity angle: requirements changed mid-flight, re-targeted the integration in 2 weeks.</p>
+        <span class="num">Launch-ready twice under deadline: 4 weeks + a 2-week pivot.</span>
+        <div class="warn">The ~15% lift is PROJECTED, never realized; correct it proactively. Never claim the pivot decision, that was management's call. Tester circle proves readiness, not the 15%.</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-failure-emails">
+        <div class="card__slot">self-imposed urgency</div>
+        <h3>SEPA Instant Buy failure emails</h3>
+        <p>Failed buys meant silent customers. Dropped my tickets (told my manager explicitly), went to the system owners to learn, ran translations and approvals in parallel.</p>
+        <span class="num">Shipped in ~2 days in an unfamiliar system; wrote the runbook and walked the team through it.</span>
+        <div class="warn">Same shape as advance notices (unfamiliar system, owners, fast). Emails = urgency slot; notices = cross-team or product slot. Pick one per interview.</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-copvop">
+        <div class="card__slot">ambiguous requirements</div>
+        <h3>CoP/VoP name matching</h3>
+        <p>Spec said "near-exact match"; nobody could define it. Too strict blocks legit payments (nicknames, business variants); too loose lets mistakes through. Gathered constraints from stakeholders (managers as constraint sources, not decision-makers), studied PSP CoP behavior, proposed an explicit policy, shipped with discrepancy-rate visibility to tune on data.</p>
+        <span class="num">Number is a flag rate, intercepted before money moved.</span>
+        <div class="warn">Decide 15% vs 25% BEFORE the interview and align everything. Never say "misdirected payments cut". Denominator: first-time, hand-typed third-party recipients.</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-rust-proxy">
+        <div class="card__slot">colleague disagreement</div>
+        <h3>Node secrets vs Rust proxy</h3>
+        <p>PII (IBANs) in Kafka events; policy said nothing sensitive persisted unencrypted. Colleague proposed a Rust proxy service. I disagreed openly (new service to own, extra hop, permanent crutch), steelmanned first, timeboxed a ~1-week spike with the wrapper as agreed fallback. Added a napi layer to the Rust lib, Vault via Terraform, UAT, feature flag.</p>
+        <span class="num">No proxy ever built; other Node teams adopted it; the colleague happily used it.</span>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-near-miss">
+        <div class="card__slot">customer-affecting mistake</div>
+        <h3>SEPA Instant near-miss (on-call)</h3>
+        <p>CX flagged a return pending for days; I said "probably stuck, safe to cancel", and that quick answer was the mistake. It had actually downgraded from SEPA Instant to SDD and was still inside its settlement window. Caught it, owned it, issued a fresh retry (cancelled is terminal by design; a new payment object is correct for audit).</p>
+        <span class="num">Customer made whole; durable CX guidance: judge by rail + settlement window, not days elapsed.</span>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-bank-weighting">
+        <div class="card__slot">data said it wasn't working · product flavor</div>
+        <h3>Bank-list weighting</h3>
+        <p>Splunk funnel data showed failures concentrated in specific banks sitting high in the selection list. The wrong assumption was "list order doesn't matter", not the code. Weighted the list: most-used banks up, high-error banks down.</p>
+        <span class="num">Failed transfers cut by a few percent; the query that exposed the problem confirmed the fix.</span>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-migration-cron">
+        <div class="card__slot">deploy gone wrong · operational data</div>
+        <h3>Migration + cron flag story</h3>
+        <p>Deploy went out, feature behind a flag, error spike. Triage order out loud: blast radius first (flag held, zero user impact), silenced the new cron jobs, found a partially applied migration, applied it, re-enabled, errors back to baseline.</p>
+        <span class="num">Own the miss: API paths were flagged, the crons were not.</span>
+        <p>Prevention beat: background jobs go behind the same flag; migration completeness check in the pipeline.</p>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-ivy">
+        <div class="card__slot">% walkthrough · cleanest number</div>
+        <h3>Ivy automatic returns, ~40%</h3>
+        <p>Run the 5-part shape: numerator (returns executed by the new automatic flow), denominator (all returns in the same Splunk aggregation), source (aggregated Splunk query), baseline window, volunteered caveat (ratio, not absolute counts). Manual rest was scoping: non-Ivy rails, missing return path.</p>
+        <span class="num">~40% of return volume went automatic.</span>
+        <div class="warn">Use the moment for the proactive Blik correction: "Before I pick one: the 15% is projected, not realized." Verify the compliance-hold category before claiming it.</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-ai-feedback">
+        <div class="card__slot">tough feedback · % backup · initiative backup</div>
+        <h3>AI slop PRs</h3>
+        <p>Open with their words: "PRs leaned too heavily on AI; reviewing them was taxing", from a team that didn't owe me time. Suppressed the defensive reflex, asked for specifics. Root cause: I'd outsourced my judgment. Fix: small single-context PRs, AI conforms to repo style, self-review pass, visual cue in every description, own every line.</p>
+        <span class="num">Turnaround days to hours at the same contribution rate; practices became team standard.</span>
+        <div class="warn">~30% = median PR cycle time (open to merged) over 25 PRs, NOT "review hours". Volunteer the proxy caveat.</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-agent-session">
+        <div class="card__slot">AI-assisted work</div>
+        <h3>Blik Instant Buy agent session</h3>
+        <p>Grounded context first (Jira/Slack MCP + Obsidian notes), epic + Mermaid dependency map, per-codebase skills, parallel branches compared on the dev env. I owned requirements, review, and e2e testing.</p>
+        <span class="num">3 days vs an optimistic 2-week estimate.</span>
+        <div class="warn">Verify the estimate-discrepancy story before leaning on it.</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+    </div>
+
+    <div class="co" style="--brand: var(--box)">Box</div>
+    <div class="cards" style="--brand: var(--box)">
+      <article class="card" id="story-docgen-java">
+        <div class="card__slot">java depth</div>
+        <h3>Box DocGen, Java 17/21</h3>
+        <p>3 years Java at Box; C# transferred smoothly. Distributed DocGen: REST endpoints, bean config per env, GCP Pub/Sub fan-out. Batch to per-file messages so files process in parallel. Follow-up ammo: inbox pattern, optimistic CAS locking, "effectively-once processing on top of at-least-once delivery" (never "exactly-once delivery"), reconciliation cron for stuck files.</p>
+        <span class="num">~35% faster average generation (latency dashboards).</span>
+        <div class="warn">Digital Signatures was Django; don't overclaim Java there.</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-docgen-queue">
+        <div class="card__slot">owned failure · engineering slot</div>
+        <h3>DocGen queue episode</h3>
+        <p>Assumed reliable exactly-once delivery; a realistic batch test sent 100 in and got ~80 out. Fixed in layers: retry (~103, duplicates appeared), idempotency keys in a distributed cache (100 exactly), DLQ for retry-exhausted messages.</p>
+        <span class="num">100 in, 100 out, with every layer justified.</span>
+        <div class="warn">Caught late in dev testing; never call it a production incident. If both Box stories come up: "same service, different episode."</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-metadata-outage">
+        <div class="card__slot">production incident</div>
+        <h3>Box Metadata API outage</h3>
+        <p>PagerDuty page: the whole DocGen subapp failing to load, hard dependency on the Metadata API for current file names. Decision beat: File Search service as fallback, stale up to 15 min vs 10 s. Freshness vs availability: a possibly-outdated name beats a dead product. Reactivated the old integration behind the same interface, deployed. Prevention: circuit breaker trips to File Search automatically and recovers on its own.</p>
+        <div class="warn">Recover the outage duration before the interview; "how long were you down" is the guaranteed follow-up.</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-wdio">
+        <div class="card__slot">initiative OR manager disagreement (one only)</div>
+        <h3>WDIO e2e library</h3>
+        <p>The whole team paid a tooling tax: 20 tests × 4-6 min × ~3 retries, about 5 hours of flaky suite. Split the 20k-LOC file, type safety, awaits instead of sleeps, cached pre-registered test users (-2 min), local runs instead of a remote VM (-2-3 min, flakiness gone). Took a couple of months alongside feature work.</p>
+        <span class="num">Per-test 5 min to 1 min (-80%); suite ~5 h to ~20 min; 50+ engineers adopted it.</span>
+        <div class="warn">Prep one concrete adoption action (migration guide, ported the first team's tests).</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-search-permissions">
+        <div class="card__slot">influenced another team's roadmap</div>
+        <h3>Box search permissions</h3>
+        <p>20 results per page, each re-checked via API. Quick win: parallelized the 20 calls. Real fix: drove the owning team to a single batched endpoint.</p>
+        <span class="num">20 round trips to 1.</span>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-reliability">
+        <div class="card__slot">general reliability ammo</div>
+        <h3>Box reliability wins</h3>
+        <p>Signing service uptime and error-rate work; anchor on concrete fixes rather than the aggregate when pushed.</p>
+        <span class="num">~99.9% uptime (SLO from monitoring); error rates ~-20% (approximate).</span>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+    </div>
+
+    <div class="co" style="--brand: var(--timechimp)">TimeChimp</div>
+    <div class="cards" style="--brand: var(--timechimp)">
+      <article class="card" id="story-tc-mentorship">
+        <div class="card__slot">mentorship · leadership</div>
+        <h3>TimeChimp v2, team of 8</h3>
+        <p>v2 rebuild with CQRS + event sourcing new to most of the team. Taught hands-on: where reads and writes live, red flags like mixing read/write storage. Enriched every ticket, led sizing. If asked about ONE person: zoom into one engineer's first aggregate.</p>
+        <span class="num">All 8 owned services unsupervised; deploys ~30 min to under 5 min.</span>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-tc-cqrs">
+        <div class="card__slot">trade-off OR blunt feedback (one only)</div>
+        <h3>TimeChimp CQRS consistency</h3>
+        <p><b>Trade-off angle:</b> couldn't have strong consistency everywhere AND speed/scale. Accepted eventual consistency on reads; optimistic UI updates plus websocket rollback covered the rare failed write. <b>Pushback angle:</b> disagreed early and plainly, about the architecture not the person, with a concrete alternative. "Disagreeing clearly and early is more respectful than letting a worse design ship."</p>
+        <span class="num">The compromise was invisible to users; the failure path explicit.</span>
+        <div class="warn">Same event powers both angles. Never use both in one interview.</div>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+    </div>
+
+    <div class="co" style="--brand: var(--travix)">Travix</div>
+    <div class="cards" style="--brand: var(--travix)">
+      <article class="card" id="story-wallets">
+        <div class="card__slot">users loved it · WOW</div>
+        <h3>Google Pay + Apple Pay</h3>
+        <p>Full card form replaced by a single biometric tap, about two seconds. 3DS2/SCA handled on the same flow. "The magic was all in the friction we removed."</p>
+        <span class="num">Revenue ~10%. Say REVENUE, not conversion; no metric drift.</span>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+
+      <article class="card" id="story-travix-rollback">
+        <div class="card__slot">backup: incident · deploy gone wrong</div>
+        <h3>Strict-serialization rollback</h3>
+        <p>Deploy correlation spotted fast; chose rollback over fix-forward because it was the payment path. Use as backup color when the lead incident story is already spent.</p>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+    </div>
+
+    <div class="co" style="--brand: var(--personal)">Personal</div>
+    <div class="cards" style="--brand: var(--personal)">
+      <article class="card" id="story-spain">
+        <div class="card__slot">non-computer system hacked</div>
+        <h3>Spain bureaucracy tracker</h3>
+        <p>NIE, tax, residency: a dependency graph with deadlines. Built tracking integrated with Calendar, Obsidian, and the task list. Generalizes: messy process, dependency graph, no stress.</p>
+        <span class="num">Nothing slipped; ran on autopilot.</span>
+        <a class="back" href="#map">↑ back to map</a>
+      </article>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Flash the target card after a pill click so the eye lands on it.
+  document.querySelectorAll('a[href^="#story-"], a[href^="#opener-"]').forEach((a) => {
+    a.addEventListener("click", () => {
+      const el = document.getElementById(a.getAttribute("href").slice(1));
+      if (!el) return;
+      el.classList.remove("is-flash");
+      requestAnimationFrame(() => el.classList.add("is-flash"));
+      setTimeout(() => el.classList.remove("is-flash"), 1600);
+    });
+  });
+</script>
+</body>
+</html>
