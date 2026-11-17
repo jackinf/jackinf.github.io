@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jevgeni Rumin - Interactive CV</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loader-content">
+      <h1>Loading Portfolio...</h1>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="load-progress"></div>
+      </div>
+      <p id="load-status">Initializing...</p>
+    </div>
+  </div>
+
+  <!-- PixiJS Canvas Container -->
+  <div id="game-container"></div>
+
+  <!-- DOM Overlay: Navigation Dots -->
+  <nav id="nav-dots">
+    <button class="nav-dot active" data-section="intro" title="Intro"></button>
+    <button class="nav-dot" data-section="experience" title="Experience"></button>
+    <button class="nav-dot" data-section="projects" title="Projects"></button>
+    <button class="nav-dot" data-section="skills" title="Skills"></button>
+    <button class="nav-dot" data-section="education" title="Education"></button>
+    <button class="nav-dot" data-section="contact" title="Contact"></button>
+  </nav>
+
+  <!-- DOM Overlay: Scroll Indicator -->
+  <div id="scroll-indicator">
+    <span>Scroll to explore</span>
+    <div class="scroll-arrow">&rarr;</div>
+  </div>
+
+  <!-- DOM Overlay: Section Labels -->
+  <div id="section-label" class="hidden"></div>
+
+  <!-- DOM Overlay: Modal -->
+  <div id="modal-overlay" class="hidden">
+    <div id="modal">
+      <button id="modal-close">&times;</button>
+      <h2 id="modal-title"></h2>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.6.6/pixi.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
